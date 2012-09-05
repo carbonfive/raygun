@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
 require File.expand_path(File.join('..', 'lib', 'raygun', 'generators', 'app_generator'), File.dirname(__FILE__))
-#require File.expand_path(File.join('..', 'lib', 'raygun', 'actions'), File.dirname(__FILE__))
-#require File.expand_path(File.join('..', 'lib', 'raygun', 'app_builder'), File.dirname(__FILE__))
+require File.expand_path(File.join('..', 'lib', 'raygun', 'actions'), File.dirname(__FILE__))
+require File.expand_path(File.join('..', 'lib', 'raygun', 'app_builder'), File.dirname(__FILE__))
 
-templates_root = File.expand_path(File.join('..', "templates"), File.dirname(__FILE__))
+templates_root = File.expand_path(File.join('..', 'templates'), File.dirname(__FILE__))
 Raygun::AppGenerator.source_root templates_root
 Raygun::AppGenerator.source_paths << Rails::Generators::AppGenerator.source_root << templates_root
 
