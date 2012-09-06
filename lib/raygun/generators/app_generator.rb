@@ -22,10 +22,11 @@ module Raygun
       invoke :setup_acceptance_environment
       #invoke :setup_staging_environment
       invoke :configure_rvm
+      # FUTURE invoke :configure_rbenv
       invoke :customize_gemfile
       invoke :setup_database
+      invoke :create_raygun_views
       invoke :configure_app
-      #invoke :create_raygun_views
       #invoke :create_common_javascripts
       #invoke :setup_stylesheets
       #invoke :copy_miscellaneous_files
@@ -42,6 +43,7 @@ module Raygun
       say "Removing unwanted files."
       build :remove_public_index
       build :remove_rails_logo_image
+      build :remove_application_layout
     end
 
     def setup_development_environment
@@ -76,6 +78,14 @@ module Raygun
       say 'Setting up database'
       build :use_postgres_config_template
       build :create_database
+    end
+
+    def create_raygun_views
+      say 'Creating suspenders views'
+      build :create_partials_directory
+      #build :create_shared_flashes
+      #build :create_shared_javascripts
+      build :create_application_layout
     end
 
     def configure_app

@@ -14,6 +14,10 @@ module Raygun
       remove_file 'app/assets/images/rails.png'
     end
 
+    def remove_application_layout
+      remove_file 'app/views/layouts/application.html.erb'
+    end
+
     def raise_delivery_errors
       replace_in_file 'config/environments/development.rb',
         'raise_delivery_errors = false', 'raise_delivery_errors = true'
@@ -38,30 +42,31 @@ module Raygun
       run 'cp config/environments/production.rb config/environments/acceptance.rb'
     end
 
-    #def create_partials_directory
-    #  empty_directory 'app/views/application'
-    #end
-    #
+    def create_partials_directory
+      empty_directory 'app/views/application'
+    end
+
     #def create_shared_flashes
-    #  copy_file '_flashes.html.erb', 'app/views/application/_flashes.html.erb'
+    #  copy_file '_flashes.html.slim', 'app/views/application/_flashes.html.slim'
     #end
-    #
+
     #def create_shared_javascripts
     #  copy_file '_javascript.html.erb', 'app/views/application/_javascript.html.erb'
     #end
-    #
-    #def create_application_layout
-    #  template 'suspenders_layout.html.erb.erb',
-    #    'app/views/layouts/application.html.erb',
-    #    :force => true
-    #end
-    #
+
+    def create_application_layout
+      template 'application.html.slim.erb',
+        'app/views/layouts/application.html.slim',
+        force: true
+    end
+
     #def create_common_javascripts
     #  directory 'javascripts', 'app/assets/javascripts'
     #end
 
     def use_postgres_config_template
-      template 'postgresql_database.yml.erb', 'config/database.yml',
+      template 'postgresql_database.yml.erb',
+               'config/database.yml',
                force: true
     end
 
