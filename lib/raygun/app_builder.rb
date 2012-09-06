@@ -144,6 +144,9 @@ module Raygun
       generate 'sorcery:install'
 
       replace_in_file 'app/models/user.rb', /^.*# attr_accessible :title, :body$\n/, ''
+
+      sorcery_core_migration = "db/migrate/" + Dir.new('./db/migrate').entries.select { |e| e =~ /sorcery_core/ }.first
+      replace_in_file sorcery_core_migration, /^.* t.string :username,         :null => false  # if you use another field as a username, for example email, you can safely remove this field.$\n/, ''
     end
 
     #def setup_guard
