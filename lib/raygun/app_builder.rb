@@ -20,7 +20,8 @@ module Raygun
 
     def raise_delivery_errors
       replace_in_file 'config/environments/development.rb',
-        'raise_delivery_errors = false', 'raise_delivery_errors = true'
+                      'raise_delivery_errors = false',
+                      'raise_delivery_errors = true'
     end
 
     def enable_factory_girl_syntax
@@ -28,14 +29,14 @@ module Raygun
     end
 
     def enable_threadsafe_mode
-      replace_in_file 'config/environments/production.rb',
-        '# config.threadsafe!', 'config.threadsafe!'
+      uncomment_lines 'config/environments/production.rb',
+                      'config.threadsafe!'
     end
 
     def initialize_on_precompile
-        inject_into_file 'config/application.rb',
-        "\n    config.assets.initialize_on_precompile = false",
-        after: 'config.assets.enabled = true'
+      inject_into_file 'config/application.rb',
+                       "\n    config.assets.initialize_on_precompile = false",
+                       after: 'config.assets.enabled = true'
     end
 
     def setup_acceptance_environment
@@ -56,8 +57,8 @@ module Raygun
 
     def create_application_layout
       template 'application.html.slim.erb',
-        'app/views/layouts/application.html.slim',
-        force: true
+               'app/views/layouts/application.html.slim',
+               force: true
     end
 
     #def create_common_javascripts
@@ -83,12 +84,12 @@ module Raygun
       copy_file 'Gemfile_customized', 'Gemfile', force: true
     end
 
-    def add_custom_gems
-      additions_path = find_in_source_paths 'Gemfile_additions'
-      new_gems = File.open(additions_path).read
-      inject_into_file 'Gemfile', "\n#{new_gems}",
-        :after => /gem 'jquery-rails'/
-    end
+    #def add_custom_gems
+    #  additions_path = find_in_source_paths 'Gemfile_additions'
+    #  new_gems = File.open(additions_path).read
+    #  inject_into_file 'Gemfile', "\n#{new_gems}",
+    #    :after => /gem 'jquery-rails'/
+    #end
 
     #def add_clearance_gem
     #  inject_into_file 'Gemfile', "\ngem 'clearance'",
@@ -117,12 +118,11 @@ module Raygun
       generate 'rspec:install'
     end
 
-
     def configure_time_zone
       time_zone_config = <<-RUBY
-          config.active_record.default_timezone = :utc
+        config.active_record.default_timezone = :utc
       RUBY
-      inject_into_class "config/application.rb", "Application", time_zone_config
+      inject_into_class 'config/application.rb', 'Application', time_zone_config
     end
 
     def configure_action_mailer
@@ -136,8 +136,8 @@ module Raygun
       generate 'simple_form:install --bootstrap'
 
       replace_in_file 'config/initializers/simple_form.rb',
-        %(# config.label_text = lambda { |label, required| "\#{required} \#{label}" }),
-        %(config.label_text = lambda { |label, required| "\#{label}" })
+                      %(# config.label_text = lambda { |label, required| "\#{required} \#{label}" }),
+                      %(config.label_text = lambda { |label, required| "\#{label}" })
     end
 
     def setup_sorcery
@@ -145,8 +145,16 @@ module Raygun
 
       replace_in_file 'app/models/user.rb', /^.*# attr_accessible :title, :body$\n/, ''
 
-      sorcery_core_migration = "db/migrate/" + Dir.new('./db/migrate').entries.select { |e| e =~ /sorcery_core/ }.first
-      replace_in_file sorcery_core_migration, /^.* t.string :username,         :null => false  # if you use another field as a username, for example email, you can safely remove this field.$\n/, ''
+      sorcery_core_migration = 'db/migrate/' + Dir.new('./db/migrate').entries.select { |e| e =~ /sorcery_core/ }.first
+      replace_in_file sorcery_core_migration, /^.* t.string :username.*$\n/, ''
+
+      route "match 'sign_in'  => 'user_sessions#new',     as: :sign_in"
+      route "match 'sign_out' => 'user_sessions#destroy', as: :sign_out"
+      route "resources :user_sessions,   only: [:new, :create, :destroy]"
+
+      copy_file 'app/controllers/application_controller.rb'
+      copy_file 'app/controllers/user_sessions_controller.rb'
+      copy_file 'app/views/user_sessions/new.html.slim'
     end
 
     #def setup_guard

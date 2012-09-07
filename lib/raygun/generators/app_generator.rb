@@ -17,6 +17,7 @@ module Raygun
 
     def raygun_customization
       invoke :remove_files_we_dont_need
+      invoke :remove_routes_comment_lines
       invoke :setup_development_environment
       invoke :setup_production_environment
       invoke :setup_acceptance_environment
@@ -31,7 +32,6 @@ module Raygun
       #invoke :setup_stylesheets
       #invoke :copy_miscellaneous_files
       #invoke :customize_error_pages
-      invoke :remove_routes_comment_lines
       invoke :setup_root_route
       #invoke :setup_git
       #invoke :create_heroku_apps
@@ -44,6 +44,10 @@ module Raygun
       build :remove_public_index
       build :remove_rails_logo_image
       build :remove_application_layout
+    end
+
+    def remove_routes_comment_lines
+      build :remove_routes_comment_lines
     end
 
     def setup_development_environment
@@ -101,10 +105,6 @@ module Raygun
       build :setup_sorcery
       build :setup_default_rake_task
       #build :setup_guard
-    end
-
-    def remove_routes_comment_lines
-      build :remove_routes_comment_lines
     end
 
     def setup_root_route

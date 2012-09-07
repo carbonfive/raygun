@@ -1,0 +1,9 @@
+= simple_form_for(@user_session) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :email, placeholder: 'jdoe@example.com', autofocus: true
+    = f.input :password
+
+  .form-actions
+    = f.button :submit
