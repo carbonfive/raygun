@@ -36,6 +36,7 @@ module Raygun
       #invoke :setup_git
       #invoke :create_heroku_apps
       #invoke :create_github_repo
+      invoke :convert_to_19_hash_syntax
       invoke :outro
     end
 
@@ -110,6 +111,10 @@ module Raygun
     def setup_root_route
       say 'Setting up a root route'
       build :setup_root_route
+    end
+
+    def convert_to_19_hash_syntax
+      build :convert_to_19_hash_syntax
     end
 
     def outro
