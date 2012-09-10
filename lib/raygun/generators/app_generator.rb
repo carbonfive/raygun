@@ -86,7 +86,7 @@ module Raygun
     end
 
     def create_raygun_views
-      say 'Creating suspenders views'
+      say 'Creating views and layouts'
       build :create_partials_directory
       #build :create_shared_flashes
       #build :create_shared_javascripts
@@ -114,6 +114,7 @@ module Raygun
     end
 
     def convert_to_19_hash_syntax
+      say 'Converting old hash syntax'
       build :convert_to_19_hash_syntax
     end
 

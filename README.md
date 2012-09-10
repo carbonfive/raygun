@@ -7,15 +7,16 @@ Inspired by and code shamelessly lifted from ThoughtBot's Suspenders. Thanks!
 
 Tools/libraries:
 
-* Rails
-* PostgreSQL
-* Slim
-* Less
-* Bootstrap
-* Sorcery
-* RSpec
-* Factory Girl
-* Guard
+    * Rails
+    * PostgreSQL
+    * Slim
+    * Less
+    * Bootstrap
+    * Sorcery
+    * Cancan
+    * RSpec
+    * Factory Girl
+    * Guard
 
 And many tweaks and common recipes.
 
@@ -28,6 +29,14 @@ And many tweaks and common recipes.
     $ raygun --help
 
     $ raygun your-project [options]
+
+Once your project is baked out, you can easily kick the wheels:
+
+    $ cd your-project
+    $ rake db:create db:migrate
+    $ rake db:test:prepare spec
+    $ rake db:populate
+    $ rails s
 
 ## Contributing
 
