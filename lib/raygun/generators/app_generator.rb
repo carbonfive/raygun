@@ -98,6 +98,7 @@ module Raygun
 
       build :configure_rspec
       build :generate_rspec
+      build :add_rspec_support
 
       build :configure_time_zone
       build :configure_action_mailer

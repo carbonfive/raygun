@@ -116,6 +116,10 @@ module Raygun
       generate 'rspec:install'
     end
 
+    def add_rspec_support
+      copy_file 'spec.root/support/accept_values.rb', 'spec/support/accept_values.rb'
+    end
+
     def configure_time_zone
       'config/application.rb'.tap do |application_rb|
       #  inject_into_file application_rb, '    config.active_record.default_timezone = :utc\n', after: "'Central Time (US & Canada)'\n"
