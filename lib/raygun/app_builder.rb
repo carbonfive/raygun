@@ -3,7 +3,8 @@ module Raygun
     include Raygun::Actions
 
     def readme
-      template 'README.md.erb', 'README.md'
+      template 'README.md.erb',
+               'README.md'
     end
 
     def remove_public_index
@@ -25,7 +26,8 @@ module Raygun
     end
 
     def enable_factory_girl_syntax
-      copy_file 'factory_girl_syntax_rspec.rb', 'spec/support/factory_girl.rb'
+      copy_file 'spec.root/support/factory_girl.rb',
+                'spec/support/factory_girl.rb'
     end
 
     def enable_threadsafe_mode
@@ -56,7 +58,7 @@ module Raygun
     #end
 
     def create_application_layout
-      template 'application.html.slim.erb',
+      template 'app.root/views/layouts/application.html.slim.erb',
                'app/views/layouts/application.html.slim',
                force: true
     end
@@ -66,7 +68,7 @@ module Raygun
     #end
 
     def use_postgres_config_template
-      template 'postgresql_database.yml.erb',
+      template 'config.root/database.yml.erb',
                'config/database.yml',
                force: true
     end
@@ -140,30 +142,101 @@ module Raygun
                       %(config.label_text = lambda { |label, required| "\#{label}" })
     end
 
-    def setup_sorcery
-      generate 'sorcery:install'
+    def setup_authentication
+      # User model
+      generate 'scaffold user email:string name:string'
 
-      replace_in_file 'app/models/user.rb', /^.*# attr_accessible :title, :body$\n/, ''
+      remove_file 'app/models/user.rb'
+      remove_file 'spec/factories/users.rb'
+      create_users_migration = 'db/migrate/' + Dir.new('./db/migrate').entries.select { |e| e =~ /create_users/ }.first
+      remove_file create_users_migration
 
+      generate 'sorcery:install brute_force_protection activity_logging user_activation remember_me reset_password external'
+
+      copy_file 'app.root/models/user.rb',
+                'app/models/user.rb',
+                force: true
+
+      copy_file 'spec.root/factories/users.rb',
+                'spec/factories/users.rb',
+                force: true
+
+      copy_file 'spec.root/models/user_spec.rb',
+                'spec/models/user_spec.rb',
+                force: true
+
+      # User mailer (has to happen before sorcery config changes)
+      generate 'mailer UserMailer activation_needed_email activation_success_email reset_password_email'
+
+      copy_file 'app.root/mailers/user_mailer.rb',
+                'app/mailers/user_mailer.rb',
+                force: true
+
+      copy_file 'spec.root/mailers/user_mailer_spec.rb',
+                'spec/mailers/user_mailer_spec.rb',
+                force: true
+
+      %w(activation_needed_email activation_success_email reset_password_email).each do |fn|
+        remove_file "app/views/user_mailer/#{fn}.text.slim"
+
+        %w(html.erb text.erb).each do |ext|
+          copy_file "app.root/views/user_mailer/#{fn}.#{ext}",
+                    "app/views/user_mailer/#{fn}.#{ext}",
+                    force: true
+        end
+      end
+
+      # Patch sorcery configuration and migrations
       sorcery_core_migration = 'db/migrate/' + Dir.new('./db/migrate').entries.select { |e| e =~ /sorcery_core/ }.first
-      replace_in_file sorcery_core_migration, /^.* t.string :username.*$\n/, ''
+      inject_into_file sorcery_core_migration, "      t.string :name\n", after: "create_table :users do |t|\n"
+      comment_lines sorcery_core_migration, /^.* t.string :username.*$\n/
 
+      replace_in_file 'config/initializers/sorcery.rb',
+                      'config.user_class = "User"',
+                      'config.user_class = User'
+
+      replace_in_file 'config/initializers/sorcery.rb',
+                      '# user.username_attribute_names =',
+                      'user.username_attribute_names = :email'
+
+      replace_in_file 'config/initializers/sorcery.rb',
+                      '# user.user_activation_mailer =',
+                      'user.user_activation_mailer = UserMailer'
+
+      replace_in_file 'config/initializers/sorcery.rb',
+                      '# user.reset_password_mailer =',
+                      'user.reset_password_mailer = UserMailer'
+
+      #replace_in_file 'config/initializers/sorcery.rb',
+      #                /# user.unlock_token_mailer =.*$/,
+      #                'user.unlock_token_mailer = UserMailer'
+
+      # Routes, controllers, helpers and views
       route "match 'sign_in'  => 'user_sessions#new',     as: :sign_in"
       route "match 'sign_out' => 'user_sessions#destroy', as: :sign_out"
-      route "resources :user_sessions,   only: [:new, :create, :destroy]"
+      route "resources :user_sessions, only: [:new, :create, :destroy]"
 
-      copy_file 'app/controllers/application_controller.rb'
-      copy_file 'app/controllers/user_sessions_controller.rb'
-      copy_file 'app/views/user_sessions/new.html.slim'
+      copy_file 'app.root/controllers/application_controller.rb',
+                'app/controllers/application_controller.rb',
+                force: true
+
+      copy_file 'app.root/helpers/application_helper.rb',
+                'app/helpers/application_helper.rb',
+                force: true
+
+      copy_file 'app.root/models/user_session.rb',
+                'app/models/user_session.rb'
+
+      copy_file 'app.root/controllers/user_sessions_controller.rb',
+                'app/controllers/user_sessions_controller.rb'
+
+      copy_file 'app.root/views/user_sessions/new.html.slim',
+                'app/views/user_sessions/new.html.slim'
+
     end
 
     #def setup_guard
     #  copy_file 'Guardfile', 'Guardfile'
-    #end
-
-    #def generate_clearance
-    #  generate 'clearance:install'
-    #  generate 'clearance:features'
     #end
 
     #def setup_stylesheets

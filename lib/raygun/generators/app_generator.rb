@@ -103,7 +103,7 @@ module Raygun
       build :configure_action_mailer
       #build :add_email_validator
       build :setup_simple_form
-      build :setup_sorcery
+      build :setup_authentication
       build :setup_default_rake_task
       #build :setup_guard
     end

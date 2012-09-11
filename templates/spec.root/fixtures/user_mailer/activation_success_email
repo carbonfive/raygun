@@ -1,0 +1,3 @@
+UserMailer#activation_success_email
+
+Hi, find me in app/views/user_mailer/activation_success_email
