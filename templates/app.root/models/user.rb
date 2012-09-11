@@ -1,10 +1,17 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :email, :name, :initials, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation
 
   authenticates_with_sorcery!
 
-  validates_length_of       :password, minimum: 3, if: :password
-  validates_confirmation_of :password, if: :password
+  validates :email,
+            presence: true,
+            email: true
+
+  validates :password,
+            presence: true,
+            length: { minimum: 3},
+            confirmation: true,
+            if: :password
 
 end

@@ -101,7 +101,8 @@ module Raygun
 
       build :configure_time_zone
       build :configure_action_mailer
-      #build :add_email_validator
+      build :add_lib_to_load_path
+      build :add_email_validator
       build :setup_simple_form
       build :setup_authentication
       build :setup_default_rake_task
@@ -114,7 +115,7 @@ module Raygun
     end
 
     def knits_and_picks
-      say 'Converting old hash syntax'
+      say 'Converting old hash syntax and fixing knit picks'
       build :convert_to_19_hash_syntax
       build :consistent_quoting
     end

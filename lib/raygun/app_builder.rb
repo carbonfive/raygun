@@ -3,8 +3,7 @@ module Raygun
     include Raygun::Actions
 
     def readme
-      template 'README.md.erb',
-               'README.md'
+      template 'README.md.erb', 'README.md'
     end
 
     def remove_public_index
@@ -26,13 +25,11 @@ module Raygun
     end
 
     def enable_factory_girl_syntax
-      copy_file 'spec.root/support/factory_girl.rb',
-                'spec/support/factory_girl.rb'
+      copy_file 'spec.root/support/factory_girl.rb', 'spec/support/factory_girl.rb'
     end
 
     def enable_threadsafe_mode
-      uncomment_lines 'config/environments/production.rb',
-                      'config.threadsafe!'
+      uncomment_lines 'config/environments/production.rb', 'config.threadsafe!'
     end
 
     def initialize_on_precompile
@@ -68,9 +65,7 @@ module Raygun
     #end
 
     def use_postgres_config_template
-      template 'config.root/database.yml.erb',
-               'config/database.yml',
-               force: true
+      template 'config.root/database.yml.erb', 'config/database.yml', force: true
     end
 
     def create_database
@@ -131,9 +126,20 @@ module Raygun
 
     def configure_action_mailer
       action_mailer_host 'development', "#{app_name}.local"
-      action_mailer_host 'test', 'example.com'
-      action_mailer_host 'acceptance', "acceptance.#{app_name}.com"
-      action_mailer_host 'production', "#{app_name}.com"
+      action_mailer_host 'test',        "example.com"
+      action_mailer_host 'acceptance',  "acceptance.#{app_name}.com"
+      action_mailer_host 'production',  "#{app_name}.com"
+    end
+
+    def add_lib_to_load_path
+      'config/application.rb'.tap do |application_rb|
+        gsub_file application_rb, '#{config.root}/extras', '#{config.root}/lib'
+        uncomment_lines application_rb, 'config.autoload_paths'
+      end
+    end
+
+    def add_email_validator
+      copy_file 'lib.root/email_validator.rb', 'lib/email_validator.rb'
     end
 
     def setup_simple_form
@@ -155,36 +161,24 @@ module Raygun
 
       generate 'sorcery:install brute_force_protection activity_logging user_activation remember_me reset_password external'
 
-      copy_file 'app.root/models/user.rb',
-                'app/models/user.rb',
-                force: true
+      copy_file 'app.root/models/user.rb', 'app/models/user.rb', force: true
+      copy_file 'spec.root/factories/users.rb', 'spec/factories/users.rb', force: true
+      copy_file 'spec.root/models/user_spec.rb', 'spec/models/user_spec.rb', force: true
 
-      copy_file 'spec.root/factories/users.rb',
-                'spec/factories/users.rb',
-                force: true
-
-      copy_file 'spec.root/models/user_spec.rb',
-                'spec/models/user_spec.rb',
-                force: true
+      gsub_file 'spec/controllers/users_controller_spec.rb',
+                /(valid_attributes\n\s*)\{\}/,
+                '\1FactoryGirl.attributes_for(:user)'
 
       # User mailer (has to happen before sorcery config changes)
       generate 'mailer UserMailer activation_needed_email activation_success_email reset_password_email'
-
-      copy_file 'app.root/mailers/user_mailer.rb',
-                'app/mailers/user_mailer.rb',
-                force: true
-
-      copy_file 'spec.root/mailers/user_mailer_spec.rb',
-                'spec/mailers/user_mailer_spec.rb',
-                force: true
+      copy_file 'app.root/mailers/user_mailer.rb', 'app/mailers/user_mailer.rb', force: true
+      copy_file 'spec.root/mailers/user_mailer_spec.rb', 'spec/mailers/user_mailer_spec.rb', force: true
 
       %w(activation_needed_email activation_success_email reset_password_email).each do |fn|
         remove_file "app/views/user_mailer/#{fn}.text.slim"
 
         %w(html.erb text.erb).each do |ext|
-          copy_file "app.root/views/user_mailer/#{fn}.#{ext}",
-                    "app/views/user_mailer/#{fn}.#{ext}",
-                    force: true
+          copy_file "app.root/views/user_mailer/#{fn}.#{ext}", "app/views/user_mailer/#{fn}.#{ext}", force: true
         end
       end
 
@@ -194,25 +188,11 @@ module Raygun
       comment_lines sorcery_core_migration, /^.* t.string :username.*$\n/
 
       'config/initializers/sorcery.rb'.tap do |sorcery_rb|
-        replace_in_file sorcery_rb,
-                        'config.user_class = "User"',
-                        'config.user_class = User'
-  
-        replace_in_file sorcery_rb,
-                        '# user.username_attribute_names =',
-                        'user.username_attribute_names = :email'
-  
-        replace_in_file sorcery_rb,
-                        '# user.user_activation_mailer =',
-                        'user.user_activation_mailer = UserMailer'
-  
-        replace_in_file sorcery_rb,
-                        '# user.reset_password_mailer =',
-                        'user.reset_password_mailer = UserMailer'
-  
-        #replace_in_file sorcery_rb,
-        #                /# user.unlock_token_mailer =.*$/,
-        #                'user.unlock_token_mailer = UserMailer'
+        replace_in_file sorcery_rb, 'config.user_class = "User"', 'config.user_class = User'
+        replace_in_file sorcery_rb, '# user.username_attribute_names =', 'user.username_attribute_names = :email'
+        replace_in_file sorcery_rb, '# user.user_activation_mailer =', 'user.user_activation_mailer = UserMailer'
+        replace_in_file sorcery_rb, '# user.reset_password_mailer =', 'user.reset_password_mailer = UserMailer'
+        #replace_in_file sorcery_rb, /# user.unlock_token_mailer =.*$/, 'user.unlock_token_mailer = UserMailer'
       end
 
       # Routes, controllers, helpers and views
@@ -317,10 +297,6 @@ module Raygun
     #  inject_into_file 'app/models/user.rb',
     #    "  attr_accessible :email, :password\n",
     #    :after => /include Clearance::User\n/
-    #end
-
-    #def add_email_validator
-    #  copy_file 'email_validator.rb', 'app/validators/email_validator.rb'
     #end
 
     #def include_clearance_matchers
