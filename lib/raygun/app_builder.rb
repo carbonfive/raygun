@@ -105,13 +105,14 @@ module Raygun
 
     def configure_rspec
       generators_config = <<-RUBY
+
     config.generators do |generate|
-      generate.test_framework :rspec
-      generate.helper false
       generate.stylesheets false
-      generate.javascript_engine false
+      #generate.helpers     false
       generate.route_specs false
+      #generate.view_specs  false
     end
+
       RUBY
       inject_into_class 'config/application.rb', 'Application', generators_config
     end
@@ -121,10 +122,11 @@ module Raygun
     end
 
     def configure_time_zone
-      time_zone_config = <<-RUBY
-        config.active_record.default_timezone = :utc
-      RUBY
-      inject_into_class 'config/application.rb', 'Application', time_zone_config
+      'config/application.rb'.tap do |application_rb|
+      #  inject_into_file application_rb, '    config.active_record.default_timezone = :utc\n', after: "'Central Time (US & Canada)'\n"
+      #  uncomment_lines  application_rb, 'config.time_zone'
+        gsub_file        application_rb, 'Central Time (US & Canada)', 'Pacific Time (US & Canada)'
+      end
     end
 
     def configure_action_mailer
@@ -191,25 +193,27 @@ module Raygun
       inject_into_file sorcery_core_migration, "      t.string :name\n", after: "create_table :users do |t|\n"
       comment_lines sorcery_core_migration, /^.* t.string :username.*$\n/
 
-      replace_in_file 'config/initializers/sorcery.rb',
-                      'config.user_class = "User"',
-                      'config.user_class = User'
-
-      replace_in_file 'config/initializers/sorcery.rb',
-                      '# user.username_attribute_names =',
-                      'user.username_attribute_names = :email'
-
-      replace_in_file 'config/initializers/sorcery.rb',
-                      '# user.user_activation_mailer =',
-                      'user.user_activation_mailer = UserMailer'
-
-      replace_in_file 'config/initializers/sorcery.rb',
-                      '# user.reset_password_mailer =',
-                      'user.reset_password_mailer = UserMailer'
-
-      #replace_in_file 'config/initializers/sorcery.rb',
-      #                /# user.unlock_token_mailer =.*$/,
-      #                'user.unlock_token_mailer = UserMailer'
+      'config/initializers/sorcery.rb'.tap do |sorcery_rb|
+        replace_in_file sorcery_rb,
+                        'config.user_class = "User"',
+                        'config.user_class = User'
+  
+        replace_in_file sorcery_rb,
+                        '# user.username_attribute_names =',
+                        'user.username_attribute_names = :email'
+  
+        replace_in_file sorcery_rb,
+                        '# user.user_activation_mailer =',
+                        'user.user_activation_mailer = UserMailer'
+  
+        replace_in_file sorcery_rb,
+                        '# user.reset_password_mailer =',
+                        'user.reset_password_mailer = UserMailer'
+  
+        #replace_in_file sorcery_rb,
+        #                /# user.unlock_token_mailer =.*$/,
+        #                'user.unlock_token_mailer = UserMailer'
+      end
 
       # Routes, controllers, helpers and views
       route "match 'sign_in'  => 'user_sessions#new',     as: :sign_in"
@@ -339,6 +343,13 @@ module Raygun
         s.gsub!(awesome_rx, '\1\2:')
         #puts "#{count} replacements @ #{f}"
         open(f, 'w') { |b| b << s }
+      end
+    end
+
+    def consistent_quoting
+      gsub_file 'config/application.rb', '"utf-8"', "'utf-8'"
+      %w(acceptance production).each do |fn|
+        gsub_file "config/environments/#{fn}.rb", '"X-Sendfile"', "'X-Sendfile'"
       end
     end
 

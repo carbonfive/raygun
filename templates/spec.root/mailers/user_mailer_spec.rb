@@ -1,14 +1,15 @@
 require "spec_helper"
 
 describe UserMailer do
+  let(:user) { FactoryGirl.build_stubbed(:user) }
+
   describe "activation_needed_email" do
-    let(:user) { FactoryGirl.build_stubbed(:user) }
     let(:mail) { UserMailer.activation_needed_email(user) }
 
     it "renders the headers" do
       mail.subject.should eq("Welcome to My Awesome Site")
       mail.to.should eq([user.email])
-      mail.from.should eq(["notifications@example.com"])
+      mail.from.should eq(['notifications@example.com'])
     end
 
     it "renders the body" do
@@ -17,13 +18,12 @@ describe UserMailer do
   end
 
   describe "activation_success_email" do
-    let(:user) { FactoryGirl.build_stubbed(:user) }
     let(:mail) { UserMailer.activation_success_email(user) }
 
     it "renders the headers" do
       mail.subject.should eq("Your account is now activated")
       mail.to.should eq([user.email])
-      mail.from.should eq(["notifications@example.com"])
+      mail.from.should eq(['notifications@example.com'])
     end
 
     it "renders the body" do
@@ -32,13 +32,12 @@ describe UserMailer do
   end
 
   describe "reset_password_email" do
-    let(:user) { FactoryGirl.build_stubbed(:user) }
     let(:mail) { UserMailer.reset_password_email(user) }
 
     it "renders the headers" do
       mail.subject.should eq("Your password reset request")
       mail.to.should eq([user.email])
-      mail.from.should eq(["notifications@example.com"])
+      mail.from.should eq(['notifications@example.com'])
     end
 
     it "renders the body" do

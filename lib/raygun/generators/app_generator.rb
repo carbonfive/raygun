@@ -36,7 +36,7 @@ module Raygun
       #invoke :setup_git
       #invoke :create_heroku_apps
       #invoke :create_github_repo
-      invoke :convert_to_19_hash_syntax
+      invoke :knits_and_picks
       invoke :outro
     end
 
@@ -113,9 +113,10 @@ module Raygun
       build :setup_root_route
     end
 
-    def convert_to_19_hash_syntax
+    def knits_and_picks
       say 'Converting old hash syntax'
       build :convert_to_19_hash_syntax
+      build :consistent_quoting
     end
 
     def outro
