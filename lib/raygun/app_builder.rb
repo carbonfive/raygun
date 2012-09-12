@@ -121,10 +121,10 @@ module Raygun
     end
 
     def configure_time_zone
-      'config/application.rb'.tap do |application_rb|
-      #  inject_into_file application_rb, '    config.active_record.default_timezone = :utc\n', after: "'Central Time (US & Canada)'\n"
-      #  uncomment_lines  application_rb, 'config.time_zone'
-        gsub_file        application_rb, 'Central Time (US & Canada)', 'Pacific Time (US & Canada)'
+      'config/application.rb'.tap do |fn|
+        #inject_into_file fn, '    config.active_record.default_timezone = :utc\n', after: "'Central Time (US & Canada)'\n"
+        #uncomment_lines  fn, 'config.time_zone'
+        gsub_file        fn, 'Central Time (US & Canada)', 'Pacific Time (US & Canada)'
       end
     end
 
@@ -136,13 +136,15 @@ module Raygun
     end
 
     def add_lib_to_load_path
-      'config/application.rb'.tap do |application_rb|
-        gsub_file application_rb, '#{config.root}/extras', '#{config.root}/lib'
-        uncomment_lines application_rb, 'config.autoload_paths'
+      'config/application.rb'.tap do |fn|
+        gsub_file       fn, '#{config.root}/extras', '#{config.root}/lib'
+        uncomment_lines fn, 'config.autoload_paths'
       end
     end
 
     def add_email_validator
+      # CN: I'm not thrilled with this use of the lib directory, but it's not that unusual. Would love to hear what
+      # other folks think about where such things should live.
       copy_file 'lib.root/email_validator.rb', 'lib/email_validator.rb'
     end
 
@@ -191,12 +193,12 @@ module Raygun
       inject_into_file sorcery_core_migration, "      t.string :name\n", after: "create_table :users do |t|\n"
       comment_lines sorcery_core_migration, /^.* t.string :username.*$\n/
 
-      'config/initializers/sorcery.rb'.tap do |sorcery_rb|
-        replace_in_file sorcery_rb, 'config.user_class = "User"', 'config.user_class = User'
-        replace_in_file sorcery_rb, '# user.username_attribute_names =', 'user.username_attribute_names = :email'
-        replace_in_file sorcery_rb, '# user.user_activation_mailer =', 'user.user_activation_mailer = UserMailer'
-        replace_in_file sorcery_rb, '# user.reset_password_mailer =', 'user.reset_password_mailer = UserMailer'
-        #replace_in_file sorcery_rb, /# user.unlock_token_mailer =.*$/, 'user.unlock_token_mailer = UserMailer'
+      'config/initializers/sorcery.rb'.tap do |fn|
+        replace_in_file fn, 'config.user_class = "User"',        'config.user_class = User'
+        replace_in_file fn, '# user.username_attribute_names =', 'user.username_attribute_names = :email'
+        replace_in_file fn, '# user.user_activation_mailer =',   'user.user_activation_mailer = UserMailer'
+        replace_in_file fn, '# user.reset_password_mailer =',    'user.reset_password_mailer = UserMailer'
+        #replace_in_file sorcery_rb, /# user.unlock_token_mailer =.*$/,   'user.unlock_token_mailer = UserMailer'
       end
 
       # Routes, controllers, helpers and views
