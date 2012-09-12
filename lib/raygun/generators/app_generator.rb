@@ -29,7 +29,7 @@ module Raygun
       invoke :create_raygun_views
       invoke :configure_app
       #invoke :create_common_javascripts
-      #invoke :setup_stylesheets
+      invoke :setup_stylesheets
       #invoke :copy_miscellaneous_files
       #invoke :customize_error_pages
       invoke :setup_root_route
@@ -108,6 +108,10 @@ module Raygun
       build :setup_authentication
       build :setup_default_rake_task
       #build :setup_guard
+    end
+
+    def setup_stylesheets
+      build :setup_stylesheets
     end
 
     def setup_root_route

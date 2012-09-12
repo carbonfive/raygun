@@ -223,6 +223,11 @@ module Raygun
 
     end
 
+    def setup_stylesheets
+      remove_file 'app/assets/stylesheets/application.css'
+      copy_file 'app.root/assets/stylesheets/application.css.less', 'app/assets/stylesheets/application.css.less'
+    end
+
     #def setup_guard
     #  copy_file 'Guardfile', 'Guardfile'
     #end
