@@ -82,7 +82,11 @@ module Raygun
     end
 
     def setup_generators
-      copy_file 'lib.root/templates/slim/scaffold/index.html.slim', 'lib/templates/slim/scaffold/index.html.slim'
+      %w(_form index show new edit).each do |view|
+        template = "lib/templates/slim/scaffold/#{view}.html.slim"
+        remove_file template
+        copy_file   "lib.root/templates/slim/scaffold/#{view}.html.slim", template
+      end
     end
 
     #def add_custom_gems
@@ -153,7 +157,7 @@ module Raygun
     end
 
     def setup_simple_form
-      generate 'simple_form:install --bootstrap'
+      generate 'simple_form:install --bootstrap -s'
 
       replace_in_file 'config/initializers/simple_form.rb',
                       %(# config.label_text = lambda { |label, required| "\#{required} \#{label}" }),
