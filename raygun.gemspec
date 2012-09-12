@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'rails', '3.2.8'
   gem.add_dependency 'bundler', '>= 1.2'
+  gem.add_dependency 'hash_syntax', '>= 1.0'
 end

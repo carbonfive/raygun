@@ -319,16 +319,18 @@ module Raygun
     #end
 
     def convert_to_19_hash_syntax
+      run 'hash_syntax -n'
+
       # Borrowed from http://devign.me/convert-ruby-hash-syntax-to-1-9/
-      Dir['**/*.rb'].each do |f|
-        s = open(f).read
-        awesome_rx = /(?<!return)(?<!:)(?<!\w)(\s+):(\w+)\s*=>/
-        count = s.scan(awesome_rx).length
-        next if count.zero?
-        s.gsub!(awesome_rx, '\1\2:')
-        #puts "#{count} replacements @ #{f}"
-        open(f, 'w') { |b| b << s }
-      end
+      #Dir['**/*.rb'].each do |f|
+      #  s = open(f).read
+      #  awesome_rx = /(?<!return)(?<!:)(?<!\w)(\s+):(\w+)\s*=>/
+      #  count = s.scan(awesome_rx).length
+      #  next if count.zero?
+      #  s.gsub!(awesome_rx, '\1\2:')
+      #  #puts "#{count} replacements @ #{f}"
+      #  open(f, 'w') { |b| b << s }
+      #end
     end
 
     def consistent_quoting
