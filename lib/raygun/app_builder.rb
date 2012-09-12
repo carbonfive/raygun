@@ -43,7 +43,7 @@ module Raygun
     end
 
     def create_partials_directory
-      empty_directory 'app/views/application'
+      #empty_directory 'app/views/application'
     end
 
     #def create_shared_flashes
