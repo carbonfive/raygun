@@ -26,6 +26,7 @@ module Raygun
       # FUTURE invoke :configure_rbenv
       invoke :customize_gemfile
       invoke :setup_database
+      invoke :setup_generators
       invoke :create_raygun_views
       invoke :configure_app
       #invoke :create_common_javascripts
@@ -83,6 +84,11 @@ module Raygun
       say 'Setting up database'
       build :use_postgres_config_template
       build :create_database
+    end
+
+    def setup_generators
+      say 'Installing custom view generator templates'
+      build :setup_generators
     end
 
     def create_raygun_views

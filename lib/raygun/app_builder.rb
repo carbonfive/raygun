@@ -81,6 +81,10 @@ module Raygun
       copy_file 'Gemfile_customized', 'Gemfile', force: true
     end
 
+    def setup_generators
+      copy_file 'lib.root/templates/slim/scaffold/index.html.slim', 'lib/templates/slim/scaffold/index.html.slim'
+    end
+
     #def add_custom_gems
     #  additions_path = find_in_source_paths 'Gemfile_additions'
     #  new_gems = File.open(additions_path).read
