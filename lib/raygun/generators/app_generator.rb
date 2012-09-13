@@ -32,7 +32,7 @@ module Raygun
       invoke :setup_generators
       invoke :create_raygun_views
       invoke :configure_app
-      #invoke :create_common_javascripts
+      invoke :setup_javascripts
       invoke :setup_stylesheets
       invoke :copy_miscellaneous_files
       #invoke :customize_error_pages
@@ -130,7 +130,13 @@ module Raygun
     end
 
     def setup_stylesheets
+      say "Configuring stylesheets"
       build :setup_stylesheets
+    end
+
+    def setup_javascripts
+      say "Configuring javascripts"
+      build :setup_javascripts
     end
 
     def copy_miscellaneous_files
@@ -155,7 +161,7 @@ module Raygun
       say ""
       say "# Prepare the database"
       say "  $ cd #{ARGV[0]}"
-      say "  $ rake db:migrate db:seed db:sample_data db:test:prepare"
+      say "  $ rake db:create db:migrate db:seed db:sample_data db:test:prepare"
       say ""
       say "# Run the specs (they should all pass)"
       say "  $ rake spec"

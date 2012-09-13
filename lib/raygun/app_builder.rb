@@ -237,6 +237,12 @@ module Raygun
       copy_file 'app.root/assets/stylesheets/application.css.less', 'app/assets/stylesheets/application.css.less'
     end
 
+    def setup_javascripts
+      inject_into_file 'app/assets/javascripts/application.js',
+                       "//= require twitter/bootstrap\n",
+                       after: "require jquery_ujs\n"
+    end
+
     def copy_rake_tasks
       copy_file 'lib.root/tasks/db.rake', 'lib/tasks/db.rake'
       copy_file 'db.root/sample_data.rb', 'db/sample_data.rb'
