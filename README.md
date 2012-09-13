@@ -15,10 +15,10 @@ Tools/libraries:
     * Less
     * Bootstrap    (with custom view generators)
     * Sorcery      (with user model, default views, controllers and mailer)
-    * Cancan
+    * Cancan       (SOON)
     * RSpec        (SOON with custom generator templates)
     * Factory Girl
-    * Guard
+    * Guard        (SOON)
 
 And many tweaks and common recipes.
 
@@ -27,8 +27,6 @@ And many tweaks and common recipes.
     $ gem install raygun
 
 ## Usage
-
-    $ raygun --help
 
     $ raygun your-project [options]
 
