@@ -13,10 +13,10 @@ Tools/libraries:
     * PostgreSQL
     * Slim
     * Less
-    * Bootstrap
-    * Sorcery
+    * Bootstrap    (with custom view generators)
+    * Sorcery      (with user model, default views, controllers and mailer)
     * Cancan
-    * RSpec
+    * RSpec        (SOON with custom generator templates)
     * Factory Girl
     * Guard
 
@@ -37,7 +37,7 @@ Once your project is baked out, you can easily kick the wheels:
     $ cd your-project
     $ rake db:create db:migrate
     $ rake db:test:prepare spec
-    $ rake db:populate
+    $ rake db:sample_data
     $ rails s
 
 ## Contributing

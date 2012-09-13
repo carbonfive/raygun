@@ -19,9 +19,9 @@ module Raygun
     end
 
     def raise_delivery_errors
-      replace_in_file 'config/environments/development.rb',
-                      'raise_delivery_errors = false',
-                      'raise_delivery_errors = true'
+      #replace_in_file 'config/environments/development.rb',
+      #                'raise_delivery_errors = false',
+      #                'raise_delivery_errors = true'
     end
 
     def enable_factory_girl_syntax
@@ -230,12 +230,16 @@ module Raygun
 
       copy_file 'app.root/views/user_sessions/new.html.slim',
                 'app/views/user_sessions/new.html.slim'
-
     end
 
     def setup_stylesheets
       remove_file 'app/assets/stylesheets/application.css'
       copy_file 'app.root/assets/stylesheets/application.css.less', 'app/assets/stylesheets/application.css.less'
+    end
+
+    def copy_rake_tasks
+      copy_file 'lib.root/tasks/db.rake', 'lib/tasks/db.rake'
+      copy_file 'db.root/sample_data.rb', 'db/sample_data.rb'
     end
 
     #def setup_guard

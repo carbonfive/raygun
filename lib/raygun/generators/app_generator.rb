@@ -34,7 +34,7 @@ module Raygun
       invoke :configure_app
       #invoke :create_common_javascripts
       invoke :setup_stylesheets
-      #invoke :copy_miscellaneous_files
+      invoke :copy_miscellaneous_files
       #invoke :customize_error_pages
       invoke :setup_root_route
       #invoke :setup_git
@@ -133,6 +133,11 @@ module Raygun
       build :setup_stylesheets
     end
 
+    def copy_miscellaneous_files
+      say 'Copying miscellaneous support files'
+      build :copy_rake_tasks
+    end
+
     def setup_root_route
       say 'Setting up a root route'
       build :setup_root_route
@@ -145,6 +150,20 @@ module Raygun
     end
 
     def outro
+      say ""
+      say "You're done! Next steps..."
+      say ""
+      say "# Prepare the database"
+      say "  $ cd #{ARGV[0]}"
+      say "  $ rake db:migrate db:seed db:sample_data db:test:prepare"
+      say ""
+      say "# Run the specs (they should all pass)"
+      say "  $ rake spec"
+      say ""
+      say "# Run the app and check things out"
+      say "  $ rails s"
+      say "  $ open http://0.0.0.0:3000"
+      say ""
       say "Enjoy your Carbon Five flavored Rails application!"
     end
 
