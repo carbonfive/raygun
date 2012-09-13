@@ -1,5 +1,6 @@
 require 'rails/generators'
 require 'rails/generators/rails/app/app_generator'
+require 'rvm'
 
 module Raygun
   class AppGenerator < Rails::Generators::AppGenerator
@@ -16,6 +17,8 @@ module Raygun
     end
 
     def raygun_customization
+      rvm_original_env = RVM.current.expanded_name
+
       invoke :remove_files_we_dont_need
       invoke :remove_routes_comment_lines
       invoke :setup_development_environment
@@ -37,6 +40,10 @@ module Raygun
       #invoke :setup_git
       #invoke :create_heroku_apps
       #invoke :create_github_repo
+
+      # Go back to the original rvm environment.
+      @@env.use!(rvm_original_env)
+
       invoke :knits_and_picks
       invoke :outro
     end
@@ -70,7 +77,13 @@ module Raygun
     end
 
     def configure_rvm
-      say "Creating a .rvmrc file."
+      say "Configuring RVM"
+
+      @@env = RVM::Environment.new
+
+      @@env.gemset_create(app_name)
+      @@env.gemset_use!(app_name)
+
       build :configure_rvm
     end
 
@@ -137,6 +150,10 @@ module Raygun
 
     def run_bundle
       # Let's not: We'll bundle manually at the right spot
+    end
+
+    def rvm_ruby
+      @@env.expanded_name.match(/(.*)@/)[1]
     end
 
     protected

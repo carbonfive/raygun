@@ -73,11 +73,11 @@ module Raygun
     end
 
     def configure_rvm
-      template 'rvmrc.erb', '.rvmrc'
-      # TODO Switch to the rvm ruby/gemset.
+      template 'rvmrc.erb', '.rvmrc', rvm_ruby: rvm_ruby
     end
 
     def configure_gemfile
+      run "gem install bundler"
       copy_file 'Gemfile_customized', 'Gemfile', force: true
     end
 
