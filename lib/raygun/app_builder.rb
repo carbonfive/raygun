@@ -118,6 +118,9 @@ module Raygun
 
       RUBY
       inject_into_class 'config/application.rb', 'Application', generators_config
+
+      copy_file 'lib.root/templates/rspec/scaffold/controller_spec.rb',
+                'lib/templates/rspec/scaffold/controller_spec.rb'
     end
 
     def generate_rspec
@@ -176,12 +179,9 @@ module Raygun
       generate 'sorcery:install brute_force_protection activity_logging user_activation remember_me reset_password external'
 
       copy_file 'app.root/models/user.rb', 'app/models/user.rb', force: true
+      copy_file 'spec.root/support/sorcery.rb', 'spec/support/sorcery.rb'
       copy_file 'spec.root/factories/users.rb', 'spec/factories/users.rb', force: true
       copy_file 'spec.root/models/user_spec.rb', 'spec/models/user_spec.rb', force: true
-
-      gsub_file 'spec/controllers/users_controller_spec.rb',
-                /(valid_attributes\n\s*)\{\}/,
-                '\1FactoryGirl.attributes_for(:user)'
 
       # User mailer (has to happen before sorcery config changes)
       generate 'mailer UserMailer activation_needed_email activation_success_email reset_password_email'
