@@ -77,7 +77,7 @@ module Raygun
     end
 
     def configure_gemfile
-      run "gem install bundler"
+      run 'gem install bundler'
       copy_file 'Gemfile_customized', 'Gemfile', force: true
     end
 
@@ -88,23 +88,6 @@ module Raygun
         copy_file   "lib.root/templates/slim/scaffold/#{view}.html.slim", template
       end
     end
-
-    #def add_custom_gems
-    #  additions_path = find_in_source_paths 'Gemfile_additions'
-    #  new_gems = File.open(additions_path).read
-    #  inject_into_file 'Gemfile', "\n#{new_gems}",
-    #    :after => /gem 'jquery-rails'/
-    #end
-
-    #def add_clearance_gem
-    #  inject_into_file 'Gemfile', "\ngem 'clearance'",
-    #    :after => /gem 'jquery-rails'/
-    #end
-    #
-    #def add_capybara_webkit_gem
-    #  inject_into_file 'Gemfile', "\n  gem 'capybara-webkit', '~> 0.11.0'",
-    #    :after => /gem 'cucumber-rails', '1.3.0', :require => false/
-    #end
 
     def configure_rspec
       generators_config = <<-RUBY
@@ -234,8 +217,7 @@ module Raygun
 
     def setup_stylesheets
       remove_file 'app/assets/stylesheets/application.css'
-      copy_file 'app.root/assets/stylesheets/application.css.less', 'app/assets/stylesheets/application.css.less'
-      copy_file 'app.root/assets/stylesheets/_footer.less',         'app/assets/stylesheets/_footer.less'
+      directory   'app.root/assets/stylesheets', 'app/assets/stylesheets'
     end
 
     def setup_javascripts
@@ -251,13 +233,6 @@ module Raygun
 
     #def setup_guard
     #  copy_file 'Guardfile', 'Guardfile'
-    #end
-
-    #def setup_stylesheets
-    #  copy_file 'app/assets/stylesheets/application.css', 'app/assets/stylesheets/application.css.scss'
-    #  remove_file 'app/assets/stylesheets/application.css'
-    #  concat_file 'import_scss_styles', 'app/assets/stylesheets/application.css.scss'
-    #  create_file 'app/assets/stylesheets/_screen.scss'
     #end
 
     #def gitignore_files
@@ -341,17 +316,6 @@ module Raygun
 
     def convert_to_19_hash_syntax
       run 'hash_syntax -n'
-
-      # Borrowed from http://devign.me/convert-ruby-hash-syntax-to-1-9/
-      #Dir['**/*.rb'].each do |f|
-      #  s = open(f).read
-      #  awesome_rx = /(?<!return)(?<!:)(?<!\w)(\s+):(\w+)\s*=>/
-      #  count = s.scan(awesome_rx).length
-      #  next if count.zero?
-      #  s.gsub!(awesome_rx, '\1\2:')
-      #  #puts "#{count} replacements @ #{f}"
-      #  open(f, 'w') { |b| b << s }
-      #end
     end
 
     def consistent_quoting
