@@ -179,6 +179,8 @@ module Raygun
         end
       end
 
+      remove_dir 'spec/fixtures/user_mailer'
+
       # Patch sorcery configuration and migrations
       sorcery_core_migration = 'db/migrate/' + Dir.new('./db/migrate').entries.select { |e| e =~ /sorcery_core/ }.first
       inject_into_file sorcery_core_migration, "      t.string :name\n", after: "create_table :users do |t|\n"
