@@ -235,6 +235,7 @@ module Raygun
     def setup_stylesheets
       remove_file 'app/assets/stylesheets/application.css'
       copy_file 'app.root/assets/stylesheets/application.css.less', 'app/assets/stylesheets/application.css.less'
+      copy_file 'app.root/assets/stylesheets/_footer.less',         'app/assets/stylesheets/_footer.less'
     end
 
     def setup_javascripts
