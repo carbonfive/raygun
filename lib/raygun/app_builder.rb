@@ -111,6 +111,30 @@ module Raygun
     end
 
     def add_rspec_support
+      shared_transaction = <<-RUBY
+
+# Forces all threads to share the same connection. This works on
+# Capybara because it starts the web server in a thread.
+#
+# http://blog.plataformatec.com.br/2011/12/three-tips-to-improve-the-performance-of-your-test-suite/
+
+class ActiveRecord::Base
+  mattr_accessor :shared_connection
+  @@shared_connection = nil
+
+  def self.connection
+    @@shared_connection || retrieve_connection
+  end
+end
+
+ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+
+# Turn down the logging while testing.
+Rails.logger.level = 4
+RUBY
+
+      append_to_file 'spec/spec_helper.rb', shared_transaction
+
       copy_file 'spec.root/support/accept_values.rb', 'spec/support/accept_values.rb'
     end
 
