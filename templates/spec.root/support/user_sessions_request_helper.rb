@@ -6,8 +6,8 @@ module UserSessionsRequestHelper
     within('#new_user_session') do
       fill_in 'Email',    with: email
       fill_in 'Password', with: password
+      click_on 'Sign In'
     end
-    click_on 'Create User session'
   end
 
   def sign_out(user = @current_user)
