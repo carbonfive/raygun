@@ -156,6 +156,7 @@ module Raygun
 
       remove_file 'app/models/user.rb'
       remove_file 'spec/factories/users.rb'
+      remove_file 'spec/requests/users_spec.rb'
       create_users_migration = 'db/migrate/' + Dir.new('./db/migrate').entries.select { |e| e =~ /create_users/ }.first
       remove_file create_users_migration
 
@@ -215,6 +216,12 @@ module Raygun
 
       copy_file 'app.root/views/user_sessions/new.html.slim',
                 'app/views/user_sessions/new.html.slim'
+
+      copy_file 'spec.root/support/user_sessions_request_helper.rb',
+                'spec/support/user_sessions_request_helper.rb'
+
+      copy_file 'spec.root/requests/user_sessions_spec.rb',
+                'spec/requests/user_sessions_spec.rb'
     end
 
     def setup_stylesheets
