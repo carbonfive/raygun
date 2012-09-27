@@ -25,6 +25,7 @@ module Raygun
       invoke :setup_production_environment
       invoke :setup_acceptance_environment
       #invoke :setup_staging_environment
+      # FUTURE autodetect rvm or rbenv
       invoke :configure_rvm
       # FUTURE invoke :configure_rbenv
       invoke :customize_gemfile
@@ -35,11 +36,7 @@ module Raygun
       invoke :setup_javascripts
       invoke :setup_stylesheets
       invoke :copy_miscellaneous_files
-      #invoke :customize_error_pages
       invoke :setup_root_route
-      #invoke :setup_git
-      #invoke :create_heroku_apps
-      #invoke :create_github_repo
 
       # Go back to the original rvm environment.
       @@env.use!(rvm_original_env)

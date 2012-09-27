@@ -18,12 +18,6 @@ module Raygun
       remove_file 'app/views/layouts/application.html.erb'
     end
 
-    def raise_delivery_errors
-      #replace_in_file 'config/environments/development.rb',
-      #                'raise_delivery_errors = false',
-      #                'raise_delivery_errors = true'
-    end
-
     def enable_factory_girl_syntax
       copy_file '_spec/support/factory_girl.rb', 'spec/support/factory_girl.rb'
     end
@@ -42,27 +36,11 @@ module Raygun
       run 'cp config/environments/production.rb config/environments/acceptance.rb'
     end
 
-    def create_partials_directory
-      #empty_directory 'app/views/application'
-    end
-
-    #def create_shared_flashes
-    #  copy_file '_flashes.html.slim', 'app/views/application/_flashes.html.slim'
-    #end
-
-    #def create_shared_javascripts
-    #  copy_file '_javascript.html.erb', 'app/views/application/_javascript.html.erb'
-    #end
-
     def create_application_layout
       template '_app/views/layouts/application.html.slim.erb',
                'app/views/layouts/application.html.slim',
                force: true
     end
-
-    #def create_common_javascripts
-    #  directory 'javascripts', 'app/assets/javascripts'
-    #end
 
     def use_postgres_config_template
       template '_config/database.yml.erb', 'config/database.yml', force: true
@@ -264,65 +242,6 @@ RUBY
       copy_file '_db/sample_data.rb', 'db/sample_data.rb'
     end
 
-    #def setup_guard
-    #  copy_file 'Guardfile', 'Guardfile'
-    #end
-
-    #def gitignore_files
-    #  concat_file 'suspenders_gitignore', '.gitignore'
-    #  ['app/models',
-    #    'app/assets/images',
-    #    'app/views/pages',
-    #    'db/migrate',
-    #    'log',
-    #    'spec/support',
-    #    'spec/lib',
-    #    'spec/models',
-    #    'spec/views',
-    #    'spec/controllers',
-    #    'spec/helpers',
-    #    'spec/support/matchers',
-    #    'spec/support/mixins',
-    #    'spec/support/shared_examples'].each do |dir|
-    #    empty_directory_with_gitkeep dir
-    #  end
-    #end
-
-    #def init_git
-    #  run 'git init'
-    #end
-
-    #def create_heroku_apps
-    #  path_addition = override_path_for_tests
-    #  run "#{path_addition} heroku create #{app_name}-production --remote=production"
-    #  run "#{path_addition} heroku create #{app_name}-staging    --remote=staging"
-    #end
-
-    #def create_github_repo(repo_name)
-    #  path_addition = override_path_for_tests
-    #  run "#{path_addition} hub create #{repo_name}"
-    #end
-
-    #def copy_miscellaneous_files
-    #  copy_file 'errors.rb', 'config/initializers/errors.rb'
-    #  copy_file 'Procfile'
-    #end
-
-#    def customize_error_pages
-#      meta_tags =<<-EOS
-#  <meta charset='utf-8' />
-#  <meta name='ROBOTS' content='NOODP' />
-#      EOS
-#      style_tags =<<-EOS
-#<link href='/assets/application.css' media='all' rel='stylesheet' type='text/css' />
-#      EOS
-#      %w(500 404 422).each do |page|
-#        inject_into_file "public/#{page}.html", meta_tags, :after => "<head>\n"
-#        replace_in_file "public/#{page}.html", /<style.+>.+<\/style>/mi, style_tags.strip
-#        replace_in_file "public/#{page}.html", /<!--.+-->\n/, ''
-#      end
-#    end
-
     def setup_root_route
       route "\n  root to: 'user_sessions#new'"
     end
@@ -330,22 +249,6 @@ RUBY
     def remove_routes_comment_lines
       replace_in_file 'config/routes.rb', /Application\.routes\.draw do.*end/m, "Application.routes.draw do\nend"
     end
-
-    #def set_attr_accessibles_on_user
-    #  inject_into_file 'app/models/user.rb',
-    #    "  attr_accessible :email, :password\n",
-    #    :after => /include Clearance::User\n/
-    #end
-
-    #def include_clearance_matchers
-    #  create_file 'spec/support/clearance.rb', "require 'clearance/testing'"
-    #end
-
-    #def setup_default_rake_task
-    #  append_file 'Rakefile' do
-    #    "task(:default).clear\ntask :default => [:spec, :cucumber]"
-    #  end
-    #end
 
     def convert_to_19_hash_syntax
       run 'hash_syntax -n'
@@ -357,14 +260,5 @@ RUBY
         gsub_file "config/environments/#{fn}.rb", '"X-Sendfile"', "'X-Sendfile'"
       end
     end
-
-    private
-
-    #def override_path_for_tests
-    #  if ENV['TESTING']
-    #    support_bin = File.expand_path(File.join('..', '..', '..', 'features', 'support', 'bin'))
-    #    "PATH=#{support_bin}:$PATH"
-    #  end
-    #end
   end
 end
