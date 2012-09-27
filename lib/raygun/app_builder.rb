@@ -155,7 +155,7 @@ RUBY
 
     def add_lib_to_load_path
       'config/application.rb'.tap do |fn|
-        gsub_file       fn, '#{_config}/extras', '#{_config}/lib'
+        gsub_file       fn, '#{config.root}/extras', '#{config.root}/lib'
         uncomment_lines fn, 'config.autoload_paths'
       end
     end
