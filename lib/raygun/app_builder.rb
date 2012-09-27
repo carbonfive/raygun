@@ -25,7 +25,7 @@ module Raygun
     end
 
     def enable_factory_girl_syntax
-      copy_file 'spec.root/support/factory_girl.rb', 'spec/support/factory_girl.rb'
+      copy_file '_spec/support/factory_girl.rb', 'spec/support/factory_girl.rb'
     end
 
     def enable_threadsafe_mode
@@ -55,7 +55,7 @@ module Raygun
     #end
 
     def create_application_layout
-      template 'app.root/views/layouts/application.html.slim.erb',
+      template '_app/views/layouts/application.html.slim.erb',
                'app/views/layouts/application.html.slim',
                force: true
     end
@@ -65,7 +65,7 @@ module Raygun
     #end
 
     def use_postgres_config_template
-      template 'config.root/database.yml.erb', 'config/database.yml', force: true
+      template '_config/database.yml.erb', 'config/database.yml', force: true
     end
 
     def create_database
@@ -85,7 +85,7 @@ module Raygun
       %w(_form index show new edit).each do |view|
         template = "lib/templates/slim/scaffold/#{view}.html.slim"
         remove_file template
-        copy_file   "lib.root/templates/slim/scaffold/#{view}.html.slim", template
+        copy_file   "_lib/templates/slim/scaffold/#{view}.html.slim", template
       end
     end
 
@@ -102,7 +102,7 @@ module Raygun
       RUBY
       inject_into_class 'config/application.rb', 'Application', generators_config
 
-      copy_file 'lib.root/templates/rspec/scaffold/controller_spec.rb',
+      copy_file '_lib/templates/rspec/scaffold/controller_spec.rb',
                 'lib/templates/rspec/scaffold/controller_spec.rb'
     end
 
@@ -135,7 +135,7 @@ RUBY
 
       append_to_file 'spec/spec_helper.rb', shared_transaction
 
-      copy_file 'spec.root/support/accept_values.rb', 'spec/support/accept_values.rb'
+      copy_file '_spec/support/accept_values.rb', 'spec/support/accept_values.rb'
     end
 
     def configure_time_zone
@@ -155,7 +155,7 @@ RUBY
 
     def add_lib_to_load_path
       'config/application.rb'.tap do |fn|
-        gsub_file       fn, '#{config.root}/extras', '#{config.root}/lib'
+        gsub_file       fn, '#{_config}/extras', '#{_config}/lib'
         uncomment_lines fn, 'config.autoload_paths'
       end
     end
@@ -163,7 +163,7 @@ RUBY
     def add_email_validator
       # CN: I'm not thrilled with this use of the lib directory, but it's not that unusual. Would love to hear what
       # other folks think about where such things should live.
-      copy_file 'lib.root/email_validator.rb', 'lib/email_validator.rb'
+      copy_file '_lib/email_validator.rb', 'lib/email_validator.rb'
     end
 
     def setup_simple_form
@@ -186,21 +186,21 @@ RUBY
 
       generate 'sorcery:install brute_force_protection activity_logging user_activation remember_me reset_password external'
 
-      copy_file 'app.root/models/user.rb', 'app/models/user.rb', force: true
-      copy_file 'spec.root/support/sorcery.rb', 'spec/support/sorcery.rb'
-      copy_file 'spec.root/factories/users.rb', 'spec/factories/users.rb', force: true
-      copy_file 'spec.root/models/user_spec.rb', 'spec/models/user_spec.rb', force: true
+      copy_file '_app/models/user.rb', 'app/models/user.rb', force: true
+      copy_file '_spec/support/sorcery.rb', 'spec/support/sorcery.rb'
+      copy_file '_spec/factories/users.rb', 'spec/factories/users.rb', force: true
+      copy_file '_spec/models/user_spec.rb', 'spec/models/user_spec.rb', force: true
 
       # User mailer (has to happen before sorcery config changes)
       generate 'mailer UserMailer activation_needed_email activation_success_email reset_password_email'
-      copy_file 'app.root/mailers/user_mailer.rb', 'app/mailers/user_mailer.rb', force: true
-      copy_file 'spec.root/mailers/user_mailer_spec.rb', 'spec/mailers/user_mailer_spec.rb', force: true
+      copy_file '_app/mailers/user_mailer.rb', 'app/mailers/user_mailer.rb', force: true
+      copy_file '_spec/mailers/user_mailer_spec.rb', 'spec/mailers/user_mailer_spec.rb', force: true
 
       %w(activation_needed_email activation_success_email reset_password_email).each do |fn|
         remove_file "app/views/user_mailer/#{fn}.text.slim"
 
         %w(html.erb text.erb).each do |ext|
-          copy_file "app.root/views/user_mailer/#{fn}.#{ext}", "app/views/user_mailer/#{fn}.#{ext}", force: true
+          copy_file "_app/views/user_mailer/#{fn}.#{ext}", "app/views/user_mailer/#{fn}.#{ext}", force: true
         end
       end
 
@@ -224,33 +224,33 @@ RUBY
       route "match 'sign_out' => 'user_sessions#destroy', as: :sign_out"
       route "resources :user_sessions, only: [:new, :create, :destroy]"
 
-      copy_file 'app.root/controllers/application_controller.rb',
+      copy_file '_app/controllers/application_controller.rb',
                 'app/controllers/application_controller.rb',
                 force: true
 
-      copy_file 'app.root/helpers/application_helper.rb',
+      copy_file '_app/helpers/application_helper.rb',
                 'app/helpers/application_helper.rb',
                 force: true
 
-      copy_file 'app.root/models/user_session.rb',
+      copy_file '_app/models/user_session.rb',
                 'app/models/user_session.rb'
 
-      copy_file 'app.root/controllers/user_sessions_controller.rb',
+      copy_file '_app/controllers/user_sessions_controller.rb',
                 'app/controllers/user_sessions_controller.rb'
 
-      copy_file 'app.root/views/user_sessions/new.html.slim',
+      copy_file '_app/views/user_sessions/new.html.slim',
                 'app/views/user_sessions/new.html.slim'
 
-      copy_file 'spec.root/support/user_sessions_request_helper.rb',
+      copy_file '_spec/support/user_sessions_request_helper.rb',
                 'spec/support/user_sessions_request_helper.rb'
 
-      copy_file 'spec.root/requests/user_sessions_spec.rb',
+      copy_file '_spec/requests/user_sessions_spec.rb',
                 'spec/requests/user_sessions_spec.rb'
     end
 
     def setup_stylesheets
       remove_file 'app/assets/stylesheets/application.css'
-      directory   'app.root/assets/stylesheets', 'app/assets/stylesheets'
+      directory   '_app/assets/stylesheets', 'app/assets/stylesheets'
     end
 
     def setup_javascripts
@@ -260,8 +260,8 @@ RUBY
     end
 
     def copy_rake_tasks
-      copy_file 'lib.root/tasks/db.rake', 'lib/tasks/db.rake'
-      copy_file 'db.root/sample_data.rb', 'db/sample_data.rb'
+      copy_file '_lib/tasks/db.rake', 'lib/tasks/db.rake'
+      copy_file '_db/sample_data.rb', 'db/sample_data.rb'
     end
 
     #def setup_guard
