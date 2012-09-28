@@ -169,6 +169,10 @@ RUBY
       copy_file '_spec/factories/users.rb', 'spec/factories/users.rb', force: true
       copy_file '_spec/models/user_spec.rb', 'spec/models/user_spec.rb', force: true
 
+      inject_into_file 'app/controllers/users_controller.rb',
+                       "\n  before_filter :require_login\n\n",
+                       after: "UsersController < ApplicationController\n"
+
       # User mailer (has to happen before sorcery config changes)
       generate 'mailer UserMailer activation_needed_email activation_success_email reset_password_email'
       copy_file '_app/mailers/user_mailer.rb', 'app/mailers/user_mailer.rb', force: true
@@ -199,6 +203,10 @@ RUBY
 
       # Routes, controllers, helpers and views
       route "resources :password_resets, only: [:new, :create, :edit, :update]"
+      route "match 'sign_up/:token/activate' => 'registrations#activate', via: :get"
+      route "match 'sign_up' => 'registrations#create', via: :post"
+      route "match 'sign_up' => 'registrations#new', via: :get"
+      route "resources :registrations, only: [:new, :create, :activate]"
       route "resources :user_sessions, only: [:new, :create, :destroy]"
       route "match 'sign_out' => 'user_sessions#destroy', as: :sign_out"
       route "match 'sign_in'  => 'user_sessions#new',     as: :sign_in"
@@ -226,11 +234,15 @@ RUBY
       copy_file '_spec/requests/user_sessions_spec.rb',
                 'spec/requests/user_sessions_spec.rb'
 
+      copy_file '_app/controllers/registrations_controller.rb',
+                'app/controllers/registrations_controller.rb'
+
+      directory '_app/views/registrations', 'app/views/registrations'
+
       copy_file '_app/controllers/password_resets_controller.rb',
                 'app/controllers/password_resets_controller.rb'
 
-      copy_file '_app/views/password_resets/new.html.slim',
-                'app/views/password_resets/new.html.slim'
+      directory '_app/views/password_resets', 'app/views/password_resets'
 
       copy_file '_app/views/password_resets/edit.html.slim',
                 'app/views/password_resets/edit.html.slim'

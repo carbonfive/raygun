@@ -7,7 +7,7 @@ describe UserMailer do
     let(:mail) { UserMailer.activation_needed_email(user) }
 
     it "renders the headers" do
-      mail.subject.should eq("Welcome to My Awesome Site")
+      mail.subject.should eq("Welcome to My Awesome Site!")
       mail.to.should eq([user.email])
       mail.from.should eq(['notifications@example.com'])
     end
@@ -21,7 +21,7 @@ describe UserMailer do
     let(:mail) { UserMailer.activation_success_email(user) }
 
     it "renders the headers" do
-      mail.subject.should eq("Your account is now activated")
+      mail.subject.should eq("Your account has been activated!")
       mail.to.should eq([user.email])
       mail.from.should eq(['notifications@example.com'])
     end
@@ -35,7 +35,7 @@ describe UserMailer do
     let(:mail) { UserMailer.reset_password_email(user) }
 
     it "renders the headers" do
-      mail.subject.should eq("Your password reset request")
+      mail.subject.should eq("Password reset requested")
       mail.to.should eq([user.email])
       mail.from.should eq(['notifications@example.com'])
     end
