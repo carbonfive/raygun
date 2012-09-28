@@ -5,5 +5,8 @@
     = f.input :email, placeholder: 'jdoe@example.com', autofocus: true
     = f.input :password
 
+  ul.unstyled
+    li= link_to 'Reset forgotten password', new_password_reset_path
+
   .form-actions
     = f.button :submit, 'Sign In', class: 'btn btn-primary'

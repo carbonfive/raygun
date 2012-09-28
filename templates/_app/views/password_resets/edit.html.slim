@@ -1,0 +1,16 @@
+.page-header
+  h1 Reset Your Password
+
+= simple_form_for(@user, url: password_reset_path(@user)) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :email, disabled: true
+    = f.input :password, required: true, autofocus: true
+    = f.input :password_confirmation, required: true
+    = hidden_field_tag :token, @token
+
+  .form-actions
+    = f.button :submit, 'Reset Password', class: 'btn btn-primary'
+    '
+    = link_to 'Cancel', sign_in_path, class: 'btn'

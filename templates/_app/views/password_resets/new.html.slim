@@ -1,0 +1,11 @@
+.page-header
+  h1 Password Reset
+
+= form_tag(password_resets_path, method: :post) do
+  .control-group
+    = label_tag :email, nil, class: 'control-label'
+    .controls
+      = text_field_tag :email, nil, placeholder: 'joe@example.com'
+
+  .form-actions
+    = submit_tag "Reset my password!", class: 'btn btn-primary'

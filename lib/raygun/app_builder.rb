@@ -198,9 +198,10 @@ RUBY
       end
 
       # Routes, controllers, helpers and views
-      route "match 'sign_in'  => 'user_sessions#new',     as: :sign_in"
-      route "match 'sign_out' => 'user_sessions#destroy', as: :sign_out"
+      route "resources :password_resets, only: [:new, :create, :edit, :update]"
       route "resources :user_sessions, only: [:new, :create, :destroy]"
+      route "match 'sign_out' => 'user_sessions#destroy', as: :sign_out"
+      route "match 'sign_in'  => 'user_sessions#new',     as: :sign_in"
 
       copy_file '_app/controllers/application_controller.rb',
                 'app/controllers/application_controller.rb',
@@ -224,6 +225,16 @@ RUBY
 
       copy_file '_spec/requests/user_sessions_spec.rb',
                 'spec/requests/user_sessions_spec.rb'
+
+      copy_file '_app/controllers/password_resets_controller.rb',
+                'app/controllers/password_resets_controller.rb'
+
+      copy_file '_app/views/password_resets/new.html.slim',
+                'app/views/password_resets/new.html.slim'
+
+      copy_file '_app/views/password_resets/edit.html.slim',
+                'app/views/password_resets/edit.html.slim'
+
     end
 
     def setup_stylesheets
