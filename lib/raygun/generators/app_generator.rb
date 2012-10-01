@@ -36,7 +36,6 @@ module Raygun
       invoke :setup_javascripts
       invoke :setup_stylesheets
       invoke :copy_miscellaneous_files
-      invoke :setup_root_route
 
       # Go back to the original rvm environment.
       @@env.use!(rvm_original_env)
@@ -47,7 +46,6 @@ module Raygun
 
     def remove_files_we_dont_need
       say "Removing unwanted files."
-      build :remove_public_index
       build :remove_rails_logo_image
       build :remove_application_layout
     end
@@ -103,6 +101,7 @@ module Raygun
 
     def create_raygun_views
       say 'Creating views and layouts'
+      build :replace_public_index
       build :create_partials_directory
       #build :create_shared_flashes
       #build :create_shared_javascripts

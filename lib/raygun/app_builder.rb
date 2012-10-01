@@ -6,8 +6,8 @@ module Raygun
       template 'README.md.erb', 'README.md'
     end
 
-    def remove_public_index
-      remove_file 'public/index.html'
+    def replace_public_index
+      template '_public/index.html.erb', 'public/index.html', force: true
     end
 
     def remove_rails_logo_image
@@ -263,10 +263,6 @@ RUBY
     def copy_rake_tasks
       copy_file '_lib/tasks/db.rake', 'lib/tasks/db.rake'
       copy_file '_db/sample_data.rb', 'db/sample_data.rb'
-    end
-
-    def setup_root_route
-      route "\n  root to: 'user_sessions#new'"
     end
 
     def remove_routes_comment_lines
