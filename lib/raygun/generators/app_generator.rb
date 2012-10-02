@@ -140,11 +140,6 @@ module Raygun
       build :copy_rake_tasks
     end
 
-    def setup_root_route
-      say 'Setting up a root route'
-      build :setup_root_route
-    end
-
     def knits_and_picks
       say 'Converting old hash syntax and fixing knit picks'
       build :convert_to_19_hash_syntax
@@ -157,12 +152,13 @@ module Raygun
       say ""
       say "# Prepare the database"
       say "  $ cd #{ARGV[0]}"
-      say "  $ rake db:create db:migrate db:seed db:sample_data db:test:prepare"
+      say "  $ rake db:create db:migrate db:test:prepare"
       say ""
       say "# Run the specs (they should all pass)"
       say "  $ rake spec"
       say ""
-      say "# Run the app and check things out"
+      say "# Load some sample data, run the app and check things out"
+      say "  $ rake db:seed db:sample_data "
       say "  $ rails s"
       say "  $ open http://0.0.0.0:3000"
       say ""

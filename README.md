@@ -33,19 +33,26 @@ Raygun...
 
 ## Installation
 
-    $ gem install raygun
+  $ gem install raygun
 
 ## Usage
 
-    $ raygun your-project [options]
+  $ raygun your-project
 
 Once your project is baked out, you can easily kick the wheels:
 
-    $ cd your-project
-    $ rake db:create db:migrate
-    $ rake db:test:prepare spec
-    $ rake db:sample_data
-    $ rails s
+  $ cd your-project
+
+  # Prep the database
+  $ rake db:create db:migrate db:test:prepare
+
+  # Run the specs
+  $ rake spec
+
+  # Load some sample data, fire up the app and open it in a browser
+  $ rake db:seed db:sample_data
+  $ rails s
+  $ open http://0.0.0.0:3000
 
 ## Contributing
 
