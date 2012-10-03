@@ -74,7 +74,7 @@ module Raygun
     def configure_rvm
       say "Configuring RVM"
 
-      @@env = RVM::Environment.new
+      @@env = RVM::Environment.current
 
       @@env.gemset_create(app_name)
       @@env.gemset_use!(app_name)
@@ -137,6 +137,7 @@ module Raygun
     def copy_miscellaneous_files
       say 'Copying miscellaneous support files'
       build :copy_rake_tasks
+      build :copy_procfile
     end
 
     def knits_and_picks
@@ -158,7 +159,7 @@ module Raygun
       say ""
       say "# Load reference and sample data, then run the app and check things out"
       say "  $ rake db:seed db:sample_data"
-      say "  $ rails s"
+      say "  $ foreman start"
       say "  $ open http://0.0.0.0:3000"
       say ""
       say "Enjoy your Carbon Five flavored Rails application!"
