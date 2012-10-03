@@ -27,32 +27,35 @@ And many tweaks, patterns and common recipes.
 ## Projects Goals
 
 Raygun...
-* should generate a new rails application that's ready for feature development immediately.
+
+* should generate a new rails application that's ready for feature development immediately.* 
 * should generate an application that has best practices that apply to most projects baked in.
 * is a forum for discussing what should or should not be included as part of a standard stack.
 
 ## Installation
 
-  $ gem install raygun
+    $ gem install raygun
 
 ## Usage
 
-  $ raygun your-project
+__Important:__ Be sure you have a postgresql user called 'postgres' with no password.
+
+    $ raygun your-project
 
 Once your project is baked out, you can easily kick the wheels:
 
-  $ cd your-project
+    $ cd your-project
 
-  # Prep the database
-  $ rake db:create db:migrate db:test:prepare
+    # Prep the database
+    $ rake db:create db:migrate db:test:prepare
 
-  # Run the specs
-  $ rake spec
+    # Run the specs
+    $ rake spec
 
-  # Load some sample data, fire up the app and open it in a browser
-  $ rake db:seed db:sample_data
-  $ rails s
-  $ open http://0.0.0.0:3000
+    # Load some sample data, fire up the app and open it in a browser
+    $ rake db:seed db:sample_data
+    $ rails s
+    $ open http://0.0.0.0:3000
 
 ## Contributing
 
