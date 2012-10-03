@@ -170,7 +170,7 @@ module Raygun
     end
 
     def rvm_ruby
-      @@env.expanded_name.match(/(.*)@/)[1]
+      @@env.expanded_name.match(/(.*)@?/)[1]
     end
 
     protected
