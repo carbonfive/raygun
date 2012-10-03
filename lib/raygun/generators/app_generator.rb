@@ -121,8 +121,7 @@ module Raygun
       build :add_email_validator
       build :setup_simple_form
       build :setup_authentication
-      build :setup_default_rake_task
-      #build :setup_guard
+      build :setup_guard
     end
 
     def setup_stylesheets
