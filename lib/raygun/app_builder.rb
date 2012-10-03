@@ -266,7 +266,7 @@ RUBY
     end
 
     def copy_procfile
-      copy_file 'Procfile', 'Procfile'
+      copy_file 'Procfile'
     end
 
     def remove_routes_comment_lines
