@@ -74,7 +74,7 @@ module Raygun
     def configure_rvm
       say "Configuring RVM"
 
-      @@env = RVM::Environment.new
+      @@env = RVM::Environment.current
 
       @@env.gemset_create(app_name)
       @@env.gemset_use!(app_name)
