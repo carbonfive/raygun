@@ -265,6 +265,10 @@ RUBY
       copy_file '_db/sample_data.rb', 'db/sample_data.rb'
     end
 
+    def copy_procfile
+      copy_file 'Procfile', 'Procfile'
+    end
+
     def remove_routes_comment_lines
       replace_in_file 'config/routes.rb', /Application\.routes\.draw do.*end/m, "Application.routes.draw do\nend"
     end

@@ -26,6 +26,7 @@ group :test, :development do
 end
 
 group :development do
+  gem 'foreman'
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-livereload'
