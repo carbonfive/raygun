@@ -246,7 +246,10 @@ RUBY
 
       copy_file '_app/views/password_resets/edit.html.slim',
                 'app/views/password_resets/edit.html.slim'
+    end
 
+    def setup_guard
+      copy_file 'Guardfile_customized', 'Guardfile'
     end
 
     def setup_stylesheets
