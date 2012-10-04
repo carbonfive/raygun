@@ -1,5 +1,3 @@
-require 'rvm'
-
 module Raygun
   class AppGenerator < Rails::Generators::AppGenerator
     include Raygun::RubyVersionHelpers
