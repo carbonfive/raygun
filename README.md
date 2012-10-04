@@ -70,3 +70,11 @@ Once your project is baked out, you can easily kick the wheels:
 Generate an example app using your local development version of raygun
 
     ./bin/raygun tmp/example_app
+
+### Customizing the generated Rails app
+
+Changes which can be applied on top of an existing Rails app should be added as `*_template.rb` files
+ in `raygun/generators/`.
+
+Changes which must be performed during the creation of the Rails app should be added to `lib/raygun/app_builder.rb`
+ and called from an appropriate step in `lib/raygun/generators/app_generator.rb`.
