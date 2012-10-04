@@ -114,6 +114,7 @@ module Raygun
       build :setup_simple_form
       build :setup_authentication
       build :setup_guard
+      build :setup_logging
     end
 
     def setup_stylesheets
