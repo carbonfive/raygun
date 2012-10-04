@@ -120,6 +120,10 @@ RUBY
       copy_file '_spec/support/accept_values.rb', 'spec/support/accept_values.rb'
     end
 
+    def add_js_testing
+      directory '_spec/javascripts', 'spec/javascripts'
+    end
+
     def configure_time_zone
       'config/application.rb'.tap do |fn|
         #inject_into_file fn, '    config.active_record.default_timezone = :utc\n', after: "'Central Time (US & Canada)'\n"
@@ -254,6 +258,7 @@ RUBY
 
     def setup_guard
       copy_file 'Guardfile_customized', 'Guardfile'
+      run 'bundle exec guard init jasmine'
     end
 
     def setup_logging

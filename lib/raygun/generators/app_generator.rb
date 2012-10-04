@@ -113,6 +113,8 @@ module Raygun
       build :generate_rspec
       build :add_rspec_support
 
+      build :add_js_testing
+
       build :configure_time_zone
       build :configure_action_mailer
       build :add_lib_to_load_path

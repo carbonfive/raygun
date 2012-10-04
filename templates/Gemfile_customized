@@ -22,6 +22,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara', github: 'jnicklas/capybara' # TODO Change when 2.0 is released.
   gem 'factory_girl_rails'
+  gem 'jasminerice'
   gem 'timecop'
 end
 
@@ -29,6 +30,7 @@ group :development do
   gem 'foreman'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'guard-jasmine'
   gem 'guard-livereload'
   gem 'rb-fsevent'
 end
