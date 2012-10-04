@@ -252,6 +252,10 @@ RUBY
       copy_file 'Guardfile_customized', 'Guardfile'
     end
 
+    def setup_logging
+      inject_into_file 'config.ru', "$stdout.sync = true\n", before: 'run ExampleApp::Application'
+    end
+
     def setup_stylesheets
       remove_file 'app/assets/stylesheets/application.css'
       directory   '_app/assets/stylesheets', 'app/assets/stylesheets'
