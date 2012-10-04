@@ -2,6 +2,7 @@ require 'rvm'
 
 module Raygun
   class AppGenerator < Rails::Generators::AppGenerator
+    include Raygun::RubyVersionHelpers
 
     class_option :database, type: :string, aliases: '-d', default: 'postgresql',
                  desc: "Preconfigure for selected database (options: #{DATABASES.join('/')})"
@@ -15,28 +16,24 @@ module Raygun
     end
 
     def raygun_customization
-      rvm_original_env = RVM.current.expanded_name
 
-      invoke :remove_files_we_dont_need
-      invoke :remove_routes_comment_lines
-      invoke :setup_development_environment
-      invoke :setup_production_environment
-      invoke :setup_acceptance_environment
-      #invoke :setup_staging_environment
-      # FUTURE autodetect rvm or rbenv
-      invoke :configure_rvm
-      # FUTURE invoke :configure_rbenv
-      invoke :customize_gemfile
-      invoke :setup_database
-      invoke :setup_generators
-      invoke :create_raygun_views
-      invoke :configure_app
-      invoke :setup_javascripts
-      invoke :setup_stylesheets
-      invoke :copy_miscellaneous_files
-
-      # Go back to the original rvm environment.
-      @@env.use!(rvm_original_env)
+      with_ruby_version do
+        invoke :remove_files_we_dont_need
+        invoke :remove_routes_comment_lines
+        invoke :setup_development_environment
+        invoke :setup_production_environment
+        invoke :setup_acceptance_environment
+        #invoke :setup_staging_environment
+        invoke :configure_ruby_version
+        invoke :customize_gemfile
+        invoke :setup_database
+        invoke :setup_generators
+        invoke :create_raygun_views
+        invoke :configure_app
+        invoke :setup_javascripts
+        invoke :setup_stylesheets
+        invoke :copy_miscellaneous_files
+      end
 
       invoke :knits_and_picks
       invoke :outro
@@ -69,15 +66,14 @@ module Raygun
       build :initialize_on_precompile
     end
 
-    def configure_rvm
-      say "Configuring RVM"
-
-      @@env = RVM::Environment.current
-
-      @@env.gemset_create(app_name)
-      @@env.gemset_use!(app_name)
-
-      build :configure_rvm
+    def configure_ruby_version
+      if rvm_installed?
+        say "Configuring RVM"
+        build :configure_rvm
+      else
+        say "Configuring rbenv"
+        build :configure_rbenv
+      end
     end
 
     def customize_gemfile
@@ -165,10 +161,6 @@ module Raygun
 
     def run_bundle
       # Let's not: We'll bundle manually at the right spot
-    end
-
-    def rvm_ruby
-      @@env.expanded_name.match(/(.*)@?/)[1]
     end
 
     protected

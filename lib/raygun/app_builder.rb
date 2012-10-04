@@ -54,6 +54,10 @@ module Raygun
       template 'rvmrc.erb', '.rvmrc', rvm_ruby: rvm_ruby
     end
 
+    def configure_rbenv
+      template 'rbenv-version.erb', '.rbenv-version', rbenv_ruby: rbenv_ruby
+    end
+
     def configure_gemfile
       run 'gem install bundler'
       copy_file 'Gemfile_customized', 'Gemfile', force: true
