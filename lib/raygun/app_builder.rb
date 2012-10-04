@@ -257,6 +257,12 @@ RUBY
                 'app/views/password_resets/edit.html.slim'
     end
 
+    def setup_default_rake_task
+      append_file 'Rakefile' do
+        "\ntask(:default).clear\ntask default: ['spec', 'spec:javascripts']"
+      end
+    end
+
     def setup_guard
       copy_file 'Guardfile_customized', 'Guardfile'
       run 'bundle exec guard init jasmine'
