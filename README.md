@@ -20,6 +20,7 @@ Major tools/libraries:
 * Cancan
 * RSpec
 * Factory Girl
+* Jasmine
 * Guard
 
 And many tweaks, patterns and common recipes.
@@ -28,7 +29,7 @@ And many tweaks, patterns and common recipes.
 
 Raygun...
 
-* should generate a new rails application that's ready for feature development immediately.* 
+* should generate a new rails application that's ready for feature development immediately.
 * should generate an application that has best practices that apply to most projects baked in.
 * is a forum for discussing what should or should not be included as part of a standard stack.
 
@@ -36,9 +37,15 @@ Raygun...
 
     $ gem install raygun
 
-## Usage
+## Prerequisites
 
-__Important:__ Be sure you have a postgresql user called 'postgres' with no password.
+Be sure you met these requirements before using raygun, otherwise you won't make it very far (misfire!).
+
+* Ruby 1.9.2+ (rvm and rbenv supported)
+* PostgreSQL 9.x with superuser 'postgres' with no password (```createuser -s postgres```)
+* PhantomJS for JavaScript testing (```brew install phantomjs```)
+
+## Usage
 
     $ raygun your-project
 
@@ -46,15 +53,14 @@ Once your project is baked out, you can easily kick the wheels:
 
     $ cd your-project
 
-    # Prep the database
-    $ rake db:create db:migrate db:test:prepare
+    # Prepare the database: schema and reference / sample data
+    $ rake db:migrate db:seed db:sample_data
 
     # Run the specs
-    $ rake spec
+    $ rake
 
-    # Load some sample data, fire up the app and open it in a browser
-    $ rake db:seed db:sample_data
-    $ rails s
+    # Fire up the app and open it in a browser
+    $ foreman start
     $ open http://0.0.0.0:3000
 
 ## Contributing
