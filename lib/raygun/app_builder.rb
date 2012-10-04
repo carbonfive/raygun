@@ -122,6 +122,7 @@ RUBY
 
     def add_js_testing
       directory '_spec/javascripts', 'spec/javascripts'
+      copy_file '_lib/tasks/spec.rake', 'lib/tasks/spec.rake'
     end
 
     def configure_time_zone
