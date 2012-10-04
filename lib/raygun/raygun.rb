@@ -2,6 +2,7 @@ require 'rails/generators'
 require 'rails/generators/rails/app/app_generator'
 
 [
+  'helpers/ruby_version_helpers',
   'actions',
   'app_builder',
   'generators/app_generator'
