@@ -119,6 +119,7 @@ module Raygun
       build :add_email_validator
       build :setup_simple_form
       build :setup_authentication
+      build :setup_simplecov
       build :setup_guard
       build :setup_logging
     end

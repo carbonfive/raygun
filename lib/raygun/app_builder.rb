@@ -252,6 +252,13 @@ RUBY
                 'app/views/password_resets/edit.html.slim'
     end
 
+    def setup_simplecov
+      inject_into_file 'spec/spec_helper.rb', "require File.expand_path('../support/simplecov', __FILE__)\n", after: "ENV[\"RAILS_ENV\"] ||= \'test\'\n"
+      inject_into_file 'Gemfile', "  gem 'simplecov'\n", after: "group :test, :development do\n"
+      copy_file '_lib/tasks/coverage.rake', 'lib/tasks/coverage.rake'
+      copy_file '_spec/support/simplecov.rb', 'spec/support/simplecov.rb'
+    end
+
     def setup_guard
       copy_file 'Guardfile_customized', 'Guardfile'
     end
