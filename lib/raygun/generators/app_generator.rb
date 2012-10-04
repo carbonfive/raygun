@@ -1,5 +1,3 @@
-require 'rails/generators'
-require 'rails/generators/rails/app/app_generator'
 require 'rvm'
 
 module Raygun
