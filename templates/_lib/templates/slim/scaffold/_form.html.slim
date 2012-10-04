@@ -3,7 +3,7 @@
 
   .form-inputs
 <%- attributes.each_with_index do |attribute, i| -%>
-    = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> <%= ", autofocus:true" if i == 0 %>
+    = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %><%= ', autofocus: true' if i == 0 %>
 <%- end -%>
 
   .form-actions
