@@ -71,10 +71,10 @@ module Raygun
       generators_config = <<-RUBY
 
     config.generators do |generate|
-      generate.stylesheets false
-      #generate.helpers     false
-      generate.route_specs false
-      #generate.view_specs  false
+      generate.stylesheets   false
+      #generate.helpers       false
+      generate.routing_specs false
+      #generate.view_specs    false
     end
 
       RUBY
