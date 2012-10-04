@@ -285,8 +285,9 @@ RUBY
     end
 
     def convert_to_19_hash_syntax
+      original_destination_root = destination_root
       inside(Raygun::AppGenerator.launch_path) do
-        run "find #{destination_root} -name '*.rb' | xargs hash_syntax -n"
+        run "find #{original_destination_root} -name '*.rb' | xargs hash_syntax -n"
       end
     end
 
