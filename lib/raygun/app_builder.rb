@@ -285,7 +285,9 @@ RUBY
     end
 
     def convert_to_19_hash_syntax
-      run 'hash_syntax -n'
+      inside(Raygun::AppGenerator.launch_path) do
+        run "find #{destination_root} -name '*.rb' | xargs hash_syntax -n"
+      end
     end
 
     def consistent_quoting

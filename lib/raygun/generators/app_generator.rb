@@ -2,6 +2,12 @@ module Raygun
   class AppGenerator < Rails::Generators::AppGenerator
     include Raygun::RubyVersionHelpers
 
+    # set and get raygun launch path
+    def self.launch_path(path=nil)
+      @_launch_path = path if path
+      @_launch_path
+    end
+
     class_option :database, type: :string, aliases: '-d', default: 'postgresql',
                  desc: "Preconfigure for selected database (options: #{DATABASES.join('/')})"
 
