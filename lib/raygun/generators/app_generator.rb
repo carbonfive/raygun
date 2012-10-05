@@ -110,7 +110,6 @@ module Raygun
       build :configure_time_zone
       build :configure_action_mailer
       build :add_lib_to_load_path
-      build :add_email_validator
       build :setup_simple_form
       build :setup_authentication
       build :setup_guard
