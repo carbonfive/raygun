@@ -142,12 +142,6 @@ RUBY
       end
     end
 
-    def add_email_validator
-      # CN: I'm not thrilled with this use of the lib directory, but it's not that unusual. Would love to hear what
-      # other folks think about where such things should live.
-      copy_file '_lib/email_validator.rb', 'lib/email_validator.rb'
-    end
-
     def setup_simple_form
       generate 'simple_form:install --bootstrap -s'
 
