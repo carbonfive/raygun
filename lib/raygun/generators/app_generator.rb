@@ -113,13 +113,16 @@ module Raygun
       build :generate_rspec
       build :add_rspec_support
 
+      build :add_js_testing
+
+      build :setup_logging
       build :configure_time_zone
       build :configure_action_mailer
       build :add_lib_to_load_path
       build :setup_simple_form
       build :setup_authentication
+      build :setup_default_rake_task
       build :setup_guard
-      build :setup_logging
     end
 
     def setup_stylesheets
@@ -148,17 +151,16 @@ module Raygun
       say ""
       say "You're done! Next steps..."
       say ""
-      say "# Prepare the database"
-      say "  $ cd #{ARGV[0]}"
-      say "  $ rake db:create db:migrate db:test:prepare"
+      say "# Prepare the database: schema and reference / sample data"
+      say "$ cd #{ARGV[0]}"
+      say "$ rake db:migrate db:seed db:sample_data"
       say ""
       say "# Run the specs (they should all pass)"
-      say "  $ rake spec"
+      say "$ rake"
       say ""
       say "# Load reference and sample data, then run the app and check things out"
-      say "  $ rake db:seed db:sample_data"
-      say "  $ foreman start"
-      say "  $ open http://0.0.0.0:3000"
+      say "$ foreman start"
+      say "$ open http://0.0.0.0:3000"
       say ""
       say "Enjoy your Carbon Five flavored Rails application!"
     end
