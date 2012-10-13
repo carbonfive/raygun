@@ -120,6 +120,11 @@ RUBY
       copy_file '_spec/support/accept_values.rb', 'spec/support/accept_values.rb'
     end
 
+    def add_js_testing
+      directory '_spec/javascripts', 'spec/javascripts'
+      copy_file '_lib/tasks/spec.rake', 'lib/tasks/spec.rake'
+    end
+
     def configure_time_zone
       'config/application.rb'.tap do |fn|
         #inject_into_file fn, '    config.active_record.default_timezone = :utc\n', after: "'Central Time (US & Canada)'\n"
@@ -140,12 +145,6 @@ RUBY
         gsub_file       fn, '#{config.root}/extras', '#{config.root}/lib'
         uncomment_lines fn, 'config.autoload_paths'
       end
-    end
-
-    def add_email_validator
-      # CN: I'm not thrilled with this use of the lib directory, but it's not that unusual. Would love to hear what
-      # other folks think about where such things should live.
-      copy_file '_lib/email_validator.rb', 'lib/email_validator.rb'
     end
 
     def setup_simple_form
@@ -252,15 +251,15 @@ RUBY
                 'app/views/password_resets/edit.html.slim'
     end
 
-    def setup_simplecov
-      inject_into_file 'spec/spec_helper.rb', "require File.expand_path('../support/simplecov', __FILE__)\n", after: "ENV[\"RAILS_ENV\"] ||= \'test\'\n"
-      inject_into_file 'Gemfile', "  gem 'simplecov'\n", after: "group :test, :development do\n"
-      copy_file '_lib/tasks/coverage.rake', 'lib/tasks/coverage.rake'
-      copy_file '_spec/support/simplecov.rb', 'spec/support/simplecov.rb'
+    def setup_default_rake_task
+      append_file 'Rakefile' do
+        "\ntask(:default).clear\ntask default: ['spec', 'spec:javascripts']"
+      end
     end
 
     def setup_guard
       copy_file 'Guardfile_customized', 'Guardfile'
+      run 'bundle exec guard init jasmine'
     end
 
     def setup_logging
