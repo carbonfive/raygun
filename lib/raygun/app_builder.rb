@@ -251,6 +251,10 @@ RUBY
                 'app/views/password_resets/edit.html.slim'
     end
 
+    def setup_authorization
+      copy_file '_app/models/ability.rb', 'app/models/ability.rb'
+    end
+
     def setup_default_rake_task
       append_file 'Rakefile' do
         "\ntask(:default).clear\ntask default: ['spec', 'spec:javascripts']"
