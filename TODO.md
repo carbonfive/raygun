@@ -1,6 +1,6 @@
 # TODOs
 
-Looking for inspiration? Here are some ideas for things that still could be done.
+Looking for inspiration? Here are some ideas for things that still could be done. Don't forget to check the open issus too.
 
 * Cleanup/refactor raygun code (a few simple helpers would help out a whole lot)
 * Automated testing of raygun (e.g. generate an app and run its specs?)
