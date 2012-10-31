@@ -264,6 +264,8 @@ RUBY
       inject_into_file 'app/controllers/application_controller.rb',
                        "  check_authorization\n",
                        after: "protect_from_forgery\n"
+
+      append_to_file 'config/environments/test.rb', 'Sorcery::CryptoProviders::BCrypt.cost = 1'
     end
 
     def setup_default_rake_task
