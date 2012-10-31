@@ -64,6 +64,8 @@ module Raygun
     end
 
     def setup_generators
+      directory '_lib/templates/rails', 'lib/templates/rails'
+
       %w(_form index show new edit).each do |view|
         template = "lib/templates/slim/scaffold/#{view}.html.slim"
         remove_file template
@@ -172,8 +174,10 @@ RUBY
       copy_file '_spec/factories/users.rb', 'spec/factories/users.rb', force: true
       copy_file '_spec/models/user_spec.rb', 'spec/models/user_spec.rb', force: true
 
+      gsub_file 'spec/controllers/users_controller_spec.rb', 'login_user build :user', 'login_user build :admin'
+
       inject_into_file 'app/controllers/users_controller.rb',
-                       "\n  before_filter :require_login\n\n",
+                       "\n  before_filter :require_login\n",
                        after: "UsersController < ApplicationController\n"
 
       # User mailer (has to happen before sorcery config changes)
@@ -249,6 +253,19 @@ RUBY
 
       copy_file '_app/views/password_resets/edit.html.slim',
                 'app/views/password_resets/edit.html.slim'
+    end
+
+    def setup_authorization
+      generate 'migration add_admin_to_users admin:boolean'
+
+      copy_file '_app/models/ability.rb', 'app/models/ability.rb'
+      copy_file '_spec/models/ability_spec.rb', 'spec/models/ability_spec.rb'
+
+      inject_into_file 'app/controllers/application_controller.rb',
+                       "  check_authorization\n",
+                       after: "protect_from_forgery\n"
+
+      append_to_file 'config/environments/test.rb', 'Sorcery::CryptoProviders::BCrypt.cost = 1'
     end
 
     def setup_default_rake_task
