@@ -20,4 +20,5 @@ User.create! do |u|
   u.email    = 'admin@example.com'
   u.name     = 'Adam Admin'
   u.password = 'password'
+  u.admin    = true
 end.activate!
