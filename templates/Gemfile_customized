@@ -7,6 +7,7 @@ gem 'jquery-rails'
 gem 'sorcery'
 gem 'simple_form'
 gem 'active_attr'
+gem 'valid_email'
 gem 'pg'
 gem 'awesome_print'
 
