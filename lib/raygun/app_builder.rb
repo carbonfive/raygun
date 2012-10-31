@@ -64,6 +64,8 @@ module Raygun
     end
 
     def setup_generators
+      directory '_lib/templates/rails', 'lib/templates/rails'
+
       %w(_form index show new edit).each do |view|
         template = "lib/templates/slim/scaffold/#{view}.html.slim"
         remove_file template
@@ -175,7 +177,7 @@ RUBY
       gsub_file 'spec/controllers/users_controller_spec.rb', 'login_user build :user', 'login_user build :admin'
 
       inject_into_file 'app/controllers/users_controller.rb',
-                       "\n  before_filter :require_login\n\n",
+                       "\n  before_filter :require_login\n",
                        after: "UsersController < ApplicationController\n"
 
       # User mailer (has to happen before sorcery config changes)
@@ -258,10 +260,6 @@ RUBY
 
       copy_file '_app/models/ability.rb', 'app/models/ability.rb'
       copy_file '_spec/models/ability_spec.rb', 'spec/models/ability_spec.rb'
-
-      inject_into_file 'app/controllers/users_controller.rb',
-                       "\n    load_and_authorize_resource\n\n",
-                       after: "require_login\n"
     end
 
     def setup_default_rake_task
