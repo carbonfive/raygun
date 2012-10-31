@@ -172,6 +172,8 @@ RUBY
       copy_file '_spec/factories/users.rb', 'spec/factories/users.rb', force: true
       copy_file '_spec/models/user_spec.rb', 'spec/models/user_spec.rb', force: true
 
+      gsub_file 'spec/controllers/users_controller_spec.rb', 'login_user build :user', 'login_user build :admin'
+
       inject_into_file 'app/controllers/users_controller.rb',
                        "\n  before_filter :require_login\n\n",
                        after: "UsersController < ApplicationController\n"
@@ -252,7 +254,14 @@ RUBY
     end
 
     def setup_authorization
+      generate 'migration add_admin_to_users admin:boolean'
+
       copy_file '_app/models/ability.rb', 'app/models/ability.rb'
+      copy_file '_spec/models/ability_spec.rb', 'spec/models/ability_spec.rb'
+
+      inject_into_file 'app/controllers/users_controller.rb',
+                       "\n    load_and_authorize_resource\n\n",
+                       after: "require_login\n"
     end
 
     def setup_default_rake_task
