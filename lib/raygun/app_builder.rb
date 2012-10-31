@@ -260,6 +260,10 @@ RUBY
 
       copy_file '_app/models/ability.rb', 'app/models/ability.rb'
       copy_file '_spec/models/ability_spec.rb', 'spec/models/ability_spec.rb'
+
+      inject_into_file 'app/controllers/application_controller.rb',
+                       "  check_authorization\n",
+                       after: "protect_from_forgery\n"
     end
 
     def setup_default_rake_task
