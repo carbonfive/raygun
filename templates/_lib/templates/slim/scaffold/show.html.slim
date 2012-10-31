@@ -7,9 +7,11 @@ dl
   dd= @<%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
 
-= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn'
-'
+- if can?(:edit, @<%= singular_table_name %>)
+  = link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn'
+  '
 = link_to 'Back', <%= index_helper %>_path, class: 'btn'
-'
-= link_to 'Destroy', <%= singular_table_name %>_path(@<%= singular_table_name %>), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'
 
+- if can?(:destroy, @<%= singular_table_name %>)
+  '
+  = link_to'Destroy', <%= singular_table_name %>_path(@<%= singular_table_name %>), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'
