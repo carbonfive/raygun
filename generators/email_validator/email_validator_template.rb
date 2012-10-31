@@ -1,1 +1,0 @@
-copy_file 'email_validator/email_validator.rb', 'lib/email_validator.rb'
