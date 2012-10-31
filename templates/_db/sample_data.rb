@@ -12,6 +12,13 @@
 
 User.create! do |u|
   u.email    = 'user@example.com'
-  u.name     = 'John Smith'
+  u.name     = 'Ustead User'
   u.password = 'password'
+end.activate!
+
+User.create! do |u|
+  u.email    = 'admin@example.com'
+  u.name     = 'Adam Admin'
+  u.password = 'password'
+  u.admin    = true
 end.activate!
