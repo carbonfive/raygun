@@ -163,7 +163,7 @@ RUBY
 
       remove_file 'app/models/user.rb'
       remove_file 'spec/factories/users.rb'
-      remove_file 'spec/requests/users_spec.rb'
+      remove_file 'spec/integration/requests/users_spec.rb'
       create_users_migration = 'db/migrate/' + Dir.new('./db/migrate').entries.select { |e| e =~ /create_users/ }.first
       remove_file create_users_migration
 
@@ -172,9 +172,9 @@ RUBY
       copy_file '_app/models/user.rb', 'app/models/user.rb', force: true
       copy_file '_spec/support/sorcery.rb', 'spec/support/sorcery.rb'
       copy_file '_spec/factories/users.rb', 'spec/factories/users.rb', force: true
-      copy_file '_spec/models/user_spec.rb', 'spec/models/user_spec.rb', force: true
+      copy_file '_spec/integration/models/user_spec.rb', 'spec/integration/models/user_spec.rb', force: true
 
-      gsub_file 'spec/controllers/users_controller_spec.rb', 'login_user build :user', 'login_user build :admin'
+      gsub_file 'spec/integration/controllers/users_controller_spec.rb', 'login_user build :user', 'login_user build :admin'
 
       inject_into_file 'app/controllers/users_controller.rb',
                        "\n  before_filter :require_login\n",
@@ -183,7 +183,7 @@ RUBY
       # User mailer (has to happen before sorcery config changes)
       generate 'mailer UserMailer activation_needed_email activation_success_email reset_password_email'
       copy_file '_app/mailers/user_mailer.rb', 'app/mailers/user_mailer.rb', force: true
-      copy_file '_spec/mailers/user_mailer_spec.rb', 'spec/mailers/user_mailer_spec.rb', force: true
+      copy_file '_spec/integration/mailers/user_mailer_spec.rb', 'spec/integration/mailers/user_mailer_spec.rb', force: true
 
       %w(activation_needed_email activation_success_email reset_password_email).each do |fn|
         remove_file "app/views/user_mailer/#{fn}.text.slim"
@@ -238,8 +238,8 @@ RUBY
       copy_file '_spec/support/user_sessions_request_helper.rb',
                 'spec/support/user_sessions_request_helper.rb'
 
-      copy_file '_spec/requests/user_sessions_spec.rb',
-                'spec/requests/user_sessions_spec.rb'
+      copy_file '_spec/integration/requests/user_sessions_spec.rb',
+                'spec/integration/requests/user_sessions_spec.rb'
 
       copy_file '_app/controllers/registrations_controller.rb',
                 'app/controllers/registrations_controller.rb'
@@ -259,7 +259,7 @@ RUBY
       generate 'migration add_admin_to_users admin:boolean'
 
       copy_file '_app/models/ability.rb', 'app/models/ability.rb'
-      copy_file '_spec/models/ability_spec.rb', 'spec/models/ability_spec.rb'
+      copy_file '_spec/integration/models/ability_spec.rb', 'spec/integration/models/ability_spec.rb'
 
       inject_into_file 'app/controllers/application_controller.rb',
                        "  check_authorization\n",
