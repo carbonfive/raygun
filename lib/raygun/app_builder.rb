@@ -269,8 +269,6 @@ RUBY
     end
 
     def setup_simplecov
-      uncomment_lines 'Gemfile', /simplecov/
-
       copy_file '_lib/tasks/coverage.rake', 'lib/tasks/coverage.rake'
       copy_file '_spec/support/simplecov.rb', 'spec/support/simplecov.rb'
     end
