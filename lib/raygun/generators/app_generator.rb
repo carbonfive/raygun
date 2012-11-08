@@ -122,6 +122,7 @@ module Raygun
       build :setup_simple_form
       build :setup_authentication
       build :setup_authorization
+      build :setup_simplecov
       build :setup_default_rake_task
       build :setup_guard
     end
