@@ -176,5 +176,13 @@ module Raygun
     def get_builder_class
       Raygun::AppBuilder
     end
+
+    # We want output from our bundle commands, overriding thor's implementation.
+    def bundle_command(command)
+      say_status :run, "bundle #{command}"
+      cmd = "#{Gem.ruby} -rubygems #{Gem.bin_path('bundler', 'bundle')} #{command}"
+      IO.popen(cmd) { |p| p.each { |f| puts f } }
+    end
+
   end
 end
