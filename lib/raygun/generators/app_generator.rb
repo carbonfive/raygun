@@ -87,18 +87,18 @@ module Raygun
     end
 
     def setup_database
-      say 'Setting up database'
+      say "Setting up database"
       build :use_postgres_config_template
       build :create_database
     end
 
     def setup_generators
-      say 'Installing custom view generator templates'
+      say "Installing custom view generator templates"
       build :setup_generators
     end
 
     def create_raygun_views
-      say 'Creating views and layouts'
+      say "Creating views and layouts"
       build :replace_public_index
       build :create_partials_directory
       #build :create_shared_flashes
@@ -107,7 +107,7 @@ module Raygun
     end
 
     def configure_app
-      say 'Configuring app'
+      say "Configuring app"
 
       build :configure_rspec
       build :generate_rspec
@@ -138,13 +138,13 @@ module Raygun
     end
 
     def copy_miscellaneous_files
-      say 'Copying miscellaneous support files'
+      say "Copying miscellaneous support files"
       build :copy_rake_tasks
       build :copy_procfile
     end
 
     def knits_and_picks
-      say 'Converting old hash syntax and fixing knit picks'
+      say "Converting old hash syntax and fixing knit picks"
       build :convert_to_19_hash_syntax
       build :consistent_quoting
     end
@@ -176,5 +176,13 @@ module Raygun
     def get_builder_class
       Raygun::AppBuilder
     end
+
+    # We want output from our bundle commands, overriding thor's implementation.
+    def bundle_command(command)
+      say_status :run, "bundle #{command}"
+      cmd = "#{Gem.ruby} -rubygems #{Gem.bin_path('bundler', 'bundle')} #{command}"
+      IO.popen(cmd) { |p| p.each { |f| puts f } }
+    end
+
   end
 end

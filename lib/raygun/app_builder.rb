@@ -281,7 +281,7 @@ RUBY
 
     def setup_guard
       copy_file 'Guardfile_customized', 'Guardfile'
-      run 'bundle exec guard init jasmine'
+      bundle_command 'exec guard init jasmine'
     end
 
     def setup_logging
