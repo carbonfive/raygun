@@ -26,7 +26,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'jasminerice'
   gem 'timecop'
-  #gem 'simplecov'
+  gem 'simplecov'
 end
 
 group :development do
