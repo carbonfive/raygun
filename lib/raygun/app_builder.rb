@@ -275,7 +275,7 @@ RUBY
 
     def setup_default_rake_task
       append_file 'Rakefile' do
-        "\ntask(:default).clear\ntask default: ['spec', 'spec:javascripts']"
+        "\ntask(:default).clear\ntask default: 'spec'"
       end
     end
 
