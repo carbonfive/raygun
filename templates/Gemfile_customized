@@ -21,7 +21,7 @@ group :assets do
 end
 
 group :test, :development do
-  gem 'rspec-rails'
+  gem 'rspec-rails', :git => 'git://github.com/carbonfive/rspec-rails.git', :branch => 'categorize_specs_into_testing_levels'
   gem 'capybara', github: 'jnicklas/capybara' # TODO Change when 2.0 is released.
   gem 'factory_girl_rails'
   gem 'jasminerice'

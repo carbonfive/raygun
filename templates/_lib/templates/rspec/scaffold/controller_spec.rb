@@ -98,8 +98,8 @@ describe <%= controller_class_name %>Controller do
         # specifies that the <%= class_name %> created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        <%= class_name %>.any_instance.should_receive(:update_attributes).with(<%= params %>)
-        put :update, {:id => <%= file_name %>.to_param, :<%= ns_file_name %> => <%= params %>}, valid_session
+        <%= class_name %>.any_instance.should_receive(:update_attributes).with(<%= formatted_hash(example_params_for_update) %>)
+        put :update, {:id => <%= file_name %>.to_param, :<%= ns_file_name %> => <%= formatted_hash(example_params_for_update) %>}, valid_session
       end
 
       it "assigns the requested <%= ns_file_name %> as @<%= ns_file_name %>" do
