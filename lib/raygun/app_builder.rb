@@ -235,11 +235,11 @@ RUBY
       copy_file '_app/views/user_sessions/new.html.slim',
                 'app/views/user_sessions/new.html.slim'
 
-      copy_file '_spec/support/user_sessions_request_helper.rb',
-                'spec/support/user_sessions_request_helper.rb'
+      copy_file '_spec/support/user_sessions_feature_helper.rb',
+                'spec/support/user_sessions_feature_helper.rb'
 
-      copy_file '_spec/requests/user_sessions_spec.rb',
-                'spec/requests/user_sessions_spec.rb'
+      copy_file '_spec/features/user_sessions_spec.rb',
+                'spec/features/user_sessions_spec.rb'
 
       copy_file '_app/controllers/registrations_controller.rb',
                 'app/controllers/registrations_controller.rb'

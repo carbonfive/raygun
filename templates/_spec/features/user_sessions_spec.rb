@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 feature "User Sessions" do
-  include Capybara::DSL # Remove once https://github.com/jnicklas/capybara/pull/809 is resolved.
 
   background do
     @user = create(:user)

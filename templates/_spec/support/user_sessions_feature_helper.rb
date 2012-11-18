@@ -1,4 +1,4 @@
-module UserSessionsRequestHelper
+module UserSessionsFeatureHelper
 
   def sign_in(email, password)
     visit sign_in_path
@@ -17,5 +17,5 @@ module UserSessionsRequestHelper
 end
 
 RSpec.configure do |config|
-  config.include UserSessionsRequestHelper, type: :request
+  config.include UserSessionsFeatureHelper, type: :feature
 end
