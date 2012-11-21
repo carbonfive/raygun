@@ -270,8 +270,6 @@ RUBY
 
     def setup_simplecov
       copy_file '_lib/tasks/coverage.rake', 'lib/tasks/coverage.rake'
-      copy_file '_spec/support/simplecov.rb', 'spec/support/simplecov.rb'
-
 
       coverage = <<-RUBY
 # Coverage must be enabled before the application is loaded.
