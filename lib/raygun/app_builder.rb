@@ -316,7 +316,9 @@ RUBY
     end
 
     def setup_logging
-      inject_into_file 'config.ru', "$stdout.sync = true\n", before: 'run ExampleApp::Application'
+      inject_into_file 'config.ru',
+                       "\n# Disable buffering for real time logging (foreman and heroku).\n$stdout.sync = true\n\n",
+                       before: /run \w+::Application/
     end
 
     def setup_stylesheets
