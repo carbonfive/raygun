@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'thin'
-gem 'rails', '~> 3.2.8'
+gem 'rails', '~> 3.2.9'
 gem 'slim-rails'
 gem 'jquery-rails'
 gem 'sorcery'
@@ -22,7 +22,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.12.0'
-  gem 'capybara', '2.0.0' # waiting for https://github.com/jnicklas/capybara/issues/882
+  gem 'capybara', github: 'jnicklas/capybara' # Switch from github once issue #882 is resolved.
   gem 'factory_girl_rails'
   gem 'jasminerice'
   gem 'timecop'
