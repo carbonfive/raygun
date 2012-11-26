@@ -36,7 +36,7 @@ module Raygun
 
     # Returns the RVM ruby version
     def rvm_ruby
-      @@env.expanded_name.match(/(.*)@?/)[1]
+      @@env.expanded_name.match(/([\w\-\.]+)/)[1]
     end
 
     # Returns true if rbenv is installed.
