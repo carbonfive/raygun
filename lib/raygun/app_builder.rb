@@ -78,7 +78,7 @@ module Raygun
 
     config.generators do |generate|
       generate.stylesheets   false
-      #generate.helpers       false
+      #generate.helper        false
       generate.routing_specs false
       #generate.view_specs    false
     end
