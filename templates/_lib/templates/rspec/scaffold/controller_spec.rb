@@ -63,7 +63,7 @@ describe <%= controller_class_name %>Controller do
       end
 
       it "assigns a newly created <%= ns_file_name %> as @<%= ns_file_name %>" do
-        post :create,  {:<%= ns_file_name %> => valid_attributes }, valid_session
+        post :create, {:<%= ns_file_name %> => valid_attributes }, valid_session
         assigns(:<%= ns_file_name %>).should be_a(<%= class_name %>)
         assigns(:<%= ns_file_name %>).should be_persisted
       end

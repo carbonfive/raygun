@@ -232,6 +232,9 @@ RUBY
       copy_file '_app/controllers/user_sessions_controller.rb',
                 'app/controllers/user_sessions_controller.rb'
 
+      copy_file '_spec/controllers/user_sessions_controller_spec.rb',
+                'spec/controllers/user_sessions_controller_spec.rb'
+
       copy_file '_app/views/user_sessions/new.html.slim',
                 'app/views/user_sessions/new.html.slim'
 

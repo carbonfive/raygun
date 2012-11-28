@@ -2,9 +2,13 @@ require 'spec_helper'
 
 feature "User Sessions" do
 
-  background do
+  background(:all) do
     @user = create(:user)
     @user.activate!
+  end
+
+  after(:all) do
+    @user.destroy
   end
 
   scenario "Sign in with valid credentials" do
