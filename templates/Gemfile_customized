@@ -36,4 +36,5 @@ group :development do
   gem 'guard-jasmine'
   gem 'guard-livereload'
   gem 'rb-fsevent'
+  gem 'growl'
 end
