@@ -1,0 +1,26 @@
+div.page-header
+  h1 Listing users
+
+table.table.table-striped
+  thead
+    tr
+      th ID
+      th Email
+      th Name
+      th Actions
+
+  tbody
+  - @users.each do |user|
+    tr
+      td= link_to_if can?(:show, user), user.id, user_path(user)
+      td= user.email
+      td= user.name
+      td
+        - if can? :edit, user
+          = link_to 'Edit', edit_user_path(user), class: 'btn btn-mini'
+          '
+        - if can? :destroy, user
+          = link_to 'Destroy', user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-mini btn-danger'
+
+- if can? :create, User
+  = link_to 'New User', new_user_path, class: 'btn btn-primary'

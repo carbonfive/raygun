@@ -1,8 +1,50 @@
 #!/usr/bin/env ruby
-require File.expand_path(File.join('..', 'lib', 'raygun', 'raygun'), File.dirname(__FILE__))
-Raygun::AppGenerator.launch_path(Dir.pwd)
-templates_root = File.expand_path(File.join('..', 'templates'), File.dirname(__FILE__))
-Raygun::AppGenerator.source_root templates_root
-Raygun::AppGenerator.source_paths << Rails::Generators::AppGenerator.source_root
 
-Raygun::AppGenerator.start ARGV
+require 'fileutils'
+require 'securerandom'
+
+def camelize(string)
+  result = string.sub(/^[a-z\d]*/) { $&.capitalize }
+  result.gsub(/(?:_|(\/))([a-z\d]*)/) { "#{$1}#{$2.capitalize}" }
+end
+
+def titleize(underscored_string)
+  result = underscored_string.gsub(/_/, ' ')
+  result.gsub(/\b('?[a-z])/) { $1.capitalize }
+end
+
+app_dir = ARGV[0]
+app_name_snake = File.basename(app_dir)
+app_name_camel = camelize(app_name_snake)
+app_name_title = titleize(app_name_snake)
+
+puts
+puts "Creating new app #{app_name_camel} in directory #{app_dir}..."
+puts
+
+FileUtils.cp_r(File.expand_path('../../app_prototype', __FILE__), app_dir)
+
+Dir.chdir(app_dir) do
+  `find . -type f -print | xargs sed -i '' 's/AppPrototype/#{app_name_camel}/g'`
+  `find . -type f -print | xargs sed -i '' 's/app_prototype/#{app_name_snake}/g'`
+  `sed -i '' 's/App Prototype/#{app_name_title}/' app/views/layouts/application.html.slim`
+  `sed -i '' 's/SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' config/initializers/secret_token.rb`
+
+  puts "Done! Next steps..."
+  puts ""
+  puts "# Install updated dependencies"
+  puts "$ cd #{ARGV[0]}"
+  puts "$ bundle update"
+  puts ""
+  puts "# Prepare the database: schema and reference / sample data"
+  puts "$ rake db:create db:migrate db:seed db:sample_data"
+  puts ""
+  puts "# Run the specs (they should all pass)"
+  puts "$ rake"
+  puts ""
+  puts "# Load reference and sample data, then run the app and check things out"
+  puts "$ foreman start"
+  puts "$ open http://0.0.0.0:3000"
+  puts ""
+  puts "Enjoy your Carbon Five flavored Rails application!"
+end

@@ -52,9 +52,10 @@ Be sure you met these requirements before using raygun, otherwise you won't make
 Once your project is baked out, you can easily kick the wheels:
 
     $ cd your-project
+    $ bundle update
 
     # Prepare the database: schema and reference / sample data
-    $ rake db:migrate db:seed db:sample_data
+    $ rake db:create db:migrate db:seed db:sample_data
 
     # Run the specs
     $ rake
@@ -76,11 +77,3 @@ Once your project is baked out, you can easily kick the wheels:
 Generate an example app using your local development version of raygun
 
     ./bin/raygun tmp/example_app
-
-### Customizing the generated Rails app
-
-Changes which can be applied on top of an existing Rails app should be added as `foo_template.rb` files
- in `raygun/generators/foo/`.
-
-Changes which must be performed during the creation of the Rails app should be added to `lib/raygun/app_builder.rb`
- and called from an appropriate step in `lib/raygun/generators/app_generator.rb`.
