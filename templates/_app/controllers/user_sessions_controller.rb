@@ -20,7 +20,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to :users, notice: "Signed out!"
+    redirect_to :sign_in, notice: "Signed out!"
   end
 
 end
