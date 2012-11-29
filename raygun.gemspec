@@ -7,7 +7,7 @@ require 'raygun/version'
 Gem::Specification.new do |gem|
   gem.name          = "raygun"
   gem.version       = Raygun::VERSION
-  gem.authors       = ["Christian Nelson"]
+  gem.authors       = ["Christian Nelson", "Jonah Williams", "Jason Wadsworth"]
   gem.email         = ["christian@carbonfive.com"]
   gem.description   = %q{Carbon Five Rails application generator}
   gem.summary       = %q{Generates and customizes Rails applications with Carbon Five best practices baked in.}
