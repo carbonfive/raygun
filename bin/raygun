@@ -13,6 +13,12 @@ def titleize(underscored_string)
   result.gsub(/\b('?[a-z])/) { $1.capitalize }
 end
 
+if !ARGV[0]
+  puts "Please specify where raygun should generate a project (e.g. projects/my_new_project)."
+  puts "usage: raygun new_app_directory"
+  exit 1
+end
+
 app_dir = ARGV[0]
 app_name_snake = File.basename(app_dir)
 app_name_camel = camelize(app_name_snake)
