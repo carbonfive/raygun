@@ -1,0 +1,13 @@
+# Use 'createuser -s postgres' to create a general purpose db (super)user.
+
+development: &default
+  adapter: postgresql
+  database: app_prototype_development
+  username: postgres
+  pool: 5
+  timeout: 5000
+
+test: &TEST
+  <<: *default
+  database: app_prototype_test
+  min_messages: warning

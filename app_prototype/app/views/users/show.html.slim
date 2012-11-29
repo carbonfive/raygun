@@ -1,0 +1,17 @@
+.page-header
+  h1 User
+
+dl
+  dt Email
+  dd= @user.email
+  dt Name
+  dd= @user.name
+
+- if can?(:edit, @user)
+  = link_to 'Edit', edit_user_path(@user), class: 'btn'
+  '
+= link_to 'Back', users_path, class: 'btn'
+
+- if can?(:destroy, @user)
+  '
+  = link_to'Destroy', user_path(@user), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'

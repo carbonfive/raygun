@@ -18,8 +18,5 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'rails',       '~> 3.2.9'
   gem.add_dependency 'bundler',     '>= 1.2'
-  gem.add_dependency 'rvm',         '>= 1.11.3.5'
-  gem.add_dependency 'hash_syntax', '>= 1.0'
 end
