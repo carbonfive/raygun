@@ -2,12 +2,8 @@
 
 # Raygun
 
-__NOTE: Currently a work in progress and not yet representative of best practices. Soon the veil will be lifted.__
-
 Command line Rails application generator that builds a new project skeleton configured with all of the Carbon Five
 best practices baked right in.
-
-Inspired by and code shamelessly lifted from ThoughtBot's Suspenders. Thanks!
 
 Major tools/libraries:
 
@@ -24,6 +20,8 @@ Major tools/libraries:
 * Guard
 
 And many tweaks, patterns and common recipes.
+
+Inspired by Xavier Shay and ThoughtBot's Suspenders. Thanks!
 
 ## Projects Goals
 
