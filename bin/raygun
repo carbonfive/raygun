@@ -37,7 +37,7 @@ Dir.chdir(app_dir) do
   puts "$ bundle update"
   puts ""
   puts "# Prepare the database: schema and reference / sample data"
-  puts "$ rake db:create db:migrate db:seed db:sample_data"
+  puts "$ rake db:reset db:sample_data"
   puts ""
   puts "# Run the specs (they should all pass)"
   puts "$ rake"

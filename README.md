@@ -55,7 +55,7 @@ Once your project is baked out, you can easily kick the wheels:
     $ bundle update
 
     # Prepare the database: schema and reference / sample data
-    $ rake db:create db:migrate db:seed db:sample_data
+    $ rake db:reset db:sample_data
 
     # Run the specs
     $ rake
