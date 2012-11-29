@@ -50,6 +50,7 @@ Be sure you met these requirements before using raygun, otherwise you won't make
 Once your project is baked out, you can easily kick the wheels:
 
     $ cd your-project
+    $ gem install bundler
     $ bundle update
 
     # Prepare the database: schema and reference / sample data

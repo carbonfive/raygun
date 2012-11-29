@@ -34,6 +34,7 @@ Dir.chdir(app_dir) do
   puts ""
   puts "# Install updated dependencies"
   puts "$ cd #{ARGV[0]}"
+  puts "$ gem install bundler"
   puts "$ bundle update"
   puts ""
   puts "# Prepare the database: schema and reference / sample data"
