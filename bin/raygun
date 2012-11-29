@@ -34,7 +34,7 @@ Dir.chdir(app_dir) do
   `find . -type f -print | xargs sed -i '' 's/AppPrototype/#{app_name_camel}/g'`
   `find . -type f -print | xargs sed -i '' 's/app_prototype/#{app_name_snake}/g'`
   `sed -i '' 's/App Prototype/#{app_name_title}/' app/views/layouts/application.html.slim`
-  `sed -i '' 's/SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' config/initializers/secret_token.rb`
+  `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' config/initializers/secret_token.rb`
 
   puts "Done! Next steps..."
   puts ""
