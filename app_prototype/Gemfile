@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby 'RUBY_VERSION'
+
 gem 'thin'
 gem 'rails', '~> 3.2.9'
 gem 'slim-rails'
