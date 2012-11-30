@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+# Heroku uses the ruby version to configure your application's runtime.
 ruby 'RUBY_VERSION'
 
 gem 'thin'

@@ -37,4 +37,6 @@ AppPrototype::Application.configure do
 
   config.action_mailer.default_url_options = { host: 'example.com' }
 end
+
+# Turn down the cost so that specs run quickly.
 Sorcery::CryptoProviders::BCrypt.cost = 1

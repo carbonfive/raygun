@@ -2,7 +2,7 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 
-# Disable buffering for real time logging (foreman and heroku).
+# Disable buffering for real time logging, see: https://devcenter.heroku.com/articles/logging#writing-to-your-log
 $stdout.sync = true
 
 run AppPrototype::Application
