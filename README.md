@@ -17,7 +17,7 @@ Major tools/libraries:
 * RSpec
 * Factory Girl
 * Jasmine
-* Guard
+* Guard (rspec, jasmine, livereload)
 
 And many tweaks, patterns and common recipes.
 
@@ -76,3 +76,12 @@ Once your project is baked out, you can easily kick the wheels:
 Generate an example app using your local development version of raygun
 
     ./bin/raygun tmp/example_app
+
+## Changes
+
+### 0.0.14 [2012-12-??]
+
+* Basic usage information.
+* Added guard-livereload to Guardfile.
+* Gemfile, rvmrc, rbenv files configured with the ruby version used to generate the app.
+* Better specs for auth flows (register, password reset, sign in).
