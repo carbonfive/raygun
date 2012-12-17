@@ -39,9 +39,11 @@ Raygun...
 
 Be sure you met these requirements before using raygun, otherwise you won't make it very far (misfire!).
 
-* Ruby 1.9.2+ (rvm and rbenv supported)
+* Ruby 1.9.2-p327 (rvm and rbenv supported)
 * PostgreSQL 9.x with superuser 'postgres' with no password (```createuser -s postgres```)
 * PhantomJS for JavaScript testing (```brew install phantomjs```)
+
+If you're using another ruby, just change the Gemfile, .rvmrc and/or .rbenv as necessary before running bundle.
 
 ## Usage
 
@@ -73,15 +75,10 @@ Once your project is baked out, you can easily kick the wheels:
 
 ### Development
 
-Generate an example app using your local development version of raygun
+Generate an example app using your local development version of raygun:
 
     ./bin/raygun tmp/example_app
 
 ## Changes
 
-### 0.0.14 [2012-12-??]
-
-* Basic usage information.
-* Added guard-livereload to Guardfile.
-* Gemfile, rvmrc, rbenv files configured with the ruby version used to generate the app.
-* Better specs for auth flows (register, password reset, sign in).
+[View the Change Log](https://github.com/carbonfive/raygun/tree/master/CHANGES.md)
