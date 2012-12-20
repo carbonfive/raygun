@@ -35,6 +35,7 @@ end
 
 group :development do
   gem 'foreman'
+  gem 'launchy'
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-jasmine'
