@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe UsersController do
 
-  # This should return the minimal set of attributes required to create a valid
+  # expect(This).to return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
     attributes_for :user
   end
 
-  # This should return the minimal set of values that should be in the session
+  # expect(This).to expect(return the minimal set of values that).to be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
   def valid_session
@@ -24,7 +24,7 @@ describe UsersController do
     it "assigns all users as @users" do
       user = User.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:users).should eq([user])
+      expect(assigns(:users)).to eq([user])
     end
   end
 
@@ -32,14 +32,14 @@ describe UsersController do
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes
       get :show, { id: user.to_param }, valid_session
-      assigns(:user).should eq(user)
+      expect(assigns(:user)).to eq(user)
     end
   end
 
   describe "GET new" do
     it "assigns a new user as @user" do
       get :new, {}, valid_session
-      assigns(:user).should be_a_new(User)
+      expect(assigns(:user)).to be_a_new(User)
     end
   end
 
@@ -47,7 +47,7 @@ describe UsersController do
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes
       get :edit, { id: user.to_param }, valid_session
-      assigns(:user).should eq(user)
+      expect(assigns(:user)).to eq(user)
     end
   end
 
@@ -61,13 +61,13 @@ describe UsersController do
 
       it "assigns a newly created user as @user" do
         post :create, {user: valid_attributes }, valid_session
-        assigns(:user).should be_a(User)
-        assigns(:user).should be_persisted
+        expect(assigns(:user)).to be_a(User)
+        expect(assigns(:user)).to be_persisted
       end
 
       it "redirects to the created user" do
         post :create, { user: valid_attributes }, valid_session
-        response.should redirect_to(User.last)
+        expect(response).to redirect_to(User.last)
       end
     end
 
@@ -76,14 +76,14 @@ describe UsersController do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         post :create, { user: { "email" => "invalid value" } }, valid_session
-        assigns(:user).should be_a_new(User)
+        expect(assigns(:user)).to be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         post :create, { user: { "email" => "invalid value" } }, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -103,13 +103,13 @@ describe UsersController do
       it "assigns the requested user as @user" do
         user = User.create! valid_attributes
         put :update, { id: user.to_param, user: valid_attributes }, valid_session
-        assigns(:user).should eq(user)
+        expect(assigns(:user)).to eq(user)
       end
 
       it "redirects to the user" do
         user = User.create! valid_attributes
         put :update, { id: user.to_param, user: valid_attributes }, valid_session
-        response.should redirect_to(user)
+        expect(response).to redirect_to(user)
       end
     end
 
@@ -119,7 +119,7 @@ describe UsersController do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         put :update, { id: user.to_param, user: { "email" => "invalid value" } }, valid_session
-        assigns(:user).should eq(user)
+        expect(assigns(:user)).to eq(user)
       end
 
       it "re-renders the 'edit' template" do
@@ -127,7 +127,7 @@ describe UsersController do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         put :update, { id: user.to_param, user: { "email" => "invalid value" } }, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -143,7 +143,7 @@ describe UsersController do
     it "redirects to the users list" do
       user = User.create! valid_attributes
       delete :destroy, { id: user.to_param }, valid_session
-      response.should redirect_to(users_url)
+      expect(response).to redirect_to(users_url)
     end
   end
 

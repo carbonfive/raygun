@@ -14,19 +14,19 @@ feature "User Sessions" do
   scenario "Sign in with valid credentials" do
     sign_in(@user.email, 'password')
 
-    find('.alert').should have_content("Successfully signed in")
+    expect(find('.alert')).to have_content("Successfully signed in")
   end
 
   scenario "Sign in with an invalid email" do
     sign_in('this is not valid', 'password')
 
-    find('.alert').should have_content("Sign in failed")
+    expect(find('.alert')).to have_content("Sign in failed")
   end
 
   scenario "Sign in with an invalid password" do
     sign_in(@user.email, 'this is not valid')
 
-    find('.alert').should have_content("Sign in failed")
+    expect(find('.alert')).to have_content("Sign in failed")
   end
 
 end

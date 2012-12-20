@@ -7,7 +7,7 @@ describe User do
 
     describe "name" do
       it "is required" do
-        subject.should_not accept_values(:email, nil, '')
+        expect(subject).to_not accept_values(:email, nil, '')
       end
 
       it "should be less than 30 characters"
@@ -15,12 +15,12 @@ describe User do
 
     describe "email" do
       it "is required" do
-        subject.should_not accept_values(:email, nil, '', ' ')
+        expect(subject).to_not accept_values(:email, nil, '', ' ')
       end
 
       it "must be properly formatted" do
-        subject.should     accept_values(:email, 'a@b.com', 'a@b.c.com')
-        subject.should_not accept_values(:email, 'a@b', 'a.b.com')
+        expect(subject).to     accept_values(:email, 'a@b.com', 'a@b.c.com')
+        expect(subject).to_not accept_values(:email, 'a@b', 'a.b.com')
       end
 
       it "must be unique"
