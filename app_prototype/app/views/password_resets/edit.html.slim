@@ -7,7 +7,6 @@
   .form-inputs
     = f.input :email, disabled: true
     = f.input :password, required: true, autofocus: true
-    = f.input :password_confirmation, required: true
     = hidden_field_tag :token, @token
 
   .form-actions
