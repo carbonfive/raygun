@@ -6,7 +6,7 @@ Overview
 Requirements
 ============
 
-* ruby 1.9.?
+* ruby 1.9.3-p327
 * postgresql 9.? (user 'postgres' with no password)
 
 Running the Specs

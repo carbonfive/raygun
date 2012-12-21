@@ -2,8 +2,8 @@
 
 # Raygun
 
-Command line Rails application generator that builds a new project skeleton configured with all of the Carbon Five
-best practices baked right in.
+Rails application generator that builds a new project skeleton configured with Carbon Five preferences and
+best practices baked right in. Spend less time configuring stuff and more building cool stuff.
 
 Major tools/libraries:
 
@@ -39,7 +39,7 @@ Raygun...
 
 Be sure you met these requirements before using raygun, otherwise you won't make it very far (misfire!).
 
-* Ruby 1.9.2-p327 (rvm and rbenv supported)
+* Ruby 1.9.3-p327 (rvm and rbenv supported)
 * PostgreSQL 9.x with superuser 'postgres' with no password (```createuser -s postgres```)
 * PhantomJS for JavaScript testing (```brew install phantomjs```)
 
