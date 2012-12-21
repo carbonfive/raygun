@@ -4,9 +4,13 @@ class User < ActiveRecord::Base
 
   authenticates_with_sorcery!
 
+  validates :name,
+            length: { maximum: 30 }
+
   validates :email,
             presence: true,
-            email: true
+            email: true,
+            uniqueness: true
 
   validates :password,
             presence: true,
