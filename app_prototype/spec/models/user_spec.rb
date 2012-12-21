@@ -10,7 +10,10 @@ describe User do
         expect(subject).to_not accept_values(:email, nil, '')
       end
 
-      it "should be less than 30 characters"
+      it "should be less than 30 characters" do
+        expect(subject).to     accept_values(:name, 'a' * 30)
+        expect(subject).to_not accept_values(:name, 'a' * 31)
+      end
     end
 
     describe "email" do
@@ -23,7 +26,11 @@ describe User do
         expect(subject).to_not accept_values(:email, 'a@b', 'a.b.com')
       end
 
-      it "must be unique"
+      it "must be unique" do
+        subject.save
+        stunt_double = subject.dup
+        expect(stunt_double).to_not accept_values(:email, subject.email)
+      end
     end
   end
 end
