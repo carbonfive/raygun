@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 # http://www.elabs.se/blog/51-simple-tricks-to-clean-up-your-capybara-tests
-# Not psyched about running the background on each spec.
 
 feature "Registration" do
   context "successful registration" do
