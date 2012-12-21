@@ -35,7 +35,20 @@ feature "Registration" do
 
     it "sends the activation email" do
       expect(open_email(@email)).to_not be_nil
-      expect(current_email).to have_content "/sign_up/#{@user.activation_token}/activate"
+      expect(current_email).to have_content "/sign_up/#{@user.activation_token}/activate" # FIXME
+    end
+  end
+
+  context "unsuccessful registration" do
+    it "redirects to new" do
+      visit sign_up_path
+      within '#new_user' do
+        fill_in 'Email',    with: 'INVALID EMAIL'
+        fill_in 'Name',     with: 'Stan'
+        fill_in 'Password', with: 'p@ssword'
+      click_button 'Sign up'
+      end
+      expect(current_path).to eq sign_up_path
     end
   end
 end
