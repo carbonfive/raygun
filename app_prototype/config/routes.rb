@@ -8,7 +8,7 @@ AppPrototype::Application.routes.draw do
   resources :registrations, only: [:new, :create, :activate]
   match 'sign_up' => 'registrations#new',                      via: :get
   match 'sign_up' => 'registrations#create',                   via: :post
-  match 'sign_up/:token/activate' => 'registrations#activate', via: :get
+  match 'sign_up/:token/activate' => 'registrations#activate', via: :get, as: :activate_registration
 
   resources :password_resets, only: [:new, :create, :edit, :update]
 
