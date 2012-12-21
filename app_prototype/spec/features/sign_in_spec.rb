@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-feature "User Sessions" do
-
+feature "Sign In" do
   background(:all) do
     @user = create(:user)
     @user.activate!
@@ -28,5 +27,4 @@ feature "User Sessions" do
 
     expect(find('.alert')).to have_content("Sign in failed")
   end
-
 end
