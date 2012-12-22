@@ -35,5 +35,5 @@ AppPrototype::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.action_mailer.default_url_options = { host: 'app_prototype.local' }
+  config.action_mailer.default_url_options = { host: '0.0.0.0:3000' }
 end
