@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe UserMailer do
-  let(:user) { build_stubbed(:user, activation_state: 'pending', activation_token: 'ABC') }
+  let(:user) { build_stubbed(:user, activation_state: 'pending', activation_token: 'ABC', reset_password_token: 'XYZ') }
 
   describe "activation_needed_email" do
     let(:mail) { UserMailer.activation_needed_email(user) }
