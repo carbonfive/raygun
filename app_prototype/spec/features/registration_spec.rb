@@ -15,7 +15,7 @@ feature "Registration" do
         fill_in 'Email',    with: @email
         fill_in 'Name',     with: 'Stan'
         fill_in 'Password', with: 'p@ssword'
-        click_button 'Sign up'
+        click_button 'Sign Up'
       end
 
       @user = User.find_by_email(@email)
@@ -46,7 +46,7 @@ feature "Registration" do
         fill_in 'Email',    with: 'INVALID EMAIL'
         fill_in 'Name',     with: 'Stan'
         fill_in 'Password', with: 'p@ssword'
-      click_button 'Sign up'
+        click_button 'Sign Up'
       end
       expect(current_path).to eq sign_up_path
     end
