@@ -10,7 +10,7 @@ feature "Password Reset" do
     click_link 'Reset forgotten password'
 
     fill_in 'Email', with: @user.email
-    click_button 'Reset my password!'
+    click_button 'Reset My Password!'
 
     @user.reload
   end

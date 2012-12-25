@@ -6,8 +6,8 @@
     = f.input :password
 
   ul.unstyled
-    li= link_to 'Sign up', sign_up_path
     li= link_to 'Reset forgotten password', new_password_reset_path
+    li= link_to 'Sign Up', sign_up_path
 
   .form-actions
     = f.button :submit, 'Sign In', class: 'btn btn-primary'
