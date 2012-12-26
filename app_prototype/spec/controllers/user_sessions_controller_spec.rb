@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe UserSessionsController do
 
-  describe "GET new" do
+  describe "#new" do
     it "assigns a new user as @user" do
       get :new
       expect(assigns(:user_session)).to_not be_nil
     end
   end
 
-  describe "POST create" do
+  describe "#create" do
     describe "with valid params" do
       it "redirect to the target page" do
         subject.stub(:login) { build_stubbed :user }
@@ -27,7 +27,7 @@ describe UserSessionsController do
     end
   end
 
-  describe "DELETE destroy" do
+  describe "#destroy" do
     it "destroys the requested user session" do
       subject.should_receive(:logout)
       delete :destroy

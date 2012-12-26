@@ -9,7 +9,7 @@ describe UsersController do
     attributes_for :user
   end
 
-  # expect(This).to expect(return the minimal set of values that).to be in the session
+  # This returns the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
   def valid_session
@@ -20,7 +20,7 @@ describe UsersController do
     login_user build :admin
   end
 
-  describe "GET index" do
+  describe "#index" do
     it "assigns all users as @users" do
       user = User.create! valid_attributes
       get :index, {}, valid_session
@@ -28,7 +28,7 @@ describe UsersController do
     end
   end
 
-  describe "GET show" do
+  describe "#show" do
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes
       get :show, { id: user.to_param }, valid_session
@@ -36,14 +36,14 @@ describe UsersController do
     end
   end
 
-  describe "GET new" do
+  describe "#new" do
     it "assigns a new user as @user" do
       get :new, {}, valid_session
       expect(assigns(:user)).to be_a_new(User)
     end
   end
 
-  describe "GET edit" do
+  describe "#edit" do
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes
       get :edit, { id: user.to_param }, valid_session
@@ -51,7 +51,7 @@ describe UsersController do
     end
   end
 
-  describe "POST create" do
+  describe "#create" do
     describe "with valid params" do
       it "creates a new User" do
         expect {
@@ -88,7 +88,7 @@ describe UsersController do
     end
   end
 
-  describe "PUT update" do
+  describe "#update" do
     describe "with valid params" do
       it "updates the requested user" do
         user = User.create! valid_attributes
@@ -132,7 +132,7 @@ describe UsersController do
     end
   end
 
-  describe "DELETE destroy" do
+  describe "#destroy" do
     it "destroys the requested user" do
       user = User.create! valid_attributes
       expect {

@@ -7,10 +7,10 @@ feature "Password Reset" do
     @user.activate!
 
     visit sign_in_path
-    click_link 'Reset forgotten password'
+    click_link 'Reset Password'
 
     fill_in 'Email', with: @user.email
-    click_button 'Reset My Password!'
+    click_button 'Reset My Password'
 
     @user.reload
   end
@@ -24,15 +24,15 @@ feature "Password Reset" do
     expect(current_path).to eq sign_in_path
   end
 
-  scenario "the password reset email is sent with a reset url" do
+  scenario "sends a password reset email with url" do
     expect(open_email(@user.email)).to_not be_nil
-    expect(current_email).to have_content edit_password_reset_path(@user.reset_password_token) # FIXME
+    expect(current_email).to have_content reset_password_path(@user.reset_password_token)
   end
 
-  scenario "password can be reset" do
-    visit edit_password_reset_path(@user.reset_password_token)
+  scenario "resets the password" do
+    visit reset_password_path(@user.reset_password_token)
 
-    fill_in 'Password', with: 'some_good_password'
+    fill_in 'New Password', with: 'som3_g00d_p@ssword'
     click_button 'Reset Password'
 
     expect(page).to have_content "Password was successfully updated."
