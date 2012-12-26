@@ -10,14 +10,14 @@
 # Data that is required by the application across all environments (i.e. reference data) should _not_ be included here.
 # That belongs in seeds.rb instead.
 
-User.create! do |u|
-  u.email    = 'user@example.com'
+# TODO Disable sending emails, no need for seed data.
+
+User.find_or_create_by_email('user@example.com') do |u|
   u.name     = 'Ustead User'
   u.password = 'password'
 end.activate!
 
-User.create! do |u|
-  u.email    = 'admin@example.com'
+User.find_or_create_by_email('admin@example.com') do |u|
   u.name     = 'Adam Admin'
   u.password = 'password'
   u.admin    = true
