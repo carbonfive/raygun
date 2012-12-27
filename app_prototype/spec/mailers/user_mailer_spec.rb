@@ -3,45 +3,45 @@ require "spec_helper"
 describe UserMailer do
   let(:user) { build_stubbed(:user, activation_state: 'pending', activation_token: 'ABC', reset_password_token: 'XYZ') }
 
-  describe "activation_needed_email" do
+  describe "#activation_needed_email" do
     let(:mail) { UserMailer.activation_needed_email(user) }
 
     it "renders the headers" do
-      mail.subject.should eq("Welcome to My Awesome Site!")
-      mail.to.should eq([user.email])
-      mail.from.should eq(['notifications@example.com'])
+      expect(mail.subject).to eq "Welcome to My Awesome Site!"
+      expect(mail.to).to      eq [user.email]
+      expect(mail.from).to    eq %w(notifications@example.com)
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("Welcome to")
+      expect(mail.body.encoded).to match "Welcome to"
     end
   end
 
-  describe "activation_success_email" do
+  describe "#activation_success_email" do
     let(:mail) { UserMailer.activation_success_email(user) }
 
     it "renders the headers" do
-      mail.subject.should eq("Your account has been activated!")
-      mail.to.should eq([user.email])
-      mail.from.should eq(['notifications@example.com'])
+      expect(mail.subject).to eq "Your account has been activated!"
+      expect(mail.to).to      eq [user.email]
+      expect(mail.from).to    eq %w(notifications@example.com)
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("You have successfully activated")
+      expect(mail.body.encoded).to match "You have successfully activated"
     end
   end
 
-  describe "reset_password_email" do
+  describe "#reset_password_email" do
     let(:mail) { UserMailer.reset_password_email(user) }
 
     it "renders the headers" do
-      mail.subject.should eq("Password reset requested")
-      mail.to.should eq([user.email])
-      mail.from.should eq(['notifications@example.com'])
+      expect(mail.subject).to eq "Password reset requested"
+      expect(mail.to).to      eq [user.email]
+      expect(mail.from).to    eq %w(notifications@example.com)
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("You have requested to reset your password.")
+      expect(mail.body.encoded).to match "You have requested to reset your password."
     end
   end
 

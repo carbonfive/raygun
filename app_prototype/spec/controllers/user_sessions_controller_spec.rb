@@ -2,19 +2,19 @@ require 'spec_helper'
 
 describe UserSessionsController do
 
-  describe "GET new" do
+  describe "#new" do
     it "assigns a new user as @user" do
       get :new
-      assigns(:user_session).should_not be_nil
+      expect(assigns(:user_session)).to_not be_nil
     end
   end
 
-  describe "POST create" do
+  describe "#create" do
     describe "with valid params" do
       it "redirect to the target page" do
         subject.stub(:login) { build_stubbed :user }
         post :create, { user_session: { email: 'valid', password: 'valid' } }, { return_to_url: 'url' }
-        response.should redirect_to('url')
+        expect(response).to redirect_to('url')
       end
     end
 
@@ -22,12 +22,12 @@ describe UserSessionsController do
       it "re-renders the 'new' template" do
         subject.stub(:login) { nil }
         post :create, { user_session: { email: 'invalid', password: 'invalid' } }
-        response.should render_template('new')
+        expect(response).to render_template('new')
       end
     end
   end
 
-  describe "DELETE destroy" do
+  describe "#destroy" do
     it "destroys the requested user session" do
       subject.should_receive(:logout)
       delete :destroy
@@ -35,7 +35,7 @@ describe UserSessionsController do
 
     it "redirects to the sign in page" do
       delete :destroy
-      response.should redirect_to(sign_in_url)
+      expect(response).to redirect_to(sign_in_url)
     end
   end
 
