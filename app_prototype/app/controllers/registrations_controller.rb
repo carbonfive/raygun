@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params[:user]) # TODO Safe attributes
 
     if @user.save
       redirect_to sign_in_path, notice: "Thanks for signing up. Please check your email for activation instructions."

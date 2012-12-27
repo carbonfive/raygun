@@ -10,8 +10,8 @@ module UserSessionsFeatureHelper
     end
   end
 
-  def sign_out(user = @current_user)
-    # TODO
+  def sign_out
+    visit sign_out_path
   end
 
 end

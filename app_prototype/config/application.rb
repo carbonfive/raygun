@@ -22,6 +22,7 @@ module AppPrototype
       #generate.helper        false
       generate.routing_specs false
       #generate.view_specs    false
+      generate.request_specs false
     end
 
     # Settings in config/environments/* take precedence over those specified here.
