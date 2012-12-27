@@ -4,7 +4,6 @@
 
 * Basic usage information.
 * Added guard-livereload to Guardfile.
-* Gemfile, rvmrc, rbenv files configured with the ruby version used to generate the app.
 * Better specs for auth flows (register, password reset, sign in) (~98% coverage).
 * Use the new rspec expect(...).to syntax ([more info](http://myronmars.to/n/dev-blog/2012/06/rspecs-new-expectation-syntax)).
 * Hardcode 1.9.3-p327 so that app_prototype is executable without futzing.
