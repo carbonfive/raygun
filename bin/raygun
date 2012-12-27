@@ -13,14 +13,14 @@ def titleize(underscored_string)
   result.gsub(/\b('?[a-z])/) { $1.capitalize }
 end
 
-if !ARGV[0]
+unless ARGV[0]
   puts "Please specify where raygun should generate a project (e.g. projects/my_new_project)."
   puts "usage: raygun new_app_directory"
   exit 1
 end
 
 app_dir = ARGV[0]
-app_name_snake = File.basename(app_dir)
+app_name_snake = File.basename(app_dir).gsub('-', '_')
 app_name_camel = camelize(app_name_snake)
 app_name_title = titleize(app_name_snake)
 
@@ -33,7 +33,7 @@ FileUtils.cp_r(File.expand_path('../../app_prototype', __FILE__), app_dir)
 Dir.chdir(app_dir) do
   `find . -type f -print | xargs sed -i '' 's/AppPrototype/#{app_name_camel}/g'`
   `find . -type f -print | xargs sed -i '' 's/app_prototype/#{app_name_snake}/g'`
-  `sed -i '' 's/App Prototype/#{app_name_title}/' app/views/layouts/application.html.slim`
+  `find . -type f -print | xargs sed -i '' 's/App Prototype/#{app_name_title}/g'`
   `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' config/initializers/secret_token.rb`
 
   puts "Done! Next steps..."
