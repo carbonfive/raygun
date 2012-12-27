@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.14 [2012-12-??]
+## 0.0.14 [2012-12-26]
 
 * Basic usage information.
 * Added guard-livereload to Guardfile.
