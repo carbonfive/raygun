@@ -17,7 +17,7 @@ class RegistrationsController < ApplicationController
   end
 
   def activate
-    if @user = User.load_from_activation_token(params[:token])
+    if (@user = User.load_from_activation_token(params[:token]))
       @user.activate!
       auto_login @user
       redirect_to sign_in_path, notice: "Your account has been activated and you're now signed in. Enjoy!"
