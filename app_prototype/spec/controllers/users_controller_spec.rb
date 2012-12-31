@@ -60,7 +60,7 @@ describe UsersController do
       end
 
       it "assigns a newly created user as @user" do
-        post :create, {user: valid_attributes }, valid_session
+        post :create, { user: valid_attributes }, valid_session
         expect(assigns(:user)).to be_a(User)
         expect(assigns(:user)).to be_persisted
       end
