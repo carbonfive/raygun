@@ -5,10 +5,14 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     if user.admin?
-      can :manage, User
+      can :manage, :all
     else
-      can :manage, User, id: user.id
+      can [:read, :update], User, id: user.id
     end
+
+    # No one can destroy themselves.
+    cannot :destroy, User, id: user.id
+
 
     # Define abilities for the passed in user here. For example:
     #
