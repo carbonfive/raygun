@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.16 [2013-01-04]
+
+* Improved authorization rules so that users can't delete themselves and non-admin can't access users controller :new.
+
 ## 0.0.15 [2012-12-26]
 
 * Handle cases where raygun is given a name with dashes (e.g wonder-pets).
