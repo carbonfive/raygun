@@ -4,13 +4,13 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Congratz, <%= @user.email %></h1>
+    <h1>Congratulations, <%= @user.email %>!</h1>
     <p>
-      You have successfully activated your example.com account,
+      You have successfully activated your App Prototype account,
       your username is: <%= @user.email %>.<br/>
     </p>
     <p>
-      To login to the site, just follow this link: <%= link_to sign_in_url, sign_in_url %>.
+      <%= "Sign In Now", sign_in_url %>.
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>
