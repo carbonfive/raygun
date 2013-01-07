@@ -1,1 +1,1 @@
-rvm use ruby-1.9.3-p327@app_prototype --create
+rvm use ruby-1.9.3-p327@app-prototype --create
