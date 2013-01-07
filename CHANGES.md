@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.17 [2013-01-??]
+
+* Configure .rbenv-version, .rvmrc, and Gemfile with the version of ruby used to execute raygun.
+
 ## 0.0.16 [2013-01-04]
 
 * Improved authorization rules so that users can't delete themselves and non-admin can't access users controller :new.

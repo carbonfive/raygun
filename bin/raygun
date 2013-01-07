@@ -24,6 +24,9 @@ app_name_snake = File.basename(app_dir).gsub('-', '_')
 app_name_camel = camelize(app_name_snake)
 app_name_title = titleize(app_name_snake)
 
+ruby_version_patchlevel = `ruby -e 'print "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"'`
+ruby_version            = `ruby -e 'print "#{RUBY_VERSION}"'`
+
 puts
 puts "Creating new app #{app_name_camel} in directory #{app_dir}..."
 puts
@@ -35,6 +38,8 @@ Dir.chdir(app_dir) do
   `find . -type f -print | xargs sed -i '' 's/app_prototype/#{app_name_snake}/g'`
   `find . -type f -print | xargs sed -i '' 's/App Prototype/#{app_name_title}/g'`
   `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' config/initializers/secret_token.rb`
+  `sed -i '' 's/1.9.3-p327/#{ruby_version_patchlevel}/g' .rvmrc .rbenv-version`
+  `sed -i '' 's/1.9.3/#{ruby_version}/g' Gemfile`
 
   puts "Done! Next steps..."
   puts ""
