@@ -7,7 +7,7 @@ development: &default
   pool: 5
   timeout: 5000
 
-test: &TEST
+test:
   <<: *default
   database: app_prototype_test
   min_messages: warning
