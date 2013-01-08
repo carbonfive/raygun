@@ -41,7 +41,7 @@ describe UserMailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match "You have requested to reset your password."
+      expect(mail.body.encoded).to match "Someone requested to reset your password."
     end
   end
 
