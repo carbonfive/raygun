@@ -25,7 +25,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.12.0'
-  gem 'capybara', github: 'jnicklas/capybara' # Switch from github once issue #882 is resolved.
+  gem 'capybara', '~> 2.0'
   gem 'capybara-email'
   gem 'factory_girl_rails'
   gem 'jasminerice'
