@@ -3,7 +3,7 @@
 # Raygun
 
 Rails application generator that builds a new project skeleton configured with Carbon Five preferences and
-best practices baked right in. Spend less time configuring stuff and more building cool stuff.
+best practices baked right in. Spend less time configuring and more building cool features.
 
 Major tools/libraries:
 
@@ -17,9 +17,13 @@ Major tools/libraries:
 * RSpec
 * Factory Girl
 * Jasmine
+* SimpleCov
 * Guard (rspec, jasmine, livereload)
+* And many tweaks, patterns and common recipes.
 
-And many tweaks, patterns and common recipes.
+Raygun includes generator templates for controllers, views, and specs so that generated code follows best
+practices. For example, view generation produces bootstrap compatible markup and rspec specs use factory
+girl when appropriate.
 
 Inspired by Xavier Shay and ThoughtBot's Suspenders. Thanks!
 
@@ -37,19 +41,22 @@ Raygun...
 
 ## Prerequisites
 
-Be sure you met these requirements before using raygun, otherwise you won't make it very far (misfire!).
+To generate an application, you only need the raygun gem.
 
-* Ruby 1.9.3-p327 (rvm and rbenv supported)
+To run your new application's specs or fire up its server, you'll need to meet these requirements.
+
 * PostgreSQL 9.x with superuser 'postgres' with no password (```createuser -s postgres```)
 * PhantomJS for JavaScript testing (```brew install phantomjs```)
 
-If you're using another ruby, just change the Gemfile, .rvmrc and/or .rbenv as necessary before running bundle.
+The generated app will be configured to use the ruby version that was used to invoke raygun. If you're using
+another ruby, just change the ```Gemfile```, ```.rvmrc``` and/or ```.rbenv-version``` as necessary.
 
 ## Usage
 
     $ raygun your-project
 
-Once your project is baked out, you can easily kick the wheels:
+Once your project is baked out, you can easily kick the wheels. Be sure that you have the prerequities
+covered (see above).
 
     $ cd your-project
     $ gem install bundler
@@ -77,7 +84,7 @@ Once your project is baked out, you can easily kick the wheels:
 
 Generate an example app using your local development version of raygun:
 
-    ./bin/raygun tmp/example_app
+    $ ./bin/raygun tmp/example_app
 
 ## Changes
 

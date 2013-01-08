@@ -1,31 +1,50 @@
-Overview
-========
+# App Prototype
 
 ...
 
-Requirements
-============
+Generated with [Raygun](https://github.com/carbonfive/raygun).
 
-* ruby 1.9.3-p327
-* postgresql 9.? (user 'postgres' with no password)
+# Requirements
 
-Running the Specs
-=================
+To run the specs or fire up the server, be sure you have these:
 
-$ rake db:setup db:test:prepare
-$ rake
+* Ruby 1.9.3-p327
+* PostgreSQL 9.x with superuser 'postgres' with no password (```createuser -s postgres```)
+* PhantomJS for JavaScript testing (```brew install phantomjs```)
 
-Running the Application
-=======================
+# Development
 
-$ foreman start
+### First Time Setup
 
-Using Guard
-===========
+After cloning, run these commands to install missing gems and prepare the database.
 
-$ bundle exec guard -c
+    $ gem install bundler
+    $ bundle update
+    $ rake db:setup db:sample_data
 
-Considerations
-==============
+Note, ```rake db:sample_data``` loads a small set of data for development. Check out ```db/sample_data.rb``` for details.
+
+### Running the Specs
+
+To run all ruby and jasmine specs.
+
+    $ rake
+
+Again, with coverage for the ruby specs:
+
+    $ rake spec:coverage
+
+### Running the Application
+
+    $ foreman start
+    $ open http://0.0.0.0:3000"
+
+### Using Guard
+
+Guard is configured to run ruby and jasmine specs, and also listen for livereload connections. Growl is used for notifications.
+
+    $ bundle exec guard
+
+# Considerations
 
 ...
