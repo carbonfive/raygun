@@ -6,6 +6,7 @@
 
 # Ignore bundler config
 /.bundle
+/gem_graph.png
 
 # Ignore the default SQLite database
 /db/*.sqlite3
