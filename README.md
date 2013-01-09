@@ -31,9 +31,10 @@ Inspired by Xavier Shay and ThoughtBot's Suspenders. Thanks!
 
 Raygun...
 
-* should generate a new rails application that's ready for feature development immediately.
-* should generate an application that has best practices that apply to most projects baked in.
-* is a forum for discussing what should or should not be included as part of a standard stack.
+* Generates a new rails application that's ready for immediate feature development.
+* Generates an application that has best practices that apply to most projects baked in.
+* Generates an application that includes specs for all build in functionality.
+* Is a forum for discussing what should or should not be included as part of a standard stack.
 
 ## Installation
 
