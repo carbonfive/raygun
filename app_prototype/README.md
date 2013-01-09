@@ -34,7 +34,7 @@ Again, with coverage for the ruby specs:
 
     $ rake spec:coverage
 
-### Running the Application
+### Running the Application Locally
 
     $ foreman start
     $ open http://0.0.0.0:3000"
@@ -44,6 +44,14 @@ Again, with coverage for the ruby specs:
 Guard is configured to run ruby and jasmine specs, and also listen for livereload connections. Growl is used for notifications.
 
     $ bundle exec guard
+
+### Deploying to Heroku
+
+Install the heroku toolbelt if you don't already have it (https://toolbelt.heroku.com/).
+
+    $ heroku apps:create app-prototype
+    $ git push heroku master
+    $ heroku run rake db:setup
 
 # Considerations
 

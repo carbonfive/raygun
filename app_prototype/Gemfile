@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'thin'
-gem 'rails', '~> 3.2.10'
+gem 'rails', '~> 3.2.11'
 gem 'slim-rails'
 gem 'jquery-rails'
 gem 'sorcery'
@@ -20,7 +20,10 @@ group :assets do
   gem 'less-rails-bootstrap'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'therubyracer', platforms: :ruby
+
+  # Heroku suggests that these gems aren't necessary, but they're required to compile less assets on deploy.
+  gem 'therubyracer'
+  gem 'libv8'
 end
 
 group :test, :development do
