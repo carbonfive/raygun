@@ -23,7 +23,7 @@ group :assets do
 
   # Heroku suggests that these gems aren't necessary, but they're required to compile less assets on deploy.
   gem 'therubyracer'
-  gem 'libv8', '~> 3.11.13'
+  gem 'libv8', '~> 3.11.8'
 end
 
 group :test, :development do
