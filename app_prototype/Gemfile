@@ -5,6 +5,7 @@ ruby '1.9.3'
 
 gem 'thin'
 gem 'rails', '~> 3.2.11'
+gem 'strong_parameters'
 gem 'slim-rails'
 gem 'jquery-rails'
 gem 'sorcery'
