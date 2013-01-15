@@ -41,7 +41,7 @@ Dir.chdir(app_dir) do
   `find . -type f -print | xargs sed -i '' 's/app_prototype/#{app_name_snake}/g'`
   `find . -type f -print | xargs sed -i '' 's/App Prototype/#{app_name_title}/g'`
   `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' config/initializers/secret_token.rb`
-  `sed -i '' 's/1.9.3-p327/#{ruby_version_patchlevel}/g' .rvmrc .rbenv-version`
+  `sed -i '' 's/1.9.3-p327/#{ruby_version_patchlevel}/g' .rvmrc .ruby-version`
   `sed -i '' 's/1.9.3/#{ruby_version}/g' Gemfile`
 
   puts "Done! Next steps..."
