@@ -6,7 +6,8 @@
 * Improve the detfault email content.
 * Improve the raygun and app_prototype READMEs.
 * Use $PORT to set the server port for Heroku compatibility, with default set in .env.
-* .ruby-version instead of .rbenv-version (as recommended by rbenv)
+* .ruby-version instead of .rbenv-version (as recommended by rbenv).
+* Add a unique database constraint on users.email.
 
 ## 0.0.16 [2013-01-04]
 
