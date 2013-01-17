@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.17 [2013-01-??]
+## 0.0.17 [2013-01-17]
 
 * Configure .rbenv-version, .rvmrc, and Gemfile with the version of ruby used to execute raygun.
 * Improve the detfault email content.
