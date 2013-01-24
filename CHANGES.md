@@ -4,7 +4,7 @@
 
 * Support generating an app in the current directory.
 * Better handling of command line arguments.
-*
+* Include support for cane quality checks via ```rake spec:cane```.
 
 ## 0.0.17 [2013-01-17]
 
