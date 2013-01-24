@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
 
   skip_authorization_check
-  
+
   def new
     @user = User.new
   end

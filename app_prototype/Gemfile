@@ -34,6 +34,8 @@ group :test, :development do
   gem 'jasminerice'
   gem 'timecop'
   gem 'simplecov'
+  gem 'cane'
+  gem 'morecane'
   gem 'quiet_assets'
 end
 

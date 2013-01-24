@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  
+
   default from: 'notifications@example.com'
 
   def activation_needed_email(user)
