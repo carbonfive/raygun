@@ -6,17 +6,15 @@ begin
   Cane::RakeTask.new(:quality) do |cane|
     cane.add_threshold 'coverage/covered_percent', :>=, 95
 
-    cane.no_style = false     # Change to true to skip style checks
-    cane.style_measure = 120  # Maximum line length
+    cane.no_style      = false # Change to true to skip style checks
+    cane.style_measure = 120   # Maximum line length
     cane.style_exclude = %w{
       lib/templates/rspec/scaffold/controller_spec.rb
-    } # Exclude files from style checks
+    }
 
-    cane.no_doc = true    # Change to false to enable documentation checks
+    cane.no_doc = true # Change to false to enable documentation checks
 
-    cane.abc_max = 15     # Fail the build if complexity is too high.
-    # If you must, you can exclude specific methods from the complexity check
-    # by adding them to this list.
+    cane.abc_max = 15 # Fail the build if complexity is too high.
     # cane.abc_exclude = %w(
     #   User#bad_code_rising
     # )
@@ -25,8 +23,8 @@ begin
     cane.use Morecane::MustNotMatchCheck,
       must_not_match_glob: "{app,lib,config,spec}/**/*.rb",
       must_not_match_regexp: /binding\.pry|debugger/
-
   end
+
 rescue LoadError
   warn "cane not available, quality task not provided."
 end
