@@ -1,65 +1,144 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
 require 'fileutils'
 require 'securerandom'
 
-def camelize(string)
-  result = string.sub(/^[a-z\d]*/) { $&.capitalize }
-  result.gsub(/(?:_|(\/))([a-z\d]*)/) { "#{$1}#{$2.capitalize}" }
+module Raygun
+  class Runner
+    attr_accessor :app_name, :app_dir, :title_name, :snake_name, :camel_name, :dash_name
+
+    def initialize(app_name_arg)
+      @app_dir = File.expand_path(app_name_arg.strip.to_s)
+      @app_name = File.basename(app_dir).gsub(/\s+/, '-')
+      @dash_name = app_name.gsub('_', '-')
+      @snake_name = app_name.gsub('-', '_')
+      @camel_name = camelize(snake_name)
+      @title_name = titleize(snake_name)
+    end
+
+    def copy_prototype
+      FileUtils.mkdir_p(app_dir)
+
+      Dir.glob(File.expand_path('../../app_prototype/*', __FILE__), File::FNM_DOTMATCH) do |f|
+        next if %w{. ..}.include?(File.basename(f))
+        FileUtils.cp_r(f, app_dir)
+      end
+    end
+
+    def rename_new_app
+      Dir.chdir(app_dir) do
+        {
+          'AppPrototype'  => camel_name,
+          'app-prototype' => dash_name,
+          'app_prototype' => snake_name,
+          'App Prototype' => title_name
+        }.each do |proto_name, new_name|
+          `find . -type f -print | xargs sed -i '' 's/#{proto_name}/#{new_name}/g'`
+        end
+      end
+    end
+
+    def configure_new_app
+      generate_tokens
+      update_ruby_version
+    end
+
+    def generate_tokens
+      Dir.chdir(app_dir) do
+        `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' #{app_dir}/config/initializers/secret_token.rb`
+      end
+    end
+
+    def update_ruby_version
+      prototype_ruby_patch_level  = File.read(File.expand_path('../../.rbenv-version', __FILE__)).strip
+      prototype_ruby_version      = prototype_ruby_patch_level.match(/(\d\.\d\.\d).*/)[1]
+      current_ruby_version        = RUBY_VERSION
+      current_ruby_patch_level    = "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
+
+      Dir.chdir(app_dir) do
+        `sed -i '' 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .rvmrc .ruby-version`
+        `sed -i '' 's/#{prototype_ruby_version}/#{current_ruby_version}/g' Gemfile`
+      end
+    end
+
+    def print_plan
+      puts
+      puts "Creating new app #{camel_name} in directory #{app_dir}..."
+      puts
+    end
+
+    def print_next_steps
+      puts "Done! Next steps..."
+      puts ""
+      puts "# Install updated dependencies"
+      puts "$ cd #{app_dir}"
+      puts "$ gem install bundler"
+      puts "$ bundle update"
+      puts ""
+      puts "# Prepare the database: schema and reference / sample data"
+      puts "$ rake db:setup db:sample_data"
+      puts ""
+      puts "# Run the specs (they should all pass)"
+      puts "$ rake"
+      puts ""
+      puts "# Load reference and sample data, then run the app and check things out"
+      puts "$ foreman start"
+      puts "$ open http://0.0.0.0:3000"
+      puts ""
+      puts "Enjoy your Carbon Five flavored Rails application!"
+    end
+
+    protected
+
+    def camelize(string)
+      result = string.sub(/^[a-z\d]*/) { $&.capitalize }
+      result.gsub(/(?:_|(\/))([a-z\d]*)/) { "#{$1}#{$2.capitalize}" }
+    end
+
+    def titleize(underscored_string)
+      result = underscored_string.gsub(/_/, ' ')
+      result.gsub(/\b('?[a-z])/) { $1.capitalize }
+    end
+
+    class << self
+      def parse(args)
+        raygun = nil
+
+        parser = OptionParser.new do |opts|
+          opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"
+
+          opts.on("-h", "--help", "Show raygun usage") do |variable|
+            usage_and_exit(opts)
+          end
+
+          if ARGV.size == 0
+            usage_and_exit(opts)
+          else
+            raygun = Raygun::Runner.new(ARGV.first)
+          end
+        end
+
+        begin
+          parser.parse!
+        rescue OptionParser::InvalidOption
+          usage_and_exit(parser)
+        end
+
+        raygun
+      end
+
+      def usage_and_exit(parser)
+        puts parser
+        exit 1
+      end
+    end
+  end
 end
 
-def titleize(underscored_string)
-  result = underscored_string.gsub(/_/, ' ')
-  result.gsub(/\b('?[a-z])/) { $1.capitalize }
-end
-
-unless ARGV[0]
-  puts "Please specify where raygun should generate a project (e.g. projects/my_new_project)."
-  puts "usage: raygun new_app_directory"
-  exit 1
-end
-
-app_dir  = ARGV[0]
-app_name = File.basename(app_dir).gsub(/\s+/, '-')
-app_name_dash  = app_name.gsub('_', '-')
-app_name_snake = app_name.gsub('-', '_')
-app_name_camel = camelize(app_name_snake)
-app_name_title = titleize(app_name_snake)
-
-ruby_version_patchlevel = `ruby -e 'print "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"'`
-ruby_version            = `ruby -e 'print "#{RUBY_VERSION}"'`
-
-puts
-puts "Creating new app #{app_name_camel} in directory #{app_dir}..."
-puts
-
-FileUtils.cp_r(File.expand_path('../../app_prototype', __FILE__), app_dir)
-
-Dir.chdir(app_dir) do
-  `find . -type f -print | xargs sed -i '' 's/AppPrototype/#{app_name_camel}/g'`
-  `find . -type f -print | xargs sed -i '' 's/app-prototype/#{app_name_dash}/g'`
-  `find . -type f -print | xargs sed -i '' 's/app_prototype/#{app_name_snake}/g'`
-  `find . -type f -print | xargs sed -i '' 's/App Prototype/#{app_name_title}/g'`
-  `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' config/initializers/secret_token.rb`
-  `sed -i '' 's/1.9.3-p327/#{ruby_version_patchlevel}/g' .rvmrc .ruby-version`
-  `sed -i '' 's/1.9.3/#{ruby_version}/g' Gemfile`
-
-  puts "Done! Next steps..."
-  puts ""
-  puts "# Install updated dependencies"
-  puts "$ cd #{ARGV[0]}"
-  puts "$ gem install bundler"
-  puts "$ bundle update"
-  puts ""
-  puts "# Prepare the database: schema and reference / sample data"
-  puts "$ rake db:setup db:sample_data"
-  puts ""
-  puts "# Run the specs (they should all pass)"
-  puts "$ rake"
-  puts ""
-  puts "# Load reference and sample data, then run the app and check things out"
-  puts "$ foreman start"
-  puts "$ open http://0.0.0.0:3000"
-  puts ""
-  puts "Enjoy your Carbon Five flavored Rails application!"
-end
+raygun = Raygun::Runner.parse(ARGV)
+raygun.print_plan
+raygun.copy_prototype
+raygun.rename_new_app
+raygun.configure_new_app
+raygun.print_next_steps
