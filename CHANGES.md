@@ -1,8 +1,14 @@
 # Change Log
 
+## 0.0.18 [2013-01-24]
+
+* Support generating an app in the current directory.
+* Better handling of command line arguments.
+*
+
 ## 0.0.17 [2013-01-17]
 
-* Configure .rbenv-version, .rvmrc, and Gemfile with the version of ruby used to execute raygun.
+* Configure .ruby-version, .rvmrc, and Gemfile with the version of ruby used to execute raygun.
 * Improve the detfault email content.
 * Improve the raygun and app_prototype READMEs.
 * Use $PORT to set the server port for Heroku compatibility, with default set in .env.
