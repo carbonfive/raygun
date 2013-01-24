@@ -14,6 +14,7 @@ gem 'active_attr'
 gem 'valid_email'
 gem 'pg'
 gem 'awesome_print'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'less-rails'
