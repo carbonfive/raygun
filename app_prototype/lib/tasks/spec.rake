@@ -16,11 +16,15 @@ begin
         end
       end
     end
+
+    desc 'Runs specs with coverage and cane checks'
+    task cane: ['spec:enable_coverage', 'spec:coverage', 'quality']
   end
 
   Rake::Task['spec'].enhance do
     Rake::Task['spec:javascripts'].invoke
   end
+
 
 rescue LoadError
   namespace :spec do
