@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-AppPrototype::Application.config.secret_token = ENV['SECRET_TOKEN']
+AppPrototype::Application.config.secret_token = ENV['SECRET_TOKEN'] || 'AWAbYFxfy5SxropZl5yIiNiE2bv3lJ7nLcreGI9p'
