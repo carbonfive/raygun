@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.19 [2013-01-??]
+
+* Pull the rails secret token from the environment so it can be easily set in server environments.
+
 ## 0.0.18 [2013-01-24]
 
 * Support generating an app in the current directory.
