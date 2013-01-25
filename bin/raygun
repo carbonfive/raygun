@@ -46,7 +46,7 @@ module Raygun
 
     def generate_tokens
       Dir.chdir(app_dir) do
-        `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' #{app_dir}/config/initializers/secret_token.rb`
+        `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' #{app_dir}/.env`
       end
     end
 
