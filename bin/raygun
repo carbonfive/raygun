@@ -82,7 +82,7 @@ module Raygun
       puts "# Run the specs (they should all pass)"
       puts "$ rake"
       puts ""
-      puts "# Load reference and sample data, then run the app and check things out"
+      puts "# Run the app and check things out"
       puts "$ foreman start"
       puts "$ open http://0.0.0.0:3000"
       puts ""
