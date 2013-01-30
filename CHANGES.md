@@ -3,17 +3,18 @@
 ## 0.0.19 [2013-01-??]
 
 * Pull the rails secret token from the environment so it can be easily set in server environments.
+* Dump the static index.html for a dynamic version.
 
 ## 0.0.18 [2013-01-24]
 
-* Support generating an app in the current directory.
-* Better handling of command line arguments.
-* Include support for cane quality checks via ```rake spec:cane```.
+* Support generating an app in the current directory (thanks @subakva).
+* Better handling of command line arguments (thanks @subakva).
+* Include support for cane quality checks via ```rake spec:cane``` (thanks @subakva).
 
 ## 0.0.17 [2013-01-17]
 
 * Configure .ruby-version, .rvmrc, and Gemfile with the version of ruby used to execute raygun.
-* Improve the detfault email content.
+* Improve the default email content.
 * Improve the raygun and app_prototype READMEs.
 * Use $PORT to set the server port for Heroku compatibility, with default set in .env.
 * .ruby-version instead of .rbenv-version (as recommended by rbenv).
