@@ -50,7 +50,7 @@ To run your new application's specs or fire up its server, you'll need to meet t
 * PhantomJS for JavaScript testing (```brew install phantomjs```)
 
 The generated app will be configured to use the ruby version that was used to invoke raygun. If you're using
-another ruby, just change the ```Gemfile```, ```.rvmrc``` and/or ```.rbenv-version``` as necessary.
+another ruby, just change the ```Gemfile```, ```.rvmrc``` and/or ```.ruby-version``` as necessary.
 
 ## Usage
 
