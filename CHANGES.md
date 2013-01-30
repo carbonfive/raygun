@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.19 [2013-01-??]
+## 0.0.19 [2013-01-29]
 
 * Pull the rails secret token from the environment so it can be easily set in server environments.
 * Dump the static index.html for a dynamic version.
