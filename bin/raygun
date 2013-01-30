@@ -51,7 +51,7 @@ module Raygun
     end
 
     def update_ruby_version
-      prototype_ruby_patch_level  = File.read(File.expand_path('../../.rbenv-version', __FILE__)).strip
+      prototype_ruby_patch_level  = File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
       prototype_ruby_version      = prototype_ruby_patch_level.match(/(\d\.\d\.\d).*/)[1]
       current_ruby_version        = RUBY_VERSION
       current_ruby_patch_level    = "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
