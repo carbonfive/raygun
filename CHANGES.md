@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.19 [2013-01-29]
+## 0.0.20 [2013-01-29]
 
 * Bug fix and minor output tweak.
 
