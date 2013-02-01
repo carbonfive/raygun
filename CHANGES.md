@@ -1,6 +1,10 @@
 # Change Log
 
-## 0.0.20 [2013-01-29]
+## 0.0.21 [2013-02-01]
+
+* Turn off threadsafe when running rake tasks (thanks @subakva).
+
+## 0.0.20 [unreleased]
 
 * Bug fix and minor output tweak.
 
