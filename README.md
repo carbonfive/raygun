@@ -75,11 +75,11 @@ covered (see above).
 
 ## Internal Mechanics
 
-Raygun simply copies the app_prototype tree and then runs a small set of commands to customize the
-cloned project. So, what you get looks a lot like app_prototype. Check out bin/raygun.rb to see how
-it's massaged.
+Raygun simply copies the [app_prototype](app_prototype) tree and then runs a small set of commands to customize
+the copied project. So, what you get looks a lot like [app_prototype](app_prototype). Check out
+[raygun](bin/raygun) to see how it's massaged after being copied.
 
-This approach is fast, simple, and makes raygun developer very easy. Make changes to app_prototype,
+This approach is fast, simple, and makes raygun developement very easy. Make changes to [app_prototype](app_prototype),
 run its specs and fire up the server to see what happens.
 
 ## Contributing
