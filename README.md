@@ -73,6 +73,15 @@ covered (see above).
     $ foreman start
     $ open http://0.0.0.0:3000
 
+## Internal Mechanics
+
+Raygun simply copies the app_prototype tree and then runs a small set of commands to customize the
+cloned project. So, what you get looks a lot like app_prototype. Check out bin/raygun.rb to see how
+it's massaged.
+
+This approach is fast, simple, and makes raygun developer very easy. Make changes to app_prototype,
+run its specs and fire up the server to see what happens.
+
 ## Contributing
 
 1. Fork it
