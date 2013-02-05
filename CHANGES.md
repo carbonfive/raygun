@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.22 [2013-02-??]
+
+* Take lib off the load path by default.
+
 ## 0.0.21 [2013-02-01]
 
 * Turn off threadsafe when running rake tasks (thanks @subakva).
