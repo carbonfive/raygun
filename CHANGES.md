@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.23 [2013-02-07]
+
+* Fixed a bug with detecting whether we're on darwin or not.
+* Remove some dead code (thanks @bemurphy).
+
 ## 0.0.22 [2013-02-07]
 
 * Support ubuntu and darwin (sed has slightly different syntax for in-place substitution).
