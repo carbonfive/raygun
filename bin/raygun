@@ -40,14 +40,7 @@ module Raygun
     end
 
     def configure_new_app
-      generate_tokens
       update_ruby_version
-    end
-
-    def generate_tokens
-      Dir.chdir(app_dir) do
-        `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' #{app_dir}/.env`
-      end
     end
 
     def update_ruby_version
