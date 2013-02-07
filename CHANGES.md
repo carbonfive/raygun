@@ -2,6 +2,7 @@
 
 ## 0.0.22 [2013-02-??]
 
+* Support ubuntu and darwin (sed has slightly different syntax for in-place substitution).
 * Take lib off the load path by default.
 
 ## 0.0.21 [2013-02-01]
