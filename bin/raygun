@@ -34,7 +34,7 @@ module Raygun
           'app_prototype' => snake_name,
           'App Prototype' => title_name
         }.each do |proto_name, new_name|
-          `find . -type f -print | xargs sed -i '' 's/#{proto_name}/#{new_name}/g'`
+          `find . -type f -print | xargs #{sed_i} 's/#{proto_name}/#{new_name}/g'`
         end
       end
     end
@@ -46,7 +46,7 @@ module Raygun
 
     def generate_tokens
       Dir.chdir(app_dir) do
-        `sed -i '' 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' #{app_dir}/.env`
+        `#{sed_i} 's/SUPER_SECRET_TOKEN_REPLACE_ME_TODO/#{SecureRandom.hex(128)}/' #{app_dir}/.env`
       end
     end
 
@@ -57,8 +57,8 @@ module Raygun
       current_ruby_patch_level    = "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
 
       Dir.chdir(app_dir) do
-        `sed -i '' 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .rvmrc .ruby-version`
-        `sed -i '' 's/#{prototype_ruby_version}/#{current_ruby_version}/g' Gemfile`
+        `#{sed_i} 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .rvmrc .ruby-version`
+        `#{sed_i} 's/#{prototype_ruby_version}/#{current_ruby_version}/g' Gemfile`
       end
     end
 
@@ -99,6 +99,11 @@ module Raygun
     def titleize(underscored_string)
       result = underscored_string.gsub(/_/, ' ')
       result.gsub(/\b('?[a-z])/) { $1.capitalize }
+    end
+
+    # Mac sed works differently than ubuntu sed when it comes to in-place substituion.
+    def sed_i
+      RUBY_PLATFORM =~ /dawrin/ ? "sed -i ''" : "sed -i"
     end
 
     class << self
