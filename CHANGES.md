@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.24 [2013-02-??]
+
+* Pay attention to shelled command's exit status and bail with a message if a command fails.
+
 ## 0.0.23 [2013-02-07]
 
 * Fixed a bug with detecting whether we're on darwin or not.

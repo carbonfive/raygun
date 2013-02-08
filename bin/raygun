@@ -34,7 +34,7 @@ module Raygun
           'app_prototype' => snake_name,
           'App Prototype' => title_name
         }.each do |proto_name, new_name|
-          `find . -type f -print | xargs #{sed_i} 's/#{proto_name}/#{new_name}/g'`
+          shell "find . -type f -print | xargs #{sed_i} 's/#{proto_name}/#{new_name}/g'"
         end
       end
     end
@@ -50,8 +50,8 @@ module Raygun
       current_ruby_patch_level    = "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
 
       Dir.chdir(app_dir) do
-        `#{sed_i} 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .rvmrc .ruby-version`
-        `#{sed_i} 's/#{prototype_ruby_version}/#{current_ruby_version}/g' Gemfile`
+        shell "#{sed_i} 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .rvmrc .ruby-version"
+        shell "#{sed_i} 's/#{prototype_ruby_version}/#{current_ruby_version}/g' Gemfile"
       end
     end
 
@@ -97,6 +97,12 @@ module Raygun
     # Mac sed works differently than ubuntu sed when it comes to in-place substituion.
     def sed_i
       RUBY_PLATFORM =~ /darwin/ ? "sed -i ''" : "sed -i"
+    end
+
+    # Run a shell command and raise an exception if it fails.
+    def shell(command)
+      %x{#{command}}
+      raise "#{command} failed with status #{$?.exitstatus}." unless $?.success?
     end
 
     class << self
