@@ -41,6 +41,7 @@ module Raygun
 
     def configure_new_app
       update_ruby_version
+      initialize_git
     end
 
     def update_ruby_version
@@ -52,6 +53,14 @@ module Raygun
       Dir.chdir(app_dir) do
         shell "#{sed_i} 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .rvmrc .ruby-version"
         shell "#{sed_i} 's/#{prototype_ruby_version}/#{current_ruby_version}/g' Gemfile"
+      end
+    end
+
+    def initialize_git
+      Dir.chdir(app_dir) do
+        shell 'git init'
+        shell 'git add -A .'
+        shell 'git commit -m "raygun-zapped skeleton"'
       end
     end
 
