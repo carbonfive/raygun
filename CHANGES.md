@@ -1,7 +1,9 @@
 # Change Log
 
-## 0.0.24 [2013-02-??]
+## 0.0.24 [2013-02-14]
 
+* Upgrade to ruby-1.9.3-p385 (thanks @mechfish).
+* Upgrade to rails ~> 3.2.12 (thanks @mechfish).
 * Pay attention to shelled command's exit status and bail with a message if a command fails.
 
 ## 0.0.23 [2013-02-07]
