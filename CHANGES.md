@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.25 [2013-02-??]
+
+* Initialize git and create an initial commit (thanks @blakeeb).
+
 ## 0.0.24 [2013-02-14]
 
 * Upgrade to ruby-1.9.3-p385 (thanks @mechfish).
