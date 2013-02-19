@@ -2,6 +2,8 @@
 
 ## 0.0.25 [2013-02-??]
 
+* Generated controller specs now pass without intervention.
+* Generated view specs use factory_girl's build_stubbed instead of rspec's stub_model, expect() syntax, and 1.9 hash syntax.
 * Initialize git and create an initial commit (thanks @blakeeb).
 
 ## 0.0.24 [2013-02-14]
