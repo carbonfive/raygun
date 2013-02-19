@@ -2,10 +2,7 @@ require 'spec_helper'
 
 describe "users/show" do
   before(:each) do
-    @user = assign(:user, stub_model(User,
-      email: "Email",
-      name: "Name"
-    ))
+    @user = assign(:user, build_stubbed(:user))
   end
 
   it "renders attributes in <p>" do
