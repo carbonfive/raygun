@@ -18,7 +18,8 @@ describe <%= controller_class_name %>Controller do
   end
 
   before do
-    login_user build :user
+    # TODO Set to :user and specify authorization rules in Ability.rb.
+    login_user build :admin
   end
 
 <% unless options[:singleton] -%>
