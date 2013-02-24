@@ -105,7 +105,8 @@ module Raygun
 
     # Mac sed works differently than ubuntu sed when it comes to in-place substituion.
     def sed_i
-      RUBY_PLATFORM =~ /darwin/ ? "sed -i ''" : "sed -i"
+      %x{sed --version}
+      $?.success? ? "sed -i " : "sed -i ''"
     end
 
     # Run a shell command and raise an exception if it fails.
