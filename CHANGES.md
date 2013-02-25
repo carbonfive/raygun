@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.27 [2013-02-??]
+
+* Better detection of BSD vs GNU sed (thanks @orangejulius).
+
 ## 0.0.26 [2013-02-24]
 
 * Validate presense of name on User
