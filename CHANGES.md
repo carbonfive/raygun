@@ -3,6 +3,7 @@
 ## 0.0.26 [2013-02-24]
 
 * Validate presense of name on User
+* Drop rspec and capybara version constraints from the Gemfile
 
 ## 0.0.25 [2013-02-20]
 

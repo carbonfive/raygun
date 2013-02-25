@@ -27,8 +27,8 @@ group :assets do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '~> 2.12.0'
-  gem 'capybara', '~> 2.0'
+  gem 'rspec-rails'
+  gem 'capybara'
   gem 'capybara-email'
   gem 'factory_girl_rails'
   gem 'jasminerice'
