@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
   validates :name,
+            presence: true,
             length: { maximum: 30 }
 
   validates :email,

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.26 [2013-02-24]
+
+* Validate presense of name on User
+
 ## 0.0.25 [2013-02-20]
 
 * Generated controller specs now pass without intervention.

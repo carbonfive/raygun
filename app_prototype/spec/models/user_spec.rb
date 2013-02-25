@@ -7,7 +7,7 @@ describe User do
 
     describe "name" do
       it "is required" do
-        expect(subject).to_not accept_values(:email, nil, '')
+        expect(subject).to_not accept_values(:name, nil, '')
       end
 
       it "should be less than 30 characters" do
