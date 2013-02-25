@@ -37,7 +37,7 @@ Again, with coverage for the ruby specs:
 ### Running the Application Locally
 
     $ foreman start
-    $ open http://0.0.0.0:3000"
+    $ open http://0.0.0.0:3000
 
 ### Using Guard
 
