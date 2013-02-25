@@ -103,10 +103,13 @@ module Raygun
       result.gsub(/\b('?[a-z])/) { $1.capitalize }
     end
 
-    # Mac sed works differently than ubuntu sed when it comes to in-place substituion.
+    #distinguish BSD vs GNU sed with the --version flag (only present in GNU sed)
     def sed_i
-      %x{sed --version}
-      $?.success? ? "sed -i " : "sed -i ''"
+      if @sed_format.nil?
+        %x{sed --version}
+        @sed_format = $?.success? ? "sed -i " : "sed -i ''"
+      end
+      @sed_format
     end
 
     # Run a shell command and raise an exception if it fails.
