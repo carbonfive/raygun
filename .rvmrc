@@ -1,1 +1,1 @@
-rvm use 1.9.3-p385@raygun --create
+rvm use 1.9.3-p392@raygun --create
