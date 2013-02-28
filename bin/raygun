@@ -17,6 +17,13 @@ module Raygun
       @title_name = titleize(snake_name)
     end
 
+    def check_target
+      unless Dir["#{@app_dir}/*"].empty?
+        puts "Misfire! The target directory isn't empty... aim elsewhere."
+        exit 1
+      end
+    end
+
     def copy_prototype
       FileUtils.mkdir_p(app_dir)
 
@@ -153,6 +160,7 @@ module Raygun
 end
 
 raygun = Raygun::Runner.parse(ARGV)
+raygun.check_target
 raygun.print_plan
 raygun.copy_prototype
 raygun.rename_new_app

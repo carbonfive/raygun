@@ -2,6 +2,7 @@
 
 ## 0.0.27 [2013-02-??]
 
+* Make sure the target directory is empty, otherwise misfire.
 * Use ruby-1.9.3-p392 for the project (new apps still use the version that invoked raygun) (thanks @rpak).
 * Better detection of BSD vs GNU sed (thanks @orangejulius).
 
