@@ -27,7 +27,7 @@ module Raygun
     def copy_prototype
       FileUtils.mkdir_p(app_dir)
 
-      Dir.glob(File.expand_path('../../app_prototype/*', __FILE__), File::FNM_DOTMATCH) do |f|
+      Dir.glob(File.expand_path("../../rails_32/*", __FILE__), File::FNM_DOTMATCH) do |f|
         next if %w{. ..}.include?(File.basename(f))
         FileUtils.cp_r(f, app_dir)
       end

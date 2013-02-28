@@ -75,11 +75,11 @@ covered (see above).
 
 ## Internal Mechanics
 
-Raygun simply copies the [app_prototype](app_prototype) tree and then runs a small set of commands to customize
-the copied project. So, what you get looks a lot like [app_prototype](app_prototype). Check out
+Raygun simply copies the [rails_32](rails_32) tree and then runs a small set of commands to customize
+the copied project. So, what you get looks a lot like [rails_32](rails_32). Check out
 [raygun](bin/raygun) to see how it's massaged after being copied.
 
-This approach is fast, simple, and makes raygun developement very easy. Make changes to [app_prototype](app_prototype),
+This approach is fast, simple, and makes raygun developement very easy. Make changes to [rails_32](rails_32),
 run its specs and fire up the server to see what happens.
 
 ## Contributing
