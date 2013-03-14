@@ -21,4 +21,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "thor"
 
   gem.add_development_dependency "guard-rspec"
+  gem.add_development_dependency "godot"
 end

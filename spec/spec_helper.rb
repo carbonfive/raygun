@@ -1,3 +1,6 @@
 $:<< File.expand_path("../../lib", __FILE__)
-require "raygun"
+
 require "tmpdir"
+require "godot"
+
+require "raygun"
