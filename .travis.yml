@@ -1,0 +1,6 @@
+language: ruby
+rvm:
+  - 2.0.0
+  - 1.9.3
+script: script/ci.sh
+before_install: gem install bundler
