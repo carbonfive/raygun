@@ -12,7 +12,7 @@ module Raygun
 
     desc "zap PATH", "Create an app with an earth-shattering kaboom"
     def zap(path)
-      self.destination_root = path.strip
+      self.destination_root = File.expand_path(path.strip)
       check_target
       print_plan
       copy_prototype
@@ -46,7 +46,7 @@ module Raygun
       end
 
       def print_plan
-        say("Creating #{camel_name} in #{destination_root} ...")
+        say "Creating #{camel_name} in #{destination_root} ..."
       end
 
       def copy_prototype
@@ -66,13 +66,13 @@ module Raygun
       end
 
       def initialize_git
-        system("git init", :chdir => destination_path, :out => "/dev/null")
-        system("git add -A", :chdir => destination_path, :out => "/dev/null")
-        system(%(git commit -m"#{GIT_MESSAGE}"), :chdir => destination_path, :out => "/dev/null")
+        git(:init)
+        git(:add, "-A")
+        git(:commit, "-m", "'#{GIT_MESSAGE}'")
       end
       
       def print_next_steps
-        say "Done! Next steps..."
+        say "Done! Next steps ..."
 
         say <<-NEXT_STEPS.gsub(/^\s+/, '')
           # Install updated dependencies
@@ -98,6 +98,14 @@ module Raygun
         NEXT_STEPS
 
         say "Enjoy your Carbon Five flavored Rails application!"
+      end
+
+      def git(command, *options)
+        system(
+          "git #{command.to_s} #{options.join(" ")}",
+          :chdir => destination_path,
+          :out => "/dev/null"
+        )
       end
 
       def replace_in_files(original, replacement, files)
