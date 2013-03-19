@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "A Generated Application" do
+describe "A Generated Application", integration: true do
   let(:temporary_path) { Dir.mktmpdir("raygun-integration") }
   let(:destination_path) { File.expand_path("organ-thief", temporary_path) }
   let(:raygun) { Raygun::Runner.new }
