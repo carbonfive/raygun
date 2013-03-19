@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "A Generated Application", integration: true do
+describe "A Raygun-Generated Rails Application", integration: true do
   let(:temporary_path) { Dir.mktmpdir("raygun-integration") }
   let(:destination_path) { File.expand_path("organ-thief", temporary_path) }
   let(:raygun) { Raygun::Runner.new }
@@ -8,37 +8,31 @@ describe "A Generated Application", integration: true do
   before { raygun.zap(destination_path) }
   around { |example| Bundler.with_clean_env(&example) }
 
-  it "bundles all of its gems" do
-    Kernel.system("bundle package --all", chdir: destination_path).should be
-    Kernel.system("bundle install --local --deployment", chdir: destination_path).should be
+  def step(message, &block)
+    RSpec.configuration.reporter.message("  #{message}")
+    yield
   end
 
-  context "after bundling" do
-    before do
-      Kernel.system("bundle package --all", chdir: destination_path)
-      Kernel.system("bundle install --local --deployment", chdir: destination_path)
+  it "is a normal rails application" do
+    step "bundler runs properly" do
+      Kernel.system("bundle package --all", chdir: destination_path).should be
+      Kernel.system("bundle install --local --deployment", chdir: destination_path).should be
     end
 
-    it "migrates all of its databases" do
+    step "database migrations run" do
       Kernel.system("bundle exec rake db:setup db:sample_data", chdir: destination_path).should be
     end
 
-    context "after migrating" do
-      before do
-        Kernel.system("bundle exec rake db:setup db:sample_data", chdir: destination_path)
-      end
+    step "all generated tests pass" do
+      Kernel.system("bundle exec rake", chdir: destination_path).should be
+    end
 
-      it "passes all of its tests" do
-        Kernel.system("bundle exec rake", chdir: destination_path).should be
-      end
-
-      it "starts a rails server" do
-        begin
-          pid = Process.spawn("bundle exec rails server", chdir: destination_path)
-          Godot.new("localhost", 3000, timeout: 30).wait.should be
-        ensure
-          Process.kill(9, pid)
-        end
+    step "the rails server starts" do
+      begin
+        pid = Process.spawn("bundle exec rails server", chdir: destination_path)
+        Godot.new("localhost", 3000, timeout: 30).wait.should be
+      ensure
+        Process.kill(9, pid)
       end
     end
   end
