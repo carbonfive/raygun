@@ -6,11 +6,11 @@ module Raygun
     include Thor::Actions
 
     GIT_MESSAGE = "raygun-zapped skeleton"
+    BANNER = "Raygun generates a new Rails application with best practices, patterns and recipes included."
 
     source_root File.expand_path("../../../app_prototype", __FILE__)
-    default_task :help
 
-    desc "PATH", "Create an app with an earth-shattering kaboom"
+    desc "zap PATH", "Create an app with an earth-shattering kaboom"
     def zap(path)
       self.destination_root = path.strip
       check_target
@@ -23,6 +23,16 @@ module Raygun
     end
 
     no_tasks do
+      def say(*arguments)
+        super
+        STDOUT.puts
+      end
+
+      def help(*arguments)
+        say BANNER unless arguments.any?
+        super
+      end
+
       def check_target
         FileUtils.mkdir_p(destination_path) unless destination_path.exist?
         

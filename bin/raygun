@@ -2,9 +2,4 @@
 $:<< File.expand_path("../../lib", __FILE__)
 
 require "raygun"
-
-if ARGV.empty?
-  Raygun::Runner.start
-else
-  Raygun::Runner.new.zap(*ARGV)
-end
+Raygun::Runner.start
