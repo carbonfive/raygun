@@ -5,9 +5,11 @@ mailcatcher_port = 1025
 begin
   sock = TCPSocket.new('localhost', mailcatcher_port)
   sock.close
-  catcher = true
+  mailcatcher = true
 rescue
-  catcher = false
+  mailcatcher = false
 end
 
-ActionMailer::Base.smtp_settings = (Rails.env.development? && catcher) ? { host: 'localhost', port: mailcatcher_port, } : {}
+if Rails.env.development? && mailcatcher
+  ActionMailer::Base.smtp_settings = { host: 'localhost', port: mailcatcher_port }
+end

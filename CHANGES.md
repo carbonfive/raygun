@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.28 []
+
+* Tweak mailcacher configuration so that it only sets smtp_settings when mailchacher is running.
+
 ## 0.0.27 [2013-02-27]
 
 * Make sure the target directory is empty, otherwise misfire.
