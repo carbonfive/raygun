@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.28 []
+## 0.0.28 [2013-03-26]
 
 * Use unicorn by default instead of thin, as per heroku's recommendation.
 * Suppress schema dumping unless run in development mode to eliminate pg_dump errors on heroku during db:migrate.
