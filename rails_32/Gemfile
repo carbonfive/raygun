@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Heroku uses the ruby version to configure your application's runtime.
 ruby '1.9.3'
 
-gem 'thin'
-gem 'rails', '~> 3.2.13.rc1'
+gem 'unicorn'
+gem 'rails', '~> 3.2.13'
 gem 'slim-rails'
 gem 'jquery-rails'
 gem 'sorcery'
