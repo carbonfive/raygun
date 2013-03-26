@@ -6,5 +6,10 @@ require File.expand_path('../config/application', __FILE__)
 
 AppPrototype::Application.load_tasks
 
+# Disable schema.sql generation, unless we're in development.
+# http://stackoverflow.com/questions/12413306/error-when-doing-rake-dbmigrate-on-heroku
+Rake::Task['db:structure:dump'].clear unless Rails.env.development?
+
+# Spec is the default rake target.
 task(:default).clear
 task default: 'spec'

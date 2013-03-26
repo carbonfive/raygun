@@ -2,6 +2,7 @@
 
 ## 0.0.28 []
 
+* Suppress schema dumping unless run in development mode to eliminate pg_dump errors on heroku during db:migrate.
 * Tweak mailcacher configuration so that it only sets smtp_settings when mailchacher is running.
 
 ## 0.0.27 [2013-02-27]
