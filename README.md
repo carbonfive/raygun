@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/raygun.png)](http://badge.fury.io/rb/raygun)
 <img src="https://raw.github.com/carbonfive/raygun/master/marvin.jpg" align="right"/>
 
 # Raygun
