@@ -58,7 +58,7 @@ module Raygun
       current_ruby_patch_level    = "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
 
       Dir.chdir(app_dir) do
-        shell "#{sed_i} 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .rvmrc .ruby-version README.md"
+        shell "#{sed_i} 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .ruby-version README.md"
         shell "#{sed_i} 's/#{prototype_ruby_version}/#{current_ruby_version}/g' Gemfile"
       end
     end
