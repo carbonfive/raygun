@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-AppPrototype::Application.config.secret_key_base = '8ab3bdb3c6090fb20d2dfd37da423ce4969be207b8ee891c59e553cd42e7a913b17a04e107eaee8623a1253e2d734105fd641178f6fa7f238b787f660773ddd9'
+AppPrototype::Application.config.secret_key_base = ENV['SECRET_TOKEN'] || 'AWAbYFxfy5SxropZl5yIiNiE2bv3lJ7nLcreGI9p'
