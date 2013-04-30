@@ -45,6 +45,14 @@ Guard is configured to run ruby and jasmine specs, and also listen for livereloa
 
     $ bundle exec guard
 
+### Using Mailcatcher
+
+    $ gem install mailcatcher
+    $ mailcacher
+    $ open http://localhost:1080/
+
+Learn more at [mailcatcher.me](http://mailcatcher.me/). And please don't add mailcatcher to the Gemfile.
+
 ### Deploying to Heroku
 
 Install the heroku toolbelt if you don't already have it (https://toolbelt.heroku.com/).

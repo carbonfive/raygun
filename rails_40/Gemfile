@@ -38,7 +38,6 @@ end
 group :development do
   gem 'foreman'
   #gem 'launchy'
-  #gem 'mailcatcher'
   gem 'guard'
   gem 'guard-rspec'
   #gem 'guard-jasmine'
