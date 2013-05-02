@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.30 [2013-05-02]
+
+* Added accept_value and reject_value matchers.
+
 ## 0.0.29 [2013-]
 
 * Migrate from ```.rvmrc``` to ```.ruby-version``` and ```.ruby-gemset``` (#93).
