@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 gem 'unicorn'
-gem 'rails', '~> 4.0.0.rc1'
+gem 'rails', '~> 4.0.0.rc2'
 gem 'slim-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
