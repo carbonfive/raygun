@@ -6,7 +6,7 @@ require 'securerandom'
 
 module Raygun
   class Runner
-    attr_accessor :app_name, :app_dir, :title_name, :snake_name, :camel_name, :dash_name
+    attr_accessor :app_name, :app_dir, :title_name, :snake_name, :camel_name, :dash_name, :prototype
 
     def initialize(app_name_arg)
       @app_dir = File.expand_path(app_name_arg.strip.to_s)
@@ -15,6 +15,7 @@ module Raygun
       @snake_name = app_name.gsub('-', '_')
       @camel_name = camelize(snake_name)
       @title_name = titleize(snake_name)
+      @prototype = "rails_40"
     end
 
     def check_target
@@ -27,7 +28,7 @@ module Raygun
     def copy_prototype
       FileUtils.mkdir_p(app_dir)
 
-      Dir.glob(File.expand_path("../../rails_32/*", __FILE__), File::FNM_DOTMATCH) do |f|
+      Dir.glob(File.expand_path("../../#{@prototype}/*", __FILE__), File::FNM_DOTMATCH) do |f|
         next if %w{. ..}.include?(File.basename(f))
         FileUtils.cp_r(f, app_dir)
       end

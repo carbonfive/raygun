@@ -14,7 +14,7 @@ gem 'less-rails-bootstrap'
 gem 'jquery-rails'
 gem 'coffee-rails'
 gem 'turbolinks'
-gem 'simple_form'
+gem 'simple_form', '~> 3.0.0.rc'
 gem 'uglifier'
 
 gem 'awesome_print'
