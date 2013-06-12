@@ -26,7 +26,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   #gem 'capybara-email'
-  #gem 'factory_girl_rails'
+  gem 'factory_girl_rails'
   #gem 'jasminerice'
   #gem 'timecop'
   #gem 'simplecov'
