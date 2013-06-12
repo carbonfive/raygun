@@ -30,7 +30,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   #gem 'jasminerice'
   #gem 'timecop'
-  #gem 'simplecov'
+  gem 'simplecov'
   #gem 'cane'
   #gem 'morecane'
   #gem 'quiet_assets'
