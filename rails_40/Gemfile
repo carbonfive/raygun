@@ -4,23 +4,24 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 gem 'unicorn'
+
 gem 'rails', '~> 4.0.0.rc2'
-gem 'slim-rails'
-gem 'jquery-rails'
-gem 'turbolinks'
 gem 'pg'
+
+gem 'slim-rails'
+gem 'less-rails'
+gem 'less-rails-bootstrap'
+gem 'jquery-rails'
+gem 'coffee-rails'
+gem 'turbolinks'
+gem 'simple_form'
+gem 'uglifier'
+
 gem 'awesome_print'
 
-group :assets do
-  gem 'less-rails'
-  gem 'less-rails-bootstrap'
-  gem 'coffee-rails'
-  gem 'uglifier'
-
-  # Heroku suggests that these gems aren't necessary, but they're required to compile less assets on deploy.
-  #gem 'therubyracer', platforms: :ruby
-  #gem 'libv8'#, '~> 3.11.8'
-end
+# Heroku suggests that these gems aren't necessary, but they're required to compile less assets on deploy.
+gem 'therubyracer', platforms: :ruby
+#gem 'libv8'#, '~> 3.11.8'
 
 group :test, :development do
   gem 'rspec-rails'
