@@ -3,6 +3,7 @@
 ## 0.0.29 [2013-]
 
 * Migrate from ```.rvmrc``` to ```.ruby-version``` and ```.ruby-gemset``` (#93).
+* Use database_cleaner instead of the shared connection (#101).
 
 ## 0.0.28 [2013-03-26]
 
