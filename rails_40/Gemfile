@@ -29,6 +29,7 @@ group :test, :development do
   #gem 'capybara-email'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'fuubar'
   #gem 'jasminerice'
   #gem 'timecop'
   gem 'simplecov'
