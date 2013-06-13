@@ -27,6 +27,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   #gem 'capybara-email'
+  gem 'poltergeist'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'fuubar'
