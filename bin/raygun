@@ -1,21 +1,22 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
+require 'ostruct'
 require 'fileutils'
 require 'securerandom'
 
 module Raygun
   class Runner
-    attr_accessor :app_name, :app_dir, :title_name, :snake_name, :camel_name, :dash_name, :prototype
+    attr_accessor :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype
 
-    def initialize(app_name_arg)
+    def initialize(app_name_arg, prototype_arg)
       @app_dir = File.expand_path(app_name_arg.strip.to_s)
       @app_name = File.basename(app_dir).gsub(/\s+/, '-')
       @dash_name = app_name.gsub('_', '-')
       @snake_name = app_name.gsub('-', '_')
       @camel_name = camelize(snake_name)
       @title_name = titleize(snake_name)
-      @prototype = "rails_40"
+      @prototype = prototype_arg
     end
 
     def check_target
@@ -125,37 +126,43 @@ module Raygun
       raise "#{command} failed with status #{$?.exitstatus}." unless $?.success?
     end
 
-    class << self
-      def parse(args)
-        raygun = nil
+    def self.parse(args)
+      raygun = nil
+      options = OpenStruct.new
+      options.target_dir = nil
+      options.prototype  = 'rails_32'
 
-        parser = OptionParser.new do |opts|
-          opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"
+      parser = OptionParser.new do |opts|
+        opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"
 
-          opts.on("-h", "--help", "Show raygun usage") do |variable|
-            usage_and_exit(opts)
-          end
-
-          if ARGV.size == 0
-            usage_and_exit(opts)
-          else
-            raygun = Raygun::Runner.new(ARGV.first)
-          end
+        opts.on('-h', '--help', "Show raygun usage") do |variable|
+          usage_and_exit(opts)
         end
 
-        begin
-          parser.parse!
-        rescue OptionParser::InvalidOption
-          usage_and_exit(parser)
+        opts.on('-r', '--rails (32|40)', "Rails version, 32 for 3.2.x or 40 for 4.0.x") do |ext|
+          options.prototype = "rails_#{ext}"
         end
-
-        raygun
       end
 
-      def usage_and_exit(parser)
-        puts parser
-        exit 1
+      begin
+        parser.parse!
+        #puts ARGV.first
+        options.target_dir = ARGV.first
+        puts "options: #{options}"
+
+        raise OptionParser::InvalidOption if options.target_dir.nil?
+
+        raygun = Raygun::Runner.new(options.target_dir, options.prototype)
+      rescue OptionParser::InvalidOption
+        usage_and_exit(parser)
       end
+
+      raygun
+    end
+
+    def self.usage_and_exit(parser)
+      puts parser
+      exit 1
     end
   end
 end
