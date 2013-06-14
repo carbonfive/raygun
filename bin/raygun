@@ -155,7 +155,7 @@ module Raygun
         end
 
         opts.on('-r', '--rails (32|40)', "Rails version, 32 for 3.2.x or 40 for 4.0.x") do |ext|
-          ext = '40' if ext = '4'
+          ext = '40' if ext == '4'
           options.prototype = "rails_#{ext}"
         end
       end
