@@ -1,0 +1,36 @@
+doctype 5
+html
+  head
+    title App Prototype
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tag
+
+  body id=(controller.controller_name) class=(controller.action_name)
+    .wrapper
+      .container
+        header.navbar.navbar-fixed-top
+          nav.navbar-inner
+            .container
+              .brand App Prototype
+              /ul.nav.pull-right
+              /  - if current_user
+              /    li.dropdown
+              /      a.dropdown-toggle href='#' data-toggle='dropdown'
+              /        = current_user.email
+              /        b.caret
+              /      ul.dropdown-menu
+              /        li= link_to 'Sign Out', sign_out_path
+              /  - else
+              /    li= link_to 'Sign In', sign_in_path
+
+        - flash.each do |name, msg|
+          = content_tag :div, raw(msg), class: "alert #{alert_class(name)}"
+
+        = yield
+
+      .push
+
+    footer
+      .container
+        p &copy; 2013 All rights reserved.

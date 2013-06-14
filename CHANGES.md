@@ -1,9 +1,10 @@
 # Change Log
 
-## 0.0.29 [2013-]
+## 0.0.29 [2013-06-]
 
 * Migrate from ```.rvmrc``` to ```.ruby-version``` and ```.ruby-gemset``` (#93).
 * Use database_cleaner instead of the shared connection (#101).
+* Support generating rails 4.0 apps (beta!) using the ```-r 40``` command line flag.
 
 ## 0.0.28 [2013-03-26]
 
