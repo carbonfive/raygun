@@ -4,19 +4,21 @@ require 'optparse'
 require 'ostruct'
 require 'fileutils'
 require 'securerandom'
+require 'colorize'
 
 module Raygun
   class Runner
-    attr_accessor :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype
+    attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype
 
-    def initialize(app_name_arg, prototype_arg)
-      @app_dir = File.expand_path(app_name_arg.strip.to_s)
-      @app_name = File.basename(app_dir).gsub(/\s+/, '-')
-      @dash_name = app_name.gsub('_', '-')
+    def initialize(target_dir, prototype)
+      @target_dir = target_dir
+      @app_dir    = File.expand_path(target_dir.strip.to_s)
+      @app_name   = File.basename(app_dir).gsub(/\s+/, '-')
+      @dash_name  = app_name.gsub('_', '-')
       @snake_name = app_name.gsub('-', '_')
       @camel_name = camelize(snake_name)
       @title_name = titleize(snake_name)
-      @prototype = prototype_arg
+      @prototype  = prototype
     end
 
     def check_target
@@ -74,30 +76,43 @@ module Raygun
     end
 
     def print_plan
+
+      project_template = prototype == 'rails_32' ? '3.2' : '4'
+
+      puts '     ____ '.colorize(:light_yellow)
+      puts '    / __ \____ ___  ______ ___  ______ '.colorize(:light_yellow)
+      puts '   / /_/ / __ `/ / / / __ `/ / / / __ \ '.colorize(:light_yellow)
+      puts '  / _, _/ /_/ / /_/ / /_/ / /_/ / / / / '.colorize(:light_yellow)
+      puts ' /_/ |_|\__,_/\__, /\__, /\__,_/_/ /_/ '.colorize(:light_yellow)
+      puts '             /____//____/ '.colorize(:light_yellow)
       puts
-      puts "Creating new app #{camel_name} in directory #{app_dir}..."
+      puts "Creating new app in directory".colorize(:yellow) + " #{target_dir}".colorize(:yellow) + "...".colorize(:yellow)
+      puts
+      puts "-".colorize(:blue) + " Application Name:".colorize(:light_blue) + " #{title_name}".colorize(:light_reen)
+      puts "-".colorize(:blue) + " Project Template:".colorize(:light_blue) + " Rails #{project_template}".colorize(:light_reen)
+      puts "-".colorize(:blue) + " Ruby Version:    ".colorize(:light_blue) + " #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}".colorize(:light_reen)
       puts
     end
 
     def print_next_steps
-      puts "Done! Next steps..."
+      puts "Done! Next steps...".colorize(:yellow)
       puts ""
-      puts "# Install updated dependencies"
-      puts "$ cd #{app_dir}"
-      puts "$ gem install bundler"
-      puts "$ bundle update"
+      puts "# Install updated dependencies".colorize(:light_green)
+      puts "$".colorize(:blue) + " cd #{target_dir}".colorize(:light_blue)
+      puts "$".colorize(:blue) + " gem install bundler".colorize(:light_blue)
+      puts "$".colorize(:blue) + " bundle update".colorize(:light_blue)
       puts ""
-      puts "# Prepare the database: schema and reference / sample data"
-      puts "$ rake db:setup db:sample_data"
+      puts "# Prepare the database: schema and reference / sample data".colorize(:light_green)
+      puts "$".colorize(:blue) + " rake db:setup db:sample_data".colorize(:light_blue)
       puts ""
-      puts "# Run the specs (they should all pass)"
-      puts "$ rake"
+      puts "# Run the specs (they should all pass)".colorize(:light_green)
+      puts "$".colorize(:blue) + " rake".colorize(:light_blue)
       puts ""
-      puts "# Run the app and check things out"
-      puts "$ foreman start"
-      puts "$ open http://0.0.0.0:3000"
+      puts "# Run the app and check things out".colorize(:light_green)
+      puts "$".colorize(:blue) + " foreman start".colorize(:light_blue)
+      puts "$".colorize(:blue) + " open http://0.0.0.0:3000".colorize(:light_blue)
       puts ""
-      puts "Enjoy your Carbon Five flavored Rails application!"
+      puts "Enjoy your Carbon Five flavored Rails application!".colorize(:yellow)
     end
 
     protected
@@ -140,6 +155,7 @@ module Raygun
         end
 
         opts.on('-r', '--rails (32|40)', "Rails version, 32 for 3.2.x or 40 for 4.0.x") do |ext|
+          ext = '40' if ext = '4'
           options.prototype = "rails_#{ext}"
         end
       end
@@ -151,7 +167,7 @@ module Raygun
         raise OptionParser::InvalidOption if options.target_dir.nil?
 
         raygun = Raygun::Runner.new(options.target_dir, options.prototype)
-          
+
       rescue OptionParser::InvalidOption
         usage_and_exit(parser)
       end
