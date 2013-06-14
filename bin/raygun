@@ -146,13 +146,12 @@ module Raygun
 
       begin
         parser.parse!
-        #puts ARGV.first
         options.target_dir = ARGV.first
-        puts "options: #{options}"
 
         raise OptionParser::InvalidOption if options.target_dir.nil?
 
         raygun = Raygun::Runner.new(options.target_dir, options.prototype)
+          
       rescue OptionParser::InvalidOption
         usage_and_exit(parser)
       end
