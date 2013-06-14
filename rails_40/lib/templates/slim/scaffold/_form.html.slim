@@ -1,0 +1,13 @@
+= simple_form_for(@<%= singular_table_name %>) do |f|
+  = f.error_notification
+
+  .form-inputs
+<%- attributes.each_with_index do |attribute, i| -%>
+    = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %><%= ', autofocus: true' if i == 0 %>
+<%- end -%>
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'
+    '
+    = link_to 'Back', <%= index_helper %>_path, class: 'btn'
+

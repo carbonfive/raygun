@@ -11,3 +11,8 @@ rm -rfv rails_32/.DS_Store
 rm -rfv rails_32/log/*
 rm -rfv rails_32/tmp/*
 rm -rfv rails_32/coverage
+
+rm -rfv rails_40/.DS_Store
+rm -rfv rails_40/log/*
+rm -rfv rails_40/tmp/*
+rm -rfv rails_40/coverage

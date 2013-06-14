@@ -1,0 +1,30 @@
+@footerHeight: 30px;
+
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -(@footerHeight + 1);
+}
+
+.push {
+  height: @footerHeight + 20px; // The extra prevents content from bumping right into our footer.
+}
+
+footer {
+  height: @footerHeight;
+  line-height: @footerHeight;
+
+  .container {
+    border-top: 1px solid @grayLighter;
+  }
+
+  p {
+    margin: 0;
+    color: @grayLight;
+  }
+}
