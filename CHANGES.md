@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.30 [2013-06-14]
+
+* Bug fix.
+
 ## 0.0.29 [2013-06-14]
 
 * Migrate from ```.rvmrc``` to ```.ruby-version``` and ```.ruby-gemset``` (#93).
