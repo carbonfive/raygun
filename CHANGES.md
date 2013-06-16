@@ -4,6 +4,7 @@
 
 * For Heroku, default to serving static assets and the logger is synchronous by default (we don't have to set it) (#103).
 * Less duplication in acceptance.rb, since it's basicially the same as production.rb.
+* Fixed a regression where new apps might be configured with a non-existent ruby (#104).
 
 ## 0.0.30 [2013-06-14]
 
