@@ -9,13 +9,13 @@ best practices baked right in. Spend less time configuring and more building coo
 
 Major tools/libraries:
 
-* Rails
+* Rails (3.2.x or 4.0.x)
 * PostgreSQL
 * Slim
 * Less
 * Bootstrap
-* Sorcery
-* Cancan
+* Sorcery (rails 3.2 projects only)
+* Cancan (rails 3.2 projects only)
 * RSpec
 * Factory Girl
 * Jasmine
@@ -58,6 +58,9 @@ another ruby, just change the ```Gemfile``` and ```.ruby-version``` as necessary
 
     $ raygun your-project
 
+Try ```raygun -r 40 your-project``` to generate a Rails 4 project (pssst! does not include authentication
+or authorization yet).
+
 Once your project is baked out, you can easily kick the wheels. Be sure that you have the prerequities
 covered (see above).
 
@@ -77,11 +80,11 @@ covered (see above).
 
 ## Internal Mechanics
 
-Raygun simply copies the [rails_32](rails_32) tree and then runs a small set of commands to customize
-the copied project. So, what you get looks a lot like [rails_32](rails_32). Check out
-[raygun](bin/raygun) to see how it's massaged after being copied.
+Raygun simply copies the [rails_40](rails_40) (or [rails_32](rails_32)) tree and then runs a small set of
+commands to customize the copied project. So, what you get looks a lot like [rails_40](rails_40)
+([rails_32](rails_32)). Check out [raygun](bin/raygun) to see how it's massaged after being copied.
 
-This approach is fast, simple, and makes raygun developement very easy. Make changes to [rails_32](rails_32),
+This approach is fast, simple, and makes raygun developement very easy. Make changes to [rails_40](rails_40),
 run its specs and fire up the server to see what happens.
 
 ## Contributing
