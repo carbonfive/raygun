@@ -56,7 +56,7 @@ module Raygun
     end
 
     def update_ruby_version
-      prototype_ruby_patch_level  = File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
+      prototype_ruby_patch_level  = File.read(File.expand_path("../../#{prototype}/.ruby-version", __FILE__)).strip
       prototype_ruby_version      = prototype_ruby_patch_level.match(/(\d\.\d\.\d).*/)[1]
       current_ruby_version        = RUBY_VERSION
       current_ruby_patch_level    = "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
@@ -77,7 +77,7 @@ module Raygun
 
     def print_plan
 
-      project_template = prototype == 'rails_32' ? '3.2' : '4'
+      project_template = (prototype == 'rails_32') ? '3.2' : '4'
 
       puts '     ____ '.colorize(:light_yellow)
       puts '    / __ \____ ___  ______ ___  ______ '.colorize(:light_yellow)
