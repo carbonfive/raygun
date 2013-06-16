@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.31 [2013-06-??]
+
+* For Heroku, default to serving static assets and the logger is synchronous by default (we don't have to set it) (#103).
+* Less duplication in acceptance.rb, since it's basicially the same as production.rb.
+
 ## 0.0.30 [2013-06-14]
 
 * Bug fix.

@@ -2,9 +2,6 @@
 
 require ::File.expand_path('../config/environment', __FILE__)
 
-# Disable buffering for real time logging, see: https://devcenter.heroku.com/articles/logging#writing-to-your-log
-$stdout.sync = true
-
 # Optional Basic Auth - Enabled if BASIC_AUTH_PASSWORD is set. User is optional (any value will be accepted).
 BASIC_AUTH_USER     = ENV['BASIC_AUTH_USER']
 BASIC_AUTH_PASSWORD = ENV['BASIC_AUTH_PASSWORD']
