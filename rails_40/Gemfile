@@ -47,7 +47,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   #gem 'guard-jasmine'
-  #gem 'guard-livereload'
+  gem 'guard-livereload'
   gem 'rb-fsevent'
   gem 'growl'
 end

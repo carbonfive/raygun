@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.32 [2013-06-??]
+
+* Rails 4: enable guard-livereload with a tweak to support .less files.
+
 ## 0.0.31 [2013-06-16]
 
 * For Heroku, default to serving static assets and the logger is synchronous by default (we don't have to set it) (#103).
