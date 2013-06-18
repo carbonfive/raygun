@@ -31,7 +31,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'fuubar'
-  #gem 'jasminerice'
+  gem 'jasminerice', github: 'bradphelan/jasminerice' # Latest release still depends on haml.
   #gem 'timecop'
   gem 'simplecov'
   #gem 'cane'
@@ -41,12 +41,12 @@ end
 
 group :development do
   gem 'foreman'
-  #gem 'launchy'
+  gem 'launchy'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'guard'
   gem 'guard-rspec'
-  #gem 'guard-jasmine'
+  gem 'guard-jasmine'
   gem 'guard-livereload'
   gem 'rb-fsevent'
   gem 'growl'

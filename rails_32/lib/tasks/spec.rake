@@ -25,7 +25,6 @@ begin
     Rake::Task['spec:javascripts'].invoke
   end
 
-
 rescue LoadError
   namespace :spec do
     task :javascripts do
