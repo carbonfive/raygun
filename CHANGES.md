@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.32 [2013-06-??]
+## 0.0.32 [2013-06-18]
 
 * Rails 4: enable guard-livereload with a tweak to support .less files.
 * Rails 4: enable guard-jasmine (with a sample spec).
