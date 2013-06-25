@@ -61,6 +61,17 @@ Install the heroku toolbelt if you don't already have it (https://toolbelt.herok
     $ git push heroku master
     $ heroku run rake db:setup
 
+### Environment Variables
+
+Several common features and operational parameters can be set using environment variables. These are all optional.
+
+* ```HOSTNAME``` - Canonical hostname for this application. Other incoming requests will be redirected to this hostname.
+* ```BASIC_AUTH_PASSWORD``` - Enable basic auth with this password.
+* ```BASIC_AUTH_USER``` - Set a basic auth username (not required, password enables basic auth).
+* ```PORT``` - Port to listen on (default: 3000).
+* ```UNICORN_WORKERS``` - Number of unicorn workers to spawn (default: development 1, otherwisee 3) .
+* ```UNICORN_BACKLOG``` - Depth of unicorn backlog (default: 16).
+
 # Considerations
 
 ...
