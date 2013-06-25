@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'unicorn'
+gem 'rack-canonical-host'
 gem 'rails', '~> 3.2.13'
 gem 'slim-rails'
 gem 'jquery-rails'

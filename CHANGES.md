@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.33 [2013-06-??]
+
+* Incluide a recipe for rack-canonical-host (#105). Set ENV['HOSTNAME'] to enable.
+
 ## 0.0.32 [2013-06-18]
 
 * Rails 4: enable guard-livereload with a tweak to support .less files.
