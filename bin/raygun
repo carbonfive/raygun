@@ -145,7 +145,7 @@ module Raygun
       raygun = nil
       options = OpenStruct.new
       options.target_dir = nil
-      options.prototype  = 'rails_32'
+      options.prototype  = 'rails_40'
 
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"
