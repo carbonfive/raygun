@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.33 [2013-06-??]
+## 0.0.33 [2013-07-??]
 
 * Raygun defaults to generating Rails 4 apps now (use -r 32 for Rails 3.2).
 * Incluide a recipe for rack-canonical-host (#105). Set ENV['HOSTNAME'] to enable.

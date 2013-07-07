@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Heroku uses the ruby version to configure your application's runtime.
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'unicorn'
 gem 'rack-canonical-host'
