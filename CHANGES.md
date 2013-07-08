@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.34 [2013-]
+
+* RSpec's rake task patterns use globs, and don't work with regular expressions as one might expect (#107, thanks @wless1!).
+
 ## 0.0.33 [2013-07-08]
 
 * Raygun defaults to generating Rails 4 apps now (use -r 32 for Rails 3.2).
