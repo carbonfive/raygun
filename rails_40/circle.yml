@@ -1,0 +1,16 @@
+test:
+  override:
+    - rake spec:without_features spec:features
+  post:
+    - bundle exec guard-jasmine
+
+deployment:
+  acceptance:
+    branch: master
+    commands:
+      - ./bin/deploy.sh app-prototype-acceptance
+
+  production:
+    branch: production 
+    commands:
+      - ./bin/deploy.sh app-prototype
