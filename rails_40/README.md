@@ -48,7 +48,7 @@ Guard is configured to run ruby and jasmine specs, and also listen for livereloa
 ### Using Mailcatcher
 
     $ gem install mailcatcher
-    $ mailcacher
+    $ mailcatcher
     $ open http://localhost:1080/
 
 Learn more at [mailcatcher.me](http://mailcatcher.me/). And please don't add mailcatcher to the Gemfile.
