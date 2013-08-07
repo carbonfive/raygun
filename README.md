@@ -7,9 +7,11 @@
 Rails application generator that builds a new project skeleton configured with Carbon Five preferences and
 best practices baked right in. Spend less time configuring and more building cool features.
 
+Raygun generates Rails 4 projects by default. Use ```-r 32``` to generate a Rails 3.2 project.
+
 Major tools/libraries:
 
-* Rails (3.2.x or 4.0.x)
+* Rails (4.0 or 3.2)
 * PostgreSQL
 * Slim
 * Less
@@ -58,8 +60,7 @@ another ruby, just change the ```Gemfile``` and ```.ruby-version``` as necessary
 
     $ raygun your-project
 
-Try ```raygun -r 40 your-project``` to generate a Rails 4 project (pssst! does not include authentication
-or authorization yet).
+Try ```raygun -r 32 your-project``` to generate a Rails 3.2 project.
 
 Once your project is baked out, you can easily kick the wheels. Be sure that you have the prerequities
 covered (see above).
