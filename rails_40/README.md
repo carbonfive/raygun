@@ -22,7 +22,8 @@ After cloning, run these commands to install missing gems and prepare the databa
     $ bundle update
     $ rake db:setup db:sample_data
 
-Note, ```rake db:sample_data``` loads a small set of data for development. Check out ```db/sample_data.rb``` for details.
+Note, ```rake db:sample_data``` loads a small set of data for development. Check out [db/sample_data.rb](db/sample_data.rb)
+for details.
 
 ### Running the Specs
 
@@ -53,9 +54,21 @@ Guard is configured to run ruby and jasmine specs, and also listen for livereloa
 
 Learn more at [mailcatcher.me](http://mailcatcher.me/). And please don't add mailcatcher to the Gemfile.
 
-### Deploying to Heroku
+### Continuous Integration and Deployment with CircleCI
 
-Install the heroku toolbelt if you don't already have it (https://toolbelt.heroku.com/).
+This project is configured for continuous integration and deployment with CircleCI and Heroku. Follow
+these steps for first time configuration:
+
+1. Push the project to Github, if you haven't already.
+1. Authenticate at circleci.com and follow this project.
+1. Be sure to enable Heroku deploys from the project settings on CircleCI.
+1. The project should automatically be deployed on every successful build.
+
+Check out [circle.yml](circle.yml) and [bin/deploy.sh](bin/deploy.sh) for details.
+
+### Manual Deploy to Heroku
+
+Install the Heroku toolbelt if you don't already have it (https://toolbelt.heroku.com/).
 
     $ heroku apps:create app-prototype
     $ git push heroku master
