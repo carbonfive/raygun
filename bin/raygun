@@ -10,6 +10,8 @@ raygun = Raygun::Runner.parse(ARGV)
 
 raygun.check_target
 raygun.print_plan
+raygun.fetch_prototype
+raygun.check_raygun_version
 raygun.copy_prototype
 raygun.rename_new_app
 raygun.configure_new_app
