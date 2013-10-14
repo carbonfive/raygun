@@ -1,4 +1,4 @@
-@footerHeight: 30px;
+@footer-height: 30px;
 
 html, body {
   height: 100%;
@@ -8,23 +8,23 @@ html, body {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -(@footerHeight + 1);
+  margin: 0 auto -(@footer-height + 1);
 }
 
 .push {
-  height: @footerHeight + 20px; // The extra prevents content from bumping right into our footer.
+  height: @footer-height + 20px; // The extra prevents content from bumping right into our footer.
 }
 
 footer {
-  height: @footerHeight;
-  line-height: @footerHeight;
+  height: @footer-height;
+  line-height: @footer-height;
 
   .container {
-    border-top: 1px solid @grayLighter;
+    border-top: 1px solid @gray-lighter;
   }
 
   p {
     margin: 0;
-    color: @grayLight;
+    color: @gray-light;
   }
 }

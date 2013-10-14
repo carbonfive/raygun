@@ -5,32 +5,35 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tag
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 
   body id=(controller.controller_name) class=(controller.action_name)
     .wrapper
-      .container
-        header.navbar.navbar-fixed-top
-          nav.navbar-inner
-            .container
-              .brand App Prototype
-              /ul.nav.pull-right
-              /  - if current_user
-              /    li.dropdown
-              /      a.dropdown-toggle href='#' data-toggle='dropdown'
-              /        = current_user.email
-              /        b.caret
-              /      ul.dropdown-menu
-              /        li= link_to 'Sign Out', sign_out_path
-              /  - else
-              /    li= link_to 'Sign In', sign_in_path
+      nav.navbar.navbar-default.navbar-fixed-top role='navigation'
+        .navbar-header
+          button.button.navbar-toggle data-toggle='collapse' data-target='.navbar-collapse'
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand href='/' App Prototype
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.pull-right
+            / - if current_user
+            /  li.dropdown
+            /    a.dropdown-toggle href='#' data-toggle='dropdown'
+            /      = current_user.email
+            /      b.caret
+            /    ul.dropdown-menu
+            /      li= link_to 'Sign Out', sign_out_path
+            / - else
+            /  li= link_to 'Sign In', sign_in_path
 
+      .container
         - flash.each do |name, msg|
           = content_tag :div, raw(msg), class: "alert #{alert_class(name)}"
-
         = yield
+        .push
 
-      .push
-
-    footer
-      .container
-        p &copy; 2013 All rights reserved.
+      footer
+        .container
+          p &copy; 2013 All rights reserved.
