@@ -10,7 +10,7 @@ gem 'pg'
 
 gem 'slim-rails'
 gem 'less-rails'
-gem 'less-rails-bootstrap'
+gem 'less-rails-bootstrap', '~> 3.0.3'
 gem 'jquery-rails'
 gem 'coffee-rails'
 gem 'turbolinks'
