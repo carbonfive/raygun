@@ -1,8 +1,9 @@
 # Change Log
 
-## 0.0.34 [2013-]
+## 0.0.34 [2013-10-15]
 
-* Upgrade to bootstrapo 3.0 (#114, thanks @drtoast!).
+* Nudge bundler to use guard v2.x (defaults to 1.x otherwise).
+* Upgrade to bootstrap 3.0 (#114, thanks @drtoast!).
 * RSpec's rake task patterns use globs, and don't work with regular expressions as one might expect (#107, thanks @wless1!).
 * Include a deployment script for heroku and configuration for circleci for easy continuous deployment (#109, thanks @jonah-carbonfive!).
 
