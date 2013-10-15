@@ -4,7 +4,7 @@ require 'optparse'
 require 'ostruct'
 require 'fileutils'
 require 'securerandom'
-require 'colorize'
+require './lib/colorize'
 
 module Raygun
   class Runner
