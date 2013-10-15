@@ -1,10 +1,14 @@
 #!/usr/bin/env ruby
 
+File.expand_path('../../lib', __FILE__).tap do |lib|
+  $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+end
+
 require 'optparse'
 require 'ostruct'
 require 'fileutils'
 require 'securerandom'
-require './lib/colorize'
+require 'colorize'
 
 module Raygun
   class Runner
