@@ -7,7 +7,8 @@
 <%- end -%>
 
   .form-actions
-    = f.button :submit, class: 'btn btn-primary'
+    = button_tag(type: 'submit', class: 'btn btn-primary') do
+      =text_with_icon("#{btn_action_prefix} <%= singular_table_name.humanize %>", action_icon_name)
     '
-    = link_to 'Back', <%= index_helper %>_path, class: 'btn'
+    = link_to text_with_icon('Back', 'chevron-left'), <%= index_helper %>_path, class: 'btn btn-default'
 
