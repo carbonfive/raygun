@@ -81,7 +81,7 @@ module Raygun
 
     def print_plan
 
-      project_template = (prototype == 'rails_32') ? '3.2' : '4'
+      project_template = '4'
 
       puts '     ____ '.colorize(:light_yellow)
       puts '    / __ \____ ___  ______ ___  ______ '.colorize(:light_yellow)
@@ -156,11 +156,6 @@ module Raygun
 
         opts.on('-h', '--help', "Show raygun usage") do |variable|
           usage_and_exit(opts)
-        end
-
-        opts.on('-r', '--rails (32|40)', "Rails version, 32 for 3.2.x or 40 for 4.0.x") do |ext|
-          ext = '40' if ext == '4'
-          options.prototype = "rails_#{ext}"
         end
       end
 

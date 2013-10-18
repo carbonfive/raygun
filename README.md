@@ -7,17 +7,15 @@
 Rails application generator that builds a new project skeleton configured with Carbon Five preferences and
 best practices baked right in. Spend less time configuring and more building cool features.
 
-Raygun generates Rails 4 projects by default. Use ```-r 32``` to generate a Rails 3.2 project.
+Raygun generates Rails 4 projects.
 
 Major tools/libraries:
 
-* Rails (4.0 or 3.2)
+* Rails 4.0
 * PostgreSQL
 * Slim
 * Less
 * Bootstrap
-* Sorcery (rails 3.2 projects only)
-* Cancan (rails 3.2 projects only)
 * RSpec
 * Factory Girl
 * Jasmine
@@ -29,7 +27,7 @@ Raygun includes generator templates for controllers, views, and specs so that ge
 practices. For example, view generation produces bootstrap compatible markup and rspec specs use factory
 girl when appropriate.
 
-Inspired by Xavier Shay and ThoughtBot's Suspenders. Thanks!
+Inspired by Xavier Shay work at Square and ThoughtBot's Suspenders. Thanks!
 
 ## Projects Goals
 
@@ -60,8 +58,6 @@ another ruby, just change the ```Gemfile``` and ```.ruby-version``` as necessary
 
     $ raygun your-project
 
-Try ```raygun -r 32 your-project``` to generate a Rails 3.2 project.
-
 Once your project is baked out, you can easily kick the wheels. Be sure that you have the prerequities
 covered (see above).
 
@@ -81,9 +77,9 @@ covered (see above).
 
 ## Internal Mechanics
 
-Raygun simply copies the [rails_40](rails_40) (or [rails_32](rails_32)) tree and then runs a small set of
-commands to customize the copied project. So, what you get looks a lot like [rails_40](rails_40)
-([rails_32](rails_32)). Check out [raygun](bin/raygun) to see how it's massaged after being copied.
+Raygun simply copies the [rails_40](rails_40) tree and then runs a small set of commands to customize
+the copied project. So, what you get looks a lot like [rails_40](rails_40). Check out
+[raygun](bin/raygun) to see how it's massaged after being copied.
 
 This approach is fast, simple, and makes raygun developement very easy. Make changes to [rails_40](rails_40),
 run its specs and fire up the server to see what happens.
