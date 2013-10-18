@@ -2,6 +2,7 @@
 
 ## 0.0.35 [2013-]
 
+* Drop support for Rails 3 (#116).
 * Better bootstrap 3 support (#115, thanks @felafelwaffle!).
 
 ## 0.0.34 [2013-10-15]
