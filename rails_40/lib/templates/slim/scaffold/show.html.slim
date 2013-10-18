@@ -8,11 +8,11 @@ dl
 <% end -%>
 
 /- if can?(:edit, @<%= singular_table_name %>)
-  = link_to text_with_icon('Edit', 'edit'), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-default'
-  '
+= link_to text_with_icon('Edit', 'edit'), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-default'
+'
 = link_to text_with_icon('Back', 'chevron-left'), <%= index_helper %>_path, class: 'btn btn-default'
 
 /- if can?(:destroy, @<%= singular_table_name %>)
-  '
-  = link_to text_with_icon('Destroy', 'remove'), <%= singular_table_name %>_path(@<%= singular_table_name %>), \
-            method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'
+'
+= link_to text_with_icon('Destroy', 'remove'), <%= singular_table_name %>_path(@<%= singular_table_name %>), \
+          method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'
