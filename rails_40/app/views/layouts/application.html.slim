@@ -24,16 +24,18 @@ html
             /      = current_user.email
             /      b.caret
             /    ul.dropdown-menu
-            /      li= link_to 'Sign Out', sign_out_path
+            /      li= link_to text_with_icon('Sign Out', 'log-out'), sign_out_path
             / - else
-            /  li= link_to 'Sign In', sign_in_path
+            /  li= link_to text_with_icon('Sign In', 'log-in'), sign_in_path
 
       .container
         - flash.each do |name, msg|
-          = content_tag :div, raw(msg), class: "alert #{alert_class(name)}"
+          .alert.alert-dismissable class=alert_class(name)
+            button.close type='button' data-dismiss='alert' aria-hidden='true' &times;
+            =raw(msg)
         = yield
         .push
 
       footer
         .container
-          p &copy; 2013 All rights reserved.
+          p &copy; #{ Time.now.year.to_s } All rights reserved.

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.35 [2013-]
+
+* Better bootstrap 3 support (#115, thanks @felafelwaffle!).
+
 ## 0.0.34 [2013-10-15]
 
 * Nudge bundler to use guard v2.x (defaults to 1.x otherwise).
