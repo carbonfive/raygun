@@ -63,7 +63,7 @@ covered (see above).
 
     $ cd your-project
     $ gem install bundler
-    $ bundle update
+    $ bundle
 
     # Prepare the database: schema and reference / sample data
     $ rake db:setup db:sample_data

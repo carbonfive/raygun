@@ -156,7 +156,7 @@ module Raygun
       puts "# Install updated dependencies".colorize(:light_green)
       puts "$".colorize(:blue) + " cd #{target_dir}".colorize(:light_blue)
       puts "$".colorize(:blue) + " gem install bundler".colorize(:light_blue)
-      puts "$".colorize(:blue) + " bundle update".colorize(:light_blue)
+      puts "$".colorize(:blue) + " bundle".colorize(:light_blue)
       puts ""
       puts "# Prepare the database: schema and reference / sample data".colorize(:light_green)
       puts "$".colorize(:blue) + " rake db:setup db:sample_data".colorize(:light_blue)
