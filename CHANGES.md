@@ -1,7 +1,8 @@
 # Change Log
 
-## 0.0.35 [2013-]
+## 0.9.0 [2013-]
 
+* Raygun no longer bundles the application prototype, it's fetched from github (https://github.com/carbonfive/raygun-rails4) instead (#112).
 * Drop support for Rails 3 (#116).
 * Better bootstrap 3 support (#115, thanks @felafelwaffle!).
 
