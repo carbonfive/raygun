@@ -15,7 +15,7 @@ Major tools/libraries:
 * Rails 4.0
 * PostgreSQL
 * Slim
-* Less
+* Sass
 * Bootstrap
 * RSpec
 * Factory Girl
