@@ -1,7 +1,8 @@
 # Change Log
 
-## 0.0.35 [2013-]
+## 0.9.0 [2013-]
 
+* Raygun no longer bundles the application prototype, it's fetched from github (https://github.com/carbonfive/raygun-rails4) instead (#112).
 * Drop support for Rails 3 (#116).
 * Better bootstrap 3 support (#115, thanks @felafelwaffle!).
 
@@ -44,7 +45,7 @@
 * Use unicorn by default instead of thin, as per heroku's recommendation.
 * Suppress schema dumping unless run in development mode to eliminate pg_dump errors on heroku during db:migrate.
 * Tweak mailcatcher configuration so that it only sets smtp_settings when mailcatcher is running.
-
+ray
 ## 0.0.27 [2013-02-27]
 
 * Make sure the target directory is empty, otherwise misfire.
