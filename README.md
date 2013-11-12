@@ -7,7 +7,8 @@
 Rails application generator that builds a new project skeleton configured with Carbon Five preferences and
 best practices baked right in. Spend less time configuring and more building cool features.
 
-Raygun generates Rails 4 projects.
+Raygun generates Rails 4 projects by copying this [sample app](https://github.com/carbonfive/raygun-rails4)
+and massaging it gently into shape.
 
 Major tools/libraries:
 
@@ -21,7 +22,7 @@ Major tools/libraries:
 * Jasmine
 * SimpleCov
 * Guard (rspec, jasmine, livereload)
-* And many tweaks, patterns and common recipes.
+* And many tweaks, patterns and common recipes (see [raygun-rails4](https://github.com/carbonfive/raygun-rails4) for all the details).
 
 Raygun includes generator templates for controllers, views, and specs so that generated code follows best
 practices. For example, view generation produces bootstrap compatible markup and rspec specs use factory
@@ -73,16 +74,16 @@ covered (see above).
 
     # Fire up the app and open it in a browser
     $ foreman start
-    $ open http://0.0.0.0:3000
+    $ open http://localhost:3000
 
 ## Internal Mechanics
 
-Raygun simply copies the [rails_40](rails_40) tree and then runs a small set of commands to customize
-the copied project. So, what you get looks a lot like [rails_40](rails_40). Check out
-[raygun](bin/raygun) to see how it's massaged after being copied.
+Raygun fetches the latest tag from the [carbonfive/raygun-rails4](https://github.com/carbonfive/raygun-rails4)
+repo, unless it already has it cached in ~/.raygun, extracts the contents of the tarball, and runs a series of
+search-and-replaces on the code to customize it accordingly.
 
-This approach is fast, simple, and makes raygun developement very easy. Make changes to [rails_40](rails_40),
-run its specs and fire up the server to see what happens.
+This approach is fast, simple, and makes raygun developement very easy. Make changes to the application
+prototype (which is a valid rails app) and tag them when they should be used for new applications.
 
 ## Contributing
 
