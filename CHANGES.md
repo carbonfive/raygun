@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.? []
+
+* Specify the license in the gemspec (#117).
+
 ## 0.9.0 [2013-11-11]
 
 Note: All future changes to the application prototype (sample app) will be made in the [raygun-rails4](https://github.com/carbonfive/raygun-rails4) repo.
