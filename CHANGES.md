@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.9.? []
+## 0.9.1 [2013-11-12]
 
 * Fixed a bug that fouled up fetching tags from github (#118).
 * Specify the license in the gemspec (#117).
