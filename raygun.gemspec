@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Carbon Five Rails application generator}
   gem.summary       = %q{Generates and customizes Rails applications with Carbon Five best practices baked in.}
   gem.homepage      = "https://github.com/carbonfive/raygun"
-  gem..license      = 'MIT'
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
