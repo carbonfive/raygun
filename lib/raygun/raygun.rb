@@ -35,7 +35,7 @@ module Raygun
       $stdout.flush
 
       # Check if we can connect, or fail gracefully and use the latest cached version.
-      latest_tag_obj = JSON.parse(Net::HTTP.get(URI("https://api.github.com/repos/#{@prototype_repo}/tags"))).first
+      latest_tag_obj = fetch_latest_tag(prototype_repo)
       latest_tag     = latest_tag_obj['name']
       tarball_url    = latest_tag_obj['tarball_url']
 
@@ -172,6 +172,16 @@ module Raygun
     end
 
     protected
+
+    # Fetch the tags for the repo (e.g. 'carbonfive/raygun-rails4') and return the latest as JSON.
+    def fetch_latest_tag(repo)
+      url          = "https://api.github.com/repos/#{@prototype_repo}/tags"
+      uri          = URI.parse(url)
+      http         = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      request      = Net::HTTP::Get.new(URI.encode(url))
+      JSON.parse(http.request(request).body).first
+    end
 
     def camelize(string)
       result = string.sub(/^[a-z\d]*/) { $&.capitalize }

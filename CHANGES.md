@@ -2,6 +2,7 @@
 
 ## 0.9.? []
 
+* Fixed a bug that fouled up fetching tags from github (#118).
 * Specify the license in the gemspec (#117).
 
 ## 0.9.0 [2013-11-11]
