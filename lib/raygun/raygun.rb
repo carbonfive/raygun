@@ -10,6 +10,7 @@ require_relative 'version'
 
 module Raygun
   class Runner
+    CARBONFIVE_REPO = 'carbonfive/raygun-rails4'
     attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype_repo
 
     def initialize(target_dir, prototype_repo)
@@ -150,6 +151,14 @@ module Raygun
     end
 
     def print_next_steps
+      if @prototype_repo == CARBONFIVE_REPO
+        print_next_steps_carbon_five
+      else
+        print_next_steps_for_custom_repo
+      end
+    end
+    
+    def print_next_steps_carbon_five
       puts ""
       puts "Zap! Your application is ready. Next steps...".colorize(:yellow)
       puts ""
@@ -169,6 +178,13 @@ module Raygun
       puts "$".colorize(:blue) + " open http://0.0.0.0:3000".colorize(:light_blue)
       puts ""
       puts "Enjoy your Carbon Five flavored Rails application!".colorize(:yellow)
+    end
+    
+    def print_next_steps_for_custom_repo
+      puts ""
+      puts "Zap! Your application is ready.".colorize(:yellow)
+      puts ""
+      puts "Enjoy your raygun generated application!".colorize(:yellow)
     end
 
     protected
@@ -247,7 +263,7 @@ module Raygun
 
       options = OpenStruct.new
       options.target_dir     = nil
-      options.prototype_repo = 'carbonfive/raygun-rails4'
+      options.prototype_repo = CARBONFIVE_REPO
 
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"

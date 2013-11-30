@@ -9,6 +9,9 @@ best practices baked right in. Spend less time configuring and more building coo
 Raygun generates Rails 4 projects by copying this [sample app](https://github.com/carbonfive/raygun-rails4)
 and massaging it gently into shape.
 
+Alternatively, Raygun allows you to specify your own prototype instead of the default sample app. See below
+for details.
+
 Major tools/libraries:
 
 * Rails 4.0
@@ -75,9 +78,26 @@ covered (see above).
     $ foreman start
     $ open http://localhost:3000
 
+## Using a Custom Project Template
+
+The default is to use the project at [carbonfive/raygun-rails4](https://github.com/carbonfive/raygun-rails4) as a
+starting point. You can use another repo as the project template with the ```-p``` command line option.
+
+If you invoke raygun with the ```-p``` option, you can specify your own github repository.
+
+    $ raygun -p githubid/repo your-project
+
+The repository must:
+
+* Have been tagged. Raygun chooses the "greatest" tag and downloads the repository as of that tag.
+* Not have any binary files. Raygun runs a 'sed' command on all files, which will fail on binaries, such as jar files.
+
+If your project template requires a minimum version of raygun, include the version in a file called
+```.raygun-version``` at the root. Raygun will make sure it's new enough for your repo.
+
 ## Internal Mechanics
 
-Raygun fetches the latest tag from the [carbonfive/raygun-rails4](https://github.com/carbonfive/raygun-rails4)
+Raygun fetches the greatest tag from the [carbonfive/raygun-rails4](https://github.com/carbonfive/raygun-rails4)
 repo, unless it already has it cached in ~/.raygun, extracts the contents of the tarball, and runs a series of
 search-and-replaces on the code to customize it accordingly.
 
