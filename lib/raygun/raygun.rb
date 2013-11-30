@@ -175,12 +175,47 @@ module Raygun
 
     # Fetch the tags for the repo (e.g. 'carbonfive/raygun-rails4') and return the latest as JSON.
     def fetch_latest_tag(repo)
-      url          = "https://api.github.com/repos/#{@prototype_repo}/tags"
+      url          = "https://api.github.com/repos/#{repo}/tags"
       uri          = URI.parse(url)
       http         = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       request      = Net::HTTP::Get.new(URI.encode(url))
-      JSON.parse(http.request(request).body).first
+
+      response     = http.request(request)
+
+      unless response.code == "200" 
+        puts  ""
+        print "Whoops - need to try again!".colorize(:red)
+        puts  ""
+        print "We could not find (".colorize(:light_red)
+        print "#{repo}".colorize(:white)
+        print ") on github.".colorize(:light_red)
+        puts  ""
+        print "The response from github was a (".colorize(:light_red)
+        print "#{response.code}".colorize(:white)
+        puts  ") which I'm sure you can fix right up!".colorize(:light_red)
+        puts  ""
+        exit 1
+      end
+
+      result = JSON.parse(response.body).first
+      unless result
+        puts  ""
+        print "Whoops - need to try again!".colorize(:red)
+        puts  ""
+        print "We could not find any tags in the repo (".colorize(:light_red)
+        print "#{repo}".colorize(:white)
+        print ") on github.".colorize(:light_red)
+        puts  ""
+        print "Raygun uses the 'largest' tag in a repository, where tags are sorted alphanumerically.".colorize(:light_red)
+        puts  ""
+        print "E.g., tag 'v.0.10.0' > 'v.0.9.9' and 'x' > 'a'.".colorize(:light_red)
+        print ""
+        puts  ""
+        exit 1
+      end
+      
+      result
     end
 
     def camelize(string)
@@ -220,9 +255,9 @@ module Raygun
         opts.on('-h', '--help', "Show raygun usage") do |variable|
           usage_and_exit(opts)
         end
-        #opts.on('-p', '--prototype', "Prototype github repo (e.g. carbonfive/raygun).") do |prototype|
-        #  options.prototype_repo = prototype_repo
-        #end
+        opts.on('-p', '--prototype [github_repo]', "Prototype github repo (e.g. carbonfive/raygun).") do |prototype|
+          options.prototype_repo = prototype
+        end
       end
 
       begin
