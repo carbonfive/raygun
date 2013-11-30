@@ -44,7 +44,7 @@ Raygun...
 
 ## Prerequisites
 
-To generate an application, you only need the raygun gem.
+To generate an application, you need the raygun gem and wget (```brew install wget```).
 
 To run your new application's specs or fire up its server, you'll need to meet these requirements.
 
