@@ -9,6 +9,9 @@ best practices baked right in. Spend less time configuring and more building coo
 Raygun generates Rails 4 projects by copying this [sample app](https://github.com/carbonfive/raygun-rails4)
 and massaging it gently into shape.
 
+Raygun now also allows you to specify your own prototype instead of the default sample app. See below
+for details.
+
 Major tools/libraries:
 
 * Rails 4.0
@@ -44,7 +47,7 @@ Raygun...
 
 ## Prerequisites
 
-To generate an application, you only need the raygun gem.
+To generate an application, you only need the raygun gem and to have wget installed.
 
 To run your new application's specs or fire up its server, you'll need to meet these requirements.
 
@@ -53,6 +56,17 @@ To run your new application's specs or fire up its server, you'll need to meet t
 
 The generated app will be configured to use the ruby version that was used to invoke raygun. If you're using
 another ruby, just change the ```Gemfile``` and ```.ruby-version``` as necessary.
+
+###Using a custom template
+
+If you invoke raygun with the "-p" option, you can specify your own github repository.
+
+    $ raygun -p githubid/repo your-project
+    
+The repository must:
+
+* Have been tagged. Raygun chooses the "greatest" tag and downloads the repository as of that tag. 
+* Not have any binary files. Raygun runs a 'sed' command on all files, which will fail on binaries, such as jar files.
 
 ## Usage
 
