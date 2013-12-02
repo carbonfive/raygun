@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.2 [2013-]
+
+* Support custom project templates with the -p command line arg (#122, thanks @drogar!).
+
 ## 0.9.1 [2013-11-12]
 
 * Fixed a bug that fouled up fetching tags from github (#118).
