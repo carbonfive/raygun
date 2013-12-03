@@ -88,6 +88,7 @@ module Raygun
 
       shell "tar xfz #{@prototype} -C #{app_dir}"
 
+      # Github includes an extra directory layer in the tag tarball.
       extraneous_dir = Dir.glob("#{app_dir}/*").first
       dirs_to_move   = Dir.glob("#{extraneous_dir}/*", File::FNM_DOTMATCH)
                           .reject { |d| %w{. ..}.include?(File.basename(d)) }
