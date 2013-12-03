@@ -3,6 +3,7 @@
 ## 0.9.2 [2013-]
 
 * Support custom project templates with the -p command line arg (#122, thanks @drogar!).
+* Remove the stranded and useless .raygun-version from the generated app.
 
 ## 0.9.1 [2013-11-12]
 
@@ -11,9 +12,9 @@
 
 ## 0.9.0 [2013-11-11]
 
-Note: All future changes to the application prototype (sample app) will be made in the [raygun-rails4](https://github.com/carbonfive/raygun-rails4) repo.
+Note: All future changes to the application prototype (sample app) will be made in the [raygun-rails](https://github.com/carbonfive/raygun-rails) repo.
 
-* Raygun no longer bundles the application prototype, it's fetched from github (https://github.com/carbonfive/raygun-rails4) instead (#112).
+* Raygun no longer bundles the application prototype, it's fetched from github (https://github.com/carbonfive/raygun-rails) instead (#112).
 * Drop support for Rails 3 (#116).
 * Better bootstrap 3 support (#115, thanks @felafelwaffle!).
 

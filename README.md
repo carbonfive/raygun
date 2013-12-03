@@ -6,7 +6,7 @@
 Rails application generator that builds a new project skeleton configured with Carbon Five preferences and
 best practices baked right in. Spend less time configuring and more building cool features.
 
-Raygun generates Rails 4 projects by copying this [sample app](https://github.com/carbonfive/raygun-rails4)
+Raygun generates Rails 4 projects by copying this [sample app](https://github.com/carbonfive/raygun-rails)
 and massaging it gently into shape.
 
 Alternatively, Raygun allows you to specify your own prototype instead of the default sample app. See below
@@ -24,7 +24,7 @@ Major tools/libraries:
 * Jasmine
 * SimpleCov
 * Guard (rspec, jasmine, livereload)
-* And many tweaks, patterns and common recipes (see [raygun-rails4](https://github.com/carbonfive/raygun-rails4) for all the details).
+* And many tweaks, patterns and common recipes (see [raygun-rails](https://github.com/carbonfive/raygun-rails) for all the details).
 
 Raygun includes generator templates for controllers, views, and specs so that generated code follows best
 practices. For example, view generation produces bootstrap compatible markup and rspec specs use factory
@@ -80,7 +80,7 @@ covered (see above).
 
 ## Using a Custom Project Template
 
-The default is to use the project at [carbonfive/raygun-rails4](https://github.com/carbonfive/raygun-rails4) as a
+The default is to use the project at [carbonfive/raygun-rails](https://github.com/carbonfive/raygun-rails) as a
 starting point. You can use another repo as the project template with the ```-p``` command line option.
 
 If you invoke raygun with the ```-p``` option, you can specify your own github repository.
@@ -97,7 +97,7 @@ If your project template requires a minimum version of raygun, include the versi
 
 ## Internal Mechanics
 
-Raygun fetches the greatest tag from the [carbonfive/raygun-rails4](https://github.com/carbonfive/raygun-rails4)
+Raygun fetches the greatest tag from the [carbonfive/raygun-rails](https://github.com/carbonfive/raygun-rails)
 repo, unless it already has it cached in ~/.raygun, extracts the contents of the tarball, and runs a series of
 search-and-replaces on the code to customize it accordingly.
 
