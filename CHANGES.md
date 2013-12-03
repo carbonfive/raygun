@@ -1,9 +1,10 @@
 # Change Log
 
-## 0.9.2 [2013-]
+## 0.9.2 [2013-12-03]
 
 * Support custom project templates with the -p command line arg (#122, thanks @drogar!).
 * Remove the stranded and useless .raygun-version from the generated app.
+* Rename the rails prototype repo to raygun-rails (#123).
 
 ## 0.9.1 [2013-11-12]
 
