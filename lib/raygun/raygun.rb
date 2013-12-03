@@ -10,7 +10,7 @@ require_relative 'version'
 
 module Raygun
   class Runner
-    CARBONFIVE_REPO = 'carbonfive/raygun-rails4'
+    CARBONFIVE_REPO = 'carbonfive/raygun-rails'
     attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype_repo
 
     def initialize(target_dir, prototype_repo)
@@ -197,7 +197,7 @@ module Raygun
 
     protected
 
-    # Fetch the tags for the repo (e.g. 'carbonfive/raygun-rails4') and return the latest as JSON.
+    # Fetch the tags for the repo (e.g. 'carbonfive/raygun-rails') and return the latest as JSON.
     def fetch_latest_tag(repo)
       url          = "https://api.github.com/repos/#{repo}/tags"
       uri          = URI.parse(url)
@@ -279,7 +279,7 @@ module Raygun
         opts.on('-h', '--help', "Show raygun usage") do
           usage_and_exit(opts)
         end
-        opts.on('-p', '--prototype [github_repo]', "Prototype github repo (e.g. carbonfive/raygun-rails4).") do |prototype|
+        opts.on('-p', '--prototype [github_repo]', "Prototype github repo (e.g. carbonfive/raygun-rails).") do |prototype|
           options.prototype_repo = prototype
         end
       end
