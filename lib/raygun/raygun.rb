@@ -111,8 +111,15 @@ module Raygun
     end
 
     def configure_new_app
+      clean_up_unwanted_files
+
       update_ruby_version
+
       initialize_git
+    end
+
+    def clean_up_unwanted_files
+      FileUtils.rm "#{app_dir}/.raygun-version", force: true
     end
 
     def update_ruby_version
@@ -269,10 +276,10 @@ module Raygun
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"
 
-        opts.on('-h', '--help', "Show raygun usage") do |variable|
+        opts.on('-h', '--help', "Show raygun usage") do
           usage_and_exit(opts)
         end
-        opts.on('-p', '--prototype [github_repo]', "Prototype github repo (e.g. carbonfive/raygun).") do |prototype|
+        opts.on('-p', '--prototype [github_repo]', "Prototype github repo (e.g. carbonfive/raygun-rails4).") do |prototype|
           options.prototype_repo = prototype
         end
       end
