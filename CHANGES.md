@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.3 [2014-]
+
+* Use curl instead of wget, it's available by default on mavericks (wget is not).
+
 ## 0.9.2 [2013-12-03]
 
 * Support custom project templates with the -p command line arg (#122, thanks @drogar!).

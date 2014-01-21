@@ -56,7 +56,7 @@ module Raygun
         # Download the tarball and install in the cache.
         Dir.mkdir(cached_prototypes_dir, 0755) unless Dir.exists?(cached_prototypes_dir)
 
-        shell "wget -q #{tarball_url} -O #{@prototype}"
+        shell "curl -s -L #{tarball_url} -o #{@prototype}"
         puts " done!".colorize(:yellow)
       end
     end
