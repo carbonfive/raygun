@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.9.3 [2014-]
+## 0.9.3 [2014-01-21]
 
 * Use curl instead of wget, it's available by default on mavericks (wget is not).
 
