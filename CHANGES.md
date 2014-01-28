@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.4 [2014-]
+
+* Don't use patchlevels with ruby v2.1.0+, now that ruby has adopted semantic versioning.
+
 ## 0.9.3 [2014-01-21]
 
 * Use curl instead of wget, it's available by default on mavericks (wget is not).

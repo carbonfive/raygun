@@ -11,7 +11,9 @@ require_relative 'version'
 module Raygun
   class Runner
     CARBONFIVE_REPO = 'carbonfive/raygun-rails'
-    attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype_repo
+
+    attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype_repo,
+                  :current_ruby_version, :current_ruby_patch_level
 
     def initialize(target_dir, prototype_repo)
       @target_dir     = target_dir
@@ -22,6 +24,13 @@ module Raygun
       @camel_name     = camelize(snake_name)
       @title_name     = titleize(snake_name)
       @prototype_repo = prototype_repo
+
+      @current_ruby_version     = RUBY_VERSION
+      @current_ruby_patch_level = if RUBY_VERSION < '2.1.0' # Ruby adopted semver starting with 2.1.0.
+                                   "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
+                                  else
+                                    "#{RUBY_VERSION}"
+                                  end
     end
 
     def check_target
@@ -125,12 +134,10 @@ module Raygun
     def update_ruby_version
       prototype_ruby_patch_level = File.read(File.expand_path("#{app_dir}/.ruby-version", __FILE__)).strip
       prototype_ruby_version     = prototype_ruby_patch_level.match(/(\d\.\d\.\d).*/)[1]
-      current_ruby_version       = RUBY_VERSION
-      current_ruby_patch_level   = "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
 
       Dir.chdir(app_dir) do
-        shell "#{sed_i} 's/#{prototype_ruby_patch_level}/#{current_ruby_patch_level}/g' .ruby-version README.md"
-        shell "#{sed_i} 's/#{prototype_ruby_version}/#{current_ruby_version}/g' Gemfile"
+        shell "#{sed_i} 's/#{prototype_ruby_patch_level}/#{@current_ruby_patch_level}/g' .ruby-version README.md"
+        shell "#{sed_i} 's/#{prototype_ruby_version}/#{@current_ruby_version}/g' Gemfile"
       end
     end
 
@@ -154,7 +161,7 @@ module Raygun
       puts
       puts "-".colorize(:blue) + " Application Name:".colorize(:light_blue) + " #{title_name}".colorize(:light_reen)
       puts "-".colorize(:blue) + " Project Template:".colorize(:light_blue) + " #{prototype_repo}".colorize(:light_reen)
-      puts "-".colorize(:blue) + " Ruby Version:    ".colorize(:light_blue) + " #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}".colorize(:light_reen)
+      puts "-".colorize(:blue) + " Ruby Version:    ".colorize(:light_blue) + " #{@current_ruby_patch_level}".colorize(:light_reen)
       puts
     end
 
@@ -183,7 +190,7 @@ module Raygun
       puts ""
       puts "# Run the app and check things out".colorize(:light_green)
       puts "$".colorize(:blue) + " foreman start".colorize(:light_blue)
-      puts "$".colorize(:blue) + " open http://0.0.0.0:3000".colorize(:light_blue)
+      puts "$".colorize(:blue) + " open http://localhost:3000".colorize(:light_blue)
       puts ""
       puts "Enjoy your Carbon Five flavored Rails application!".colorize(:yellow)
     end
