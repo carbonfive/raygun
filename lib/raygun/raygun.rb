@@ -150,7 +150,7 @@ module Raygun
       puts ' /_/ |_|\__,_/\__, /\__, /\__,_/_/ /_/ '.colorize(:light_yellow)
       puts '             /____//____/ '.colorize(:light_yellow)
       puts
-      puts "Raygun will creating new app in directory".colorize(:yellow) + " #{target_dir}".colorize(:yellow) + "...".colorize(:yellow)
+      puts "Raygun will create new app in directory:".colorize(:yellow) + " #{target_dir}".colorize(:yellow) + "...".colorize(:yellow)
       puts
       puts "-".colorize(:blue) + " Application Name:".colorize(:light_blue) + " #{title_name}".colorize(:light_reen)
       puts "-".colorize(:blue) + " Project Template:".colorize(:light_blue) + " #{prototype_repo}".colorize(:light_reen)
