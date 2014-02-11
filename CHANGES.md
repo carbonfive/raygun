@@ -1,8 +1,9 @@
 # Change Log
 
-## 0.9.4 [2014-]
+## 0.9.4 [2014-02-11]
 
 * Don't use patchlevels with ruby v2.1.0+, now that ruby has adopted semantic versioning.
+* Fixed a typo (#124 , thanks redpoptarts!).
 
 ## 0.9.3 [2014-01-21]
 
