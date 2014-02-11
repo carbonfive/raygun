@@ -14,7 +14,7 @@ for details.
 
 Major tools/libraries:
 
-* Rails 4.0
+* Rails 4.1 (beta)
 * PostgreSQL
 * Slim
 * Sass
@@ -47,7 +47,7 @@ Raygun...
 
 ## Prerequisites
 
-To generate an application, you need the raygun gem and wget (```brew install wget```).
+To generate an application, you only need the raygun gem and network connectivity.
 
 To run your new application's specs or fire up its server, you'll need to meet these requirements.
 
