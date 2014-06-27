@@ -38,7 +38,7 @@ Raygun...
 
 * Generates a new rails application that's ready for immediate feature development.
 * Generates an application that has best practices that apply to most projects baked in.
-* Generates an application that includes specs for all build in functionality.
+* Generates an application that includes specs for all built in functionality.
 * Is a forum for discussing what should or should not be included as part of a standard stack.
 
 ## Installation
