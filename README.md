@@ -14,7 +14,7 @@ for details.
 
 Major tools/libraries:
 
-* Rails 4.1 (rc)
+* Rails
 * PostgreSQL
 * Slim
 * Sass
