@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.0 [2014-07-01]
+
+* 1.0 Release, because it's about time.
+
 ## 0.9.4 [2014-02-11]
 
 * Don't use patchlevels with ruby v2.1.0+, now that ruby has adopted semantic versioning.
