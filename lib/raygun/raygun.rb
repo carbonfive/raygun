@@ -177,13 +177,9 @@ module Raygun
       puts ""
       puts "Zap! Your application is ready. Next steps...".colorize(:yellow)
       puts ""
-      puts "# Install updated dependencies".colorize(:light_green)
+      puts "# Install updated dependencies and prepare the database".colorize(:light_green)
       puts "$".colorize(:blue) + " cd #{target_dir}".colorize(:light_blue)
-      puts "$".colorize(:blue) + " gem install bundler".colorize(:light_blue)
-      puts "$".colorize(:blue) + " bundle".colorize(:light_blue)
-      puts ""
-      puts "# Prepare the database: schema and reference / sample data".colorize(:light_green)
-      puts "$".colorize(:blue) + " rake db:setup db:sample_data".colorize(:light_blue)
+      puts "$".colorize(:blue) + " ./bin/setup".colorize(:light_blue)
       puts ""
       puts "# Run the specs (they should all pass)".colorize(:light_green)
       puts "$".colorize(:blue) + " rake".colorize(:light_blue)
