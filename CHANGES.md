@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.1 [2015-01-30]
+
+* Simplify instructions: use ./bin/setup instead of explicit commands.
+* Use ruby 2.2.0 for development.
+
 ## 1.0.0 [2014-07-01]
 
 * 1.0 Release, because it's about time.
