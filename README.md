@@ -65,13 +65,9 @@ Once your project is baked out, you can easily kick the wheels. Be sure that you
 covered (see above).
 
     $ cd your-project
-    $ gem install bundler
-    $ bundle
+    $ ./bin/setup
 
-    # Prepare the database: schema and reference / sample data
-    $ rake db:setup db:sample_data
-
-    # Run the specs
+    # Run the specs, they should all pass
     $ rake
 
     # Fire up the app and open it in a browser
