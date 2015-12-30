@@ -116,10 +116,10 @@ module Raygun
         }.each do |proto_name, new_name|
           shell "find . -type f -print | xargs #{sed_i} 's/#{proto_name}/#{new_name}/g'"
         end
-      end
 
-      %w(d f).each do |find_type|
-        shell "find . -depth -type #{find_type} -name '*app_prototype*' -exec bash -c 'mv $0 ${0/app_prototype/#{snake_name}}' {} \\;"
+        %w(d f).each do |find_type|
+          shell "find . -depth -type #{find_type} -name '*app_prototype*' -exec bash -c 'mv $0 ${0/app_prototype/#{snake_name}}' {} \\;"
+        end
       end
     end
 
