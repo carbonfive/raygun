@@ -95,7 +95,7 @@ module Raygun
     def copy_prototype
       FileUtils.mkdir_p(app_dir)
 
-      shell "tar xfz #{@prototype} -C #{app_dir}"
+      shell "tar xfz #{@prototype} -C \"#{app_dir}\""
 
       # Github includes an extra directory layer in the tag tarball.
       extraneous_dir = Dir.glob("#{app_dir}/*").first
