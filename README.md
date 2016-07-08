@@ -21,9 +21,8 @@ Major tools/libraries:
 * Bootstrap
 * RSpec
 * Factory Girl
-* Jasmine
 * SimpleCov
-* Guard (rspec, jasmine, livereload)
+* Guard (rspec, livereload)
 * And many tweaks, patterns and common recipes (see [raygun-rails](https://github.com/carbonfive/raygun-rails) for all the details).
 
 Raygun includes generator templates for controllers, views, and specs so that generated code follows best
