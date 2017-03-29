@@ -6,7 +6,7 @@
 Rails application generator that builds a new project skeleton configured with Carbon Five preferences and
 best practices baked right in. Spend less time configuring and more building cool features.
 
-Raygun generates Rails 4 projects by copying this [sample app](https://github.com/carbonfive/raygun-rails)
+Raygun generates Rails 5 projects by copying this [sample app](https://github.com/carbonfive/raygun-rails)
 and massaging it gently into shape.
 
 Alternatively, Raygun allows you to specify your own prototype instead of the default sample app. See below
