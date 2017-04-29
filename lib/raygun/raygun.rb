@@ -7,6 +7,7 @@ require 'json'
 require 'colorize'
 
 require_relative 'version'
+require_relative 'template_repo'
 
 module Raygun
   class Runner
@@ -45,15 +46,16 @@ module Raygun
       $stdout.flush
 
       # Check if we can connect, or fail gracefully and use the latest cached version.
-      latest_tag_obj = fetch_latest_tag(prototype_repo)
-      latest_tag     = latest_tag_obj['name']
-      tarball_url    = latest_tag_obj['tarball_url']
+      repo        = TemplateRepo.new(prototype_repo)
+      name        = repo.name
+      tarball_url = repo.tarball
+      sha         = repo.sha
 
-      print " #{latest_tag}.".colorize(:white)
+      print " #{name}.".colorize(:white)
       $stdout.flush
 
       cached_prototypes_dir = File.join(Dir.home, ".raygun")
-      @prototype = "#{cached_prototypes_dir}/#{prototype_repo.sub('/', '--')}-#{latest_tag}.tar.gz"
+      @prototype = "#{cached_prototypes_dir}/#{name.gsub('/','--')}-#{sha}.tar.gz"
 
       # Do we already have the tarball cached under ~/.raygun?
       if File.exists?(@prototype)
@@ -64,7 +66,6 @@ module Raygun
 
         # Download the tarball and install in the cache.
         Dir.mkdir(cached_prototypes_dir, 0755) unless Dir.exists?(cached_prototypes_dir)
-
         shell "curl -s -L #{tarball_url} -o #{@prototype}"
         puts " done!".colorize(:yellow)
       end
@@ -176,7 +177,7 @@ module Raygun
         print_next_steps_for_custom_repo
       end
     end
-    
+
     def print_next_steps_carbon_five
       puts ""
       puts "Zap! Your application is ready. Next steps...".colorize(:yellow)
@@ -194,7 +195,7 @@ module Raygun
       puts ""
       puts "Enjoy your Carbon Five flavored Rails application!".colorize(:yellow)
     end
-    
+
     def print_next_steps_for_custom_repo
       puts ""
       puts "Zap! Your application is ready.".colorize(:yellow)
@@ -203,51 +204,6 @@ module Raygun
     end
 
     protected
-
-    # Fetch the tags for the repo (e.g. 'carbonfive/raygun-rails') and return the latest as JSON.
-    def fetch_latest_tag(repo)
-      url          = "https://api.github.com/repos/#{repo}/tags"
-      uri          = URI.parse(url)
-      http         = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      request      = Net::HTTP::Get.new(URI.encode(url))
-
-      response     = http.request(request)
-
-      unless response.code == "200" 
-        puts  ""
-        print "Whoops - need to try again!".colorize(:red)
-        puts  ""
-        print "We could not find (".colorize(:light_red)
-        print "#{repo}".colorize(:white)
-        print ") on github.".colorize(:light_red)
-        puts  ""
-        print "The response from github was a (".colorize(:light_red)
-        print "#{response.code}".colorize(:white)
-        puts  ") which I'm sure you can fix right up!".colorize(:light_red)
-        puts  ""
-        exit 1
-      end
-
-      result = JSON.parse(response.body).first
-      unless result
-        puts  ""
-        print "Whoops - need to try again!".colorize(:red)
-        puts  ""
-        print "We could not find any tags in the repo (".colorize(:light_red)
-        print "#{repo}".colorize(:white)
-        print ") on github.".colorize(:light_red)
-        puts  ""
-        print "Raygun uses the 'largest' tag in a repository, where tags are sorted alphanumerically.".colorize(:light_red)
-        puts  ""
-        print "E.g., tag 'v.0.10.0' > 'v.0.9.9' and 'x' > 'a'.".colorize(:light_red)
-        print ""
-        puts  ""
-        exit 1
-      end
-      
-      result
-    end
 
     def camelize(string)
       result = string.sub(/^[a-z\d]*/) { $&.capitalize }
