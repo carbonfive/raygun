@@ -82,10 +82,16 @@ If you invoke raygun with the ```-p``` option, you can specify your own github r
 
     $ raygun -p githubid/repo your-project
 
+or 
+
+    $ raygun -p githubid/repo your-project#new-branch-name
+
 The repository must:
 
-* Have been tagged. Raygun chooses the "greatest" tag and downloads the repository as of that tag.
 * Not have any binary files. Raygun runs a 'sed' command on all files, which will fail on binaries, such as jar files.
+
+If you are not planning to pull the prototype repository by branch, it must also have a tag. Raygun will choose the
+"greatest" tag and downloads the repository as of that tag.
 
 If your project template requires a minimum version of Raygun, include the version in a file called
 `.raygun-version` at the root. Raygun will make sure it's new enough for your repo.
