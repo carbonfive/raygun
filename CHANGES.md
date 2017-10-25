@@ -3,6 +3,12 @@
 **Note:** Don't let the apparent lack of activity here scare you away. Almost all changes are captured in the
 prototype repo (see [raygun-rails](https://github.com/carbonfive/raygun-rails)), and it's kept pretty well up to date.
 
+## 1.0.3 [2017-10-25]
+
+* Add ability to pull template repository by branch name (#137, thanks @bunnymatic!).
+* Updates to the README (mostly tweaks).
+* Use Ruby 2.4.2 for development.
+
 ## 1.0.1 [2015-01-30]
 
 * Simplify instructions: use ./bin/setup instead of explicit commands.
