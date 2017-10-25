@@ -20,7 +20,7 @@ Major tools/libraries:
 * Sass
 * Bootstrap
 * RSpec
-* Factory Girl
+* Factory Bot
 * SimpleCov
 * Guard (rspec, livereload)
 * And many tweaks, patterns and common recipes (see [raygun-rails](https://github.com/carbonfive/raygun-rails) for all the details).
@@ -50,11 +50,11 @@ To generate an application, you only need the Raygun gem and network connectivit
 
 To run your new application's specs or fire up its server, you'll need to meet these requirements.
 
-* PostgreSQL 9.x with superuser 'postgres' with no password (```createuser -s postgres```)
-* PhantomJS for JavaScript testing (```brew install phantomjs```)
+* PostgreSQL 9.x with superuser 'postgres' with no password (`createuser -s postgres`)
+* PhantomJS for JavaScript testing (`brew install phantomjs`)
 
 The generated app will be configured to use the ruby version that was used to invoke Raygun. If you're using
-another ruby, just change the ```Gemfile``` and ```.ruby-version``` as necessary.
+another ruby, just change the `Gemfile` and `.ruby-version` as necessary.
 
 ## Usage
 
@@ -76,19 +76,19 @@ covered (see above).
 ## Using a Custom Project Template
 
 The default is to use the project at [carbonfive/raygun-rails](https://github.com/carbonfive/raygun-rails) as a
-starting point. You can use another repo as the project template with the ```-p``` command line option.
+starting point. You can use another repo as the project template with the `-p` command line option.
 
-If you invoke raygun with the ```-p``` option, you can specify your own github repository.
+If you invoke raygun with the `-p` option, you can specify your own github repository.
 
     $ raygun -p githubid/repo your-project
 
-or 
+Or 
 
     $ raygun -p githubid/repo your-project#new-branch-name
 
 The repository must:
 
-* Not have any binary files. Raygun runs a 'sed' command on all files, which will fail on binaries, such as jar files.
+Not have any binary files. Raygun runs a 'sed' command on all files, which will fail on binaries, such as jar files.
 
 If you are not planning to pull the prototype repository by branch, it must also have a tag. Raygun will choose the
 "greatest" tag and downloads the repository as of that tag.
