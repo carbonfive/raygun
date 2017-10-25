@@ -6,7 +6,7 @@
 Rails application generator that builds a new project skeleton configured with Carbon Five preferences and
 best practices baked right in. Spend less time configuring and more building cool features.
 
-Raygun generates Rails 5 projects by copying this [sample app](https://github.com/carbonfive/raygun-rails)
+Raygun generates Rails projects by copying this [sample app](https://github.com/carbonfive/raygun-rails)
 and massaging it gently into shape.
 
 Alternatively, Raygun allows you to specify your own prototype instead of the default sample app. See below
@@ -46,21 +46,21 @@ Raygun...
 
 ## Prerequisites
 
-To generate an application, you only need the raygun gem and network connectivity.
+To generate an application, you only need the Raygun gem and network connectivity.
 
 To run your new application's specs or fire up its server, you'll need to meet these requirements.
 
 * PostgreSQL 9.x with superuser 'postgres' with no password (```createuser -s postgres```)
 * PhantomJS for JavaScript testing (```brew install phantomjs```)
 
-The generated app will be configured to use the ruby version that was used to invoke raygun. If you're using
+The generated app will be configured to use the ruby version that was used to invoke Raygun. If you're using
 another ruby, just change the ```Gemfile``` and ```.ruby-version``` as necessary.
 
 ## Usage
 
     $ raygun your-project
 
-Once your project is baked out, you can easily kick the wheels. Be sure that you have the prerequities
+Once your project is baked out, you can easily kick the wheels. Be sure that you have the prerequisites
 covered (see above).
 
     $ cd your-project
@@ -87,16 +87,16 @@ The repository must:
 * Have been tagged. Raygun chooses the "greatest" tag and downloads the repository as of that tag.
 * Not have any binary files. Raygun runs a 'sed' command on all files, which will fail on binaries, such as jar files.
 
-If your project template requires a minimum version of raygun, include the version in a file called
-```.raygun-version``` at the root. Raygun will make sure it's new enough for your repo.
+If your project template requires a minimum version of Raygun, include the version in a file called
+`.raygun-version` at the root. Raygun will make sure it's new enough for your repo.
 
 ## Internal Mechanics
 
 Raygun fetches the greatest tag from the [carbonfive/raygun-rails](https://github.com/carbonfive/raygun-rails)
-repo, unless it already has it cached in ~/.raygun, extracts the contents of the tarball, and runs a series of
+repo, unless it already has it cached in `~/.raygun`, extracts the contents of the tarball, and runs a series of
 search-and-replaces on the code to customize it accordingly.
 
-This approach is fast, simple, and makes raygun developement very easy. Make changes to the application
+This approach is fast, simple, and makes developmentn on Raygun very easy: make changes to the application
 prototype (which is a valid rails app) and tag them when they should be used for new applications.
 
 ## Contributing
@@ -109,7 +109,7 @@ prototype (which is a valid rails app) and tag them when they should be used for
 
 ### Development
 
-Generate an example app using your local development version of raygun:
+Generate an example app using your local development version of Raygun:
 
     $ ./bin/raygun tmp/example_app
 
