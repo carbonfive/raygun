@@ -1,9 +1,5 @@
-require 'byebug'
-
 module Raygun
-
   class TemplateRepo
-
     attr_reader :name, :branch, :tarball, :sha
 
     def initialize(repo)
@@ -77,5 +73,4 @@ module Raygun
       response     = http.request(request)
     end
   end
-
 end
