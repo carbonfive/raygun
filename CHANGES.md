@@ -3,6 +3,10 @@
 **Note:** Don't let the apparent lack of activity here scare you away. Almost all changes are captured in the
 prototype repo (see [raygun-rails](https://github.com/carbonfive/raygun-rails)), and it's kept pretty well up to date.
 
+## 1.0.4 [2017-11-28]
+
+* Tweak instructions: use `heroku local` instead of `foreman s` (#138, thanks @mattbrictson)
+
 ## 1.0.3 [2017-10-25]
 
 * Add ability to pull template repository by branch name (#137, thanks @bunnymatic!).
