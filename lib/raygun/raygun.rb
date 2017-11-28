@@ -184,13 +184,13 @@ module Raygun
       puts ""
       puts "# Install updated dependencies and prepare the database".colorize(:light_green)
       puts "$".colorize(:blue) + " cd #{target_dir}".colorize(:light_blue)
-      puts "$".colorize(:blue) + " ./bin/setup".colorize(:light_blue)
+      puts "$".colorize(:blue) + " bin/setup".colorize(:light_blue)
       puts ""
       puts "# Run the specs (they should all pass)".colorize(:light_green)
-      puts "$".colorize(:blue) + " rake".colorize(:light_blue)
+      puts "$".colorize(:blue) + " bin/rake".colorize(:light_blue)
       puts ""
       puts "# Run the app and check things out".colorize(:light_green)
-      puts "$".colorize(:blue) + " foreman start".colorize(:light_blue)
+      puts "$".colorize(:blue) + " heroku local".colorize(:light_blue)
       puts "$".colorize(:blue) + " open http://localhost:3000".colorize(:light_blue)
       puts ""
       puts "Enjoy your Carbon Five flavored Rails application!".colorize(:yellow)

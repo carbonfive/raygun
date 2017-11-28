@@ -65,13 +65,13 @@ Once your project is baked out, you can easily kick the wheels. Be sure that you
 covered (see above).
 
     $ cd your-project
-    $ ./bin/setup
+    $ bin/setup
 
     # Run the specs, they should all pass
-    $ rake
+    $ bin/rake
 
     # Fire up the app and open it in a browser
-    $ foreman start
+    $ heroku local
     $ open http://localhost:3000
 
 ## Using a Custom Project Template
@@ -83,7 +83,7 @@ If you invoke raygun with the `-p` option, you can specify your own github repos
 
     $ raygun -p githubid/repo your-project
 
-Or 
+Or
 
     $ raygun -p githubid/repo your-project#new-branch-name
 
