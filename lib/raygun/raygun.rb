@@ -245,6 +245,11 @@ module Raygun
         opts.on('-p', '--prototype [github_repo]', "Prototype github repo (e.g. carbonfive/raygun-rails).") do |prototype|
           options.prototype_repo = prototype
         end
+
+        opts.on('-v', '--version', 'Print the version number') do
+          puts Raygun::VERSION
+          exit 1
+        end
       end
 
       begin
