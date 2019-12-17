@@ -193,6 +193,9 @@ module Raygun
       puts "$".colorize(:blue) + " heroku local".colorize(:light_blue)
       puts "$".colorize(:blue) + " open http://localhost:3000".colorize(:light_blue)
       puts ""
+      puts "# For some suggested next steps, check out the raygun README".colorize(:light_green)
+      puts "$".colorize(:blue) + " open https://github.com/carbonfive/raygun/#next-steps".colorize(:light_blue)
+      puts ""
       puts "Enjoy your Carbon Five flavored Rails application!".colorize(:yellow)
     end
 
