@@ -18,7 +18,6 @@ Major tools/libraries:
 * PostgreSQL
 * Slim
 * Sass
-* Bootstrap
 * RSpec and Capybara
 * Factory Bot
 * SimpleCov
@@ -27,8 +26,7 @@ Major tools/libraries:
 the details).
 
 Raygun includes generator templates for controllers, views, and specs so that generated code follows best
-practices. For example, view generation produces bootstrap compatible markup and rspec specs use factory
-girl when appropriate.
+practices. For example, rspec specs use factory bot when appropriate.
 
 Inspired by Xavier Shay work at Square and ThoughtBot's Suspenders. Thanks!
 
@@ -59,20 +57,54 @@ another ruby, just change the `Gemfile` and `.ruby-version` as necessary.
 
 ## Usage
 
-    $ raygun your-project
+```bash
+$ raygun your-project
+```
 
 Once your project is baked out, you can easily kick the wheels. Be sure that you have the prerequisites
 covered (see above).
 
-    $ cd your-project
-    $ bin/setup
+```bash
+$ cd your-project
+$ bin/setup
 
-    # Run the specs, they should all pass
-    $ bin/rake
+# Run the specs, they should all pass
+$ bin/rake
 
-    # Fire up the app and open it in a browser
-    $ heroku local
-    $ open http://localhost:3000
+# Fire up the app and open it in a browser
+$ heroku local
+$ open http://localhost:3000
+```
+
+## Next Steps
+
+As you'll notice, the project comes with enough CSS (SCSS, actually) to establish some patterns.  If you
+need more of a framework, here are instructions on how to add Bootstrap to your new project.
+
+```bash
+$ yarn add bootstrap
+$ rails generate simple_form:install --bootstrap
+
+# Answer Yes to the question about overwriting your existing `config/initializers/simple_form.rb`
+```
+
+This generates an initializer and scaffold files for Rails view scaffolding.
+
+Add Bootstrap imports to the top your `application.scss`
+
+```css
+// application.scss
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+
+...
+```
+
+Now you've got Bootstrap in the application.
+
+We include `simple_form` in the project by default.  For more information about using Bootstrap styling
+on `simple_form` forms, check out the documentation here http://simple-form-bootstrap.plataformatec.com.br/documentation
+
 
 ## Using a Custom Project Template
 
