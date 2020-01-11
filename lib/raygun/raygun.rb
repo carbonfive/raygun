@@ -13,7 +13,8 @@ module Raygun
   class Runner
     CARBONFIVE_REPO = "carbonfive/raygun-rails"
 
-    attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype_repo,
+    attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name,
+                  :camel_name, :title_name, :prototype_repo,
                   :current_ruby_version, :current_ruby_patch_level
 
     def initialize(target_dir, prototype_repo)
@@ -35,10 +36,10 @@ module Raygun
     end
 
     def check_target
-      unless Dir["#{@app_dir}/*"].empty?
-        puts "Misfire! The target directory isn't empty... aim elsewhere."
-        exit 1
-      end
+      return if Dir["#{@app_dir}/*"].empty?
+
+      puts "Misfire! The target directory isn't empty... aim elsewhere.".colorize(:light_red)
+      exit 1
     end
 
     def fetch_prototype
@@ -75,22 +76,21 @@ module Raygun
       required_raygun_version =
         `tar xfz #{@prototype} --include "*.raygun-version" -O 2> /dev/null`.chomp ||
         ::Raygun::VERSION
+      return unless Gem::Version.new(required_raygun_version) > Gem::Version.new(::Raygun::VERSION)
 
-      if Gem::Version.new(required_raygun_version) > Gem::Version.new(::Raygun::VERSION)
-        puts  ""
-        print "Hold up!".colorize(:red)
-        print " This version of the raygun gem (".colorize(:light_red)
-        print "#{::Raygun::VERSION})".colorize(:white)
-        print " is too old to generate this application (needs ".colorize(:light_red)
-        print required_raygun_version.to_s.colorize(:white)
-        puts  " or newer).".colorize(:light_red)
-        puts  ""
-        print "Please update the gem by running ".colorize(:light_red)
-        print "gem update raygun".colorize(:white)
-        puts  ", and try again. Thanks!".colorize(:light_red)
-        puts  ""
-        exit 1
-      end
+      puts  ""
+      print "Hold up!".colorize(:red)
+      print " This version of the raygun gem (".colorize(:light_red)
+      print "#{::Raygun::VERSION})".colorize(:white)
+      print " is too old to generate this application (needs ".colorize(:light_red)
+      print required_raygun_version.to_s.colorize(:white)
+      puts  " or newer).".colorize(:light_red)
+      puts  ""
+      print "Please update the gem by running ".colorize(:light_red)
+      print "gem update raygun".colorize(:white)
+      puts  ", and try again. Thanks!".colorize(:light_red)
+      puts  ""
+      exit 1
     end
 
     def copy_prototype
@@ -119,7 +119,8 @@ module Raygun
         end
 
         %w[d f].each do |find_type|
-          shell "find . -depth -type #{find_type} -name '*app_prototype*' -exec bash -c 'mv $0 ${0/app_prototype/#{snake_name}}' {} \\;"
+          shell "find . -depth -type #{find_type} -name '*app_prototype*' " \
+                "-exec bash -c 'mv $0 ${0/app_prototype/#{snake_name}}' {} \\;"
         end
       end
     end
@@ -154,6 +155,7 @@ module Raygun
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def print_plan
       puts "     ____ ".colorize(:light_yellow)
       puts '    / __ \____ ___  ______ ___  ______ '.colorize(:light_yellow)
@@ -162,13 +164,18 @@ module Raygun
       puts ' /_/ |_|\__,_/\__, /\__, /\__,_/_/ /_/ '.colorize(:light_yellow)
       puts "             /____//____/ ".colorize(:light_yellow)
       puts
-      puts "Raygun will create new app in directory:".colorize(:yellow) + " #{target_dir}".colorize(:yellow) + "...".colorize(:yellow)
+      puts "Raygun will create new app in directory:".colorize(:yellow) +
+           " #{target_dir}".colorize(:yellow) + "...".colorize(:yellow)
       puts
-      puts "-".colorize(:blue) + " Application Name:".colorize(:light_blue) + " #{title_name}".colorize(:light_reen)
-      puts "-".colorize(:blue) + " Project Template:".colorize(:light_blue) + " #{prototype_repo}".colorize(:light_reen)
-      puts "-".colorize(:blue) + " Ruby Version:    ".colorize(:light_blue) + " #{@current_ruby_patch_level}".colorize(:light_reen)
+      puts "-".colorize(:blue) + " Application Name:".colorize(:light_blue) +
+           " #{title_name}".colorize(:light_reen)
+      puts "-".colorize(:blue) + " Project Template:".colorize(:light_blue) +
+           " #{prototype_repo}".colorize(:light_reen)
+      puts "-".colorize(:blue) + " Ruby Version:    ".colorize(:light_blue) +
+           " #{@current_ruby_patch_level}".colorize(:light_reen)
       puts
     end
+    # rubocop:enable Metrics/AbcSize
 
     def print_next_steps
       if @prototype_repo == CARBONFIVE_REPO
@@ -178,6 +185,7 @@ module Raygun
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def print_next_steps_carbon_five
       puts ""
       puts "Zap! Your application is ready. Next steps...".colorize(:yellow)
@@ -198,6 +206,7 @@ module Raygun
       puts ""
       puts "Enjoy your Carbon Five flavored Rails application!".colorize(:yellow)
     end
+    # rubocop:enable Metrics/AbcSize
 
     def print_next_steps_for_custom_repo
       puts ""
@@ -220,10 +229,10 @@ module Raygun
 
     # Distinguish BSD vs GNU sed with the --version flag (only present in GNU sed).
     def sed_i
-      @sed_format ||= begin
-        `sed --version &> /dev/null`
-        $?.success? ? "sed -i" : "sed -i ''"
-      end
+      @sed_i ||= begin
+                   `sed --version &> /dev/null`
+                   $?.success? ? "sed -i" : "sed -i ''"
+                 end
     end
 
     # Run a shell command and raise an exception if it fails.
@@ -232,46 +241,54 @@ module Raygun
       raise "#{command} failed with status #{$?.exitstatus}." unless $?.success?
     end
 
-    def self.parse(_args)
-      raygun = nil
+    class << self
+      # rubocop:disable Metrics/MethodLength
+      def parse(_args)
+        raygun = nil
 
-      options = OpenStruct.new
-      options.target_dir     = nil
-      options.prototype_repo = CARBONFIVE_REPO
+        options = OpenStruct.new
+        options.target_dir     = nil
+        options.prototype_repo = CARBONFIVE_REPO
 
-      parser = OptionParser.new do |opts|
-        opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"
+        parser = OptionParser.new do |opts|
+          opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"
 
-        opts.on("-h", "--help", "Show raygun usage") do
-          usage_and_exit(opts)
+          opts.on("-h", "--help", "Show raygun usage") do
+            usage_and_exit(opts)
+          end
+          opts.on(
+            "-p",
+            "--prototype [github_repo]",
+            "Prototype github repo (e.g. carbonfive/raygun-rails)."
+          ) do |prototype|
+            options.prototype_repo = prototype
+          end
+
+          opts.on("-v", "--version", "Print the version number") do
+            puts Raygun::VERSION
+            exit 1
+          end
         end
-        opts.on("-p", "--prototype [github_repo]", "Prototype github repo (e.g. carbonfive/raygun-rails).") do |prototype|
-          options.prototype_repo = prototype
+
+        begin
+          parser.parse!
+          options.target_dir = ARGV.first
+
+          raise OptionParser::InvalidOption if options.target_dir.nil?
+
+          raygun = Raygun::Runner.new(options.target_dir, options.prototype_repo)
+        rescue OptionParser::InvalidOption
+          usage_and_exit(parser)
         end
 
-        opts.on("-v", "--version", "Print the version number") do
-          puts Raygun::VERSION
-          exit 1
-        end
+        raygun
       end
+      # rubocop:enable Metrics/MethodLength
 
-      begin
-        parser.parse!
-        options.target_dir = ARGV.first
-
-        raise OptionParser::InvalidOption if options.target_dir.nil?
-
-        raygun = Raygun::Runner.new(options.target_dir, options.prototype_repo)
-      rescue OptionParser::InvalidOption
-        usage_and_exit(parser)
+      def usage_and_exit(parser)
+        puts parser
+        exit 1
       end
-
-      raygun
-    end
-
-    def self.usage_and_exit(parser)
-      puts parser
-      exit 1
     end
   end
 end

@@ -39,7 +39,8 @@ module Raygun
       print name.to_s.colorize(:white)
       print ") on github.".colorize(:light_red)
       puts  ""
-      print "Raygun uses the 'largest' tag in a repository, where tags are sorted alphanumerically.".colorize(:light_red)
+      print "Raygun uses the 'largest' tag in a repository, " \
+            "where tags are sorted alphanumerically.".colorize(:light_red)
       puts  ""
       print "E.g., tag 'v.0.10.0' > 'v.0.9.9' and 'x' > 'a'.".colorize(:light_red)
       print ""
@@ -66,12 +67,12 @@ module Raygun
     end
 
     def http_get(url)
-      uri          = URI.parse(url)
+      uri          = URI(url)
       http         = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
-      request      = Net::HTTP::Get.new(URI.encode(url))
+      request      = Net::HTTP::Get.new(uri)
 
-      response = http.request(request)
+      http.request(request)
     end
   end
 end
