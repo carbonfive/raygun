@@ -65,12 +65,12 @@ module Raygun
     end
 
     def http_get(url)
-      uri          = URI.parse(url)
+      uri          = URI(url)
       http         = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
-      request      = Net::HTTP::Get.new(URI.encode(url))
+      request      = Net::HTTP::Get.new(uri)
 
-      response     = http.request(request)
+      http.request(request)
     end
   end
 end
