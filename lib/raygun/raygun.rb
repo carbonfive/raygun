@@ -1,17 +1,17 @@
-require 'optparse'
-require 'ostruct'
-require 'fileutils'
-require 'securerandom'
-require 'net/http'
-require 'json'
-require 'colorize'
+require "optparse"
+require "ostruct"
+require "fileutils"
+require "securerandom"
+require "net/http"
+require "json"
+require "colorize"
 
-require_relative 'version'
-require_relative 'template_repo'
+require_relative "version"
+require_relative "template_repo"
 
 module Raygun
   class Runner
-    CARBONFIVE_REPO = 'carbonfive/raygun-rails'
+    CARBONFIVE_REPO = "carbonfive/raygun-rails"
 
     attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name, :camel_name, :title_name, :prototype_repo,
                   :current_ruby_version, :current_ruby_patch_level
@@ -19,18 +19,18 @@ module Raygun
     def initialize(target_dir, prototype_repo)
       @target_dir     = target_dir
       @app_dir        = File.expand_path(target_dir.strip.to_s)
-      @app_name       = File.basename(app_dir).gsub(/\s+/, '-')
-      @dash_name      = app_name.gsub('_', '-')
-      @snake_name     = app_name.gsub('-', '_')
+      @app_name       = File.basename(app_dir).gsub(/\s+/, "-")
+      @dash_name      = app_name.tr("_", "-")
+      @snake_name     = app_name.tr("-", "_")
       @camel_name     = camelize(snake_name)
       @title_name     = titleize(snake_name)
       @prototype_repo = prototype_repo
 
       @current_ruby_version     = RUBY_VERSION
-      @current_ruby_patch_level = if RUBY_VERSION < '2.1.0' # Ruby adopted semver starting with 2.1.0.
-                                   "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
+      @current_ruby_patch_level = if RUBY_VERSION < "2.1.0" # Ruby adopted semver starting with 2.1.0.
+                                    "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
                                   else
-                                    "#{RUBY_VERSION}"
+                                    RUBY_VERSION.to_s
                                   end
     end
 
@@ -55,17 +55,17 @@ module Raygun
       $stdout.flush
 
       cached_prototypes_dir = File.join(Dir.home, ".raygun")
-      @prototype = "#{cached_prototypes_dir}/#{name.gsub('/','--')}-#{sha}.tar.gz"
+      @prototype = "#{cached_prototypes_dir}/#{name.gsub("/", "--")}-#{sha}.tar.gz"
 
       # Do we already have the tarball cached under ~/.raygun?
-      if File.exists?(@prototype)
+      if File.exist?(@prototype)
         puts " Using cached version.".colorize(:yellow)
       else
         print " Downloading...".colorize(:yellow)
         $stdout.flush
 
         # Download the tarball and install in the cache.
-        Dir.mkdir(cached_prototypes_dir, 0755) unless Dir.exists?(cached_prototypes_dir)
+        Dir.mkdir(cached_prototypes_dir, 0o755) unless Dir.exist?(cached_prototypes_dir)
         shell "curl -s -L #{tarball_url} -o #{@prototype}"
         puts " done!".colorize(:yellow)
       end
@@ -73,8 +73,8 @@ module Raygun
 
     def check_raygun_version
       required_raygun_version =
-        %x{tar xfz #{@prototype} --include "*.raygun-version" -O 2> /dev/null}.chomp ||
-          ::Raygun::VERSION
+        `tar xfz #{@prototype} --include "*.raygun-version" -O 2> /dev/null`.chomp ||
+        ::Raygun::VERSION
 
       if Gem::Version.new(required_raygun_version) > Gem::Version.new(::Raygun::VERSION)
         puts  ""
@@ -82,7 +82,7 @@ module Raygun
         print " This version of the raygun gem (".colorize(:light_red)
         print "#{::Raygun::VERSION})".colorize(:white)
         print " is too old to generate this application (needs ".colorize(:light_red)
-        print "#{required_raygun_version}".colorize(:white)
+        print required_raygun_version.to_s.colorize(:white)
         puts  " or newer).".colorize(:light_red)
         puts  ""
         print "Please update the gem by running ".colorize(:light_red)
@@ -101,7 +101,7 @@ module Raygun
       # Github includes an extra directory layer in the tag tarball.
       extraneous_dir = Dir.glob("#{app_dir}/*").first
       dirs_to_move   = Dir.glob("#{extraneous_dir}/*", File::FNM_DOTMATCH)
-                          .reject { |d| %w{. ..}.include?(File.basename(d)) }
+        .reject { |d| %w[. ..].include?(File.basename(d)) }
 
       FileUtils.mv         dirs_to_move, app_dir
       FileUtils.remove_dir extraneous_dir
@@ -110,15 +110,15 @@ module Raygun
     def rename_new_app
       Dir.chdir(app_dir) do
         {
-          'AppPrototype'  => camel_name,
-          'app-prototype' => dash_name,
-          'app_prototype' => snake_name,
-          'App Prototype' => title_name
+          "AppPrototype"  => camel_name,
+          "app-prototype" => dash_name,
+          "app_prototype" => snake_name,
+          "App Prototype" => title_name
         }.each do |proto_name, new_name|
           shell "find . -type f -print | xargs #{sed_i} 's/#{proto_name}/#{new_name}/g'"
         end
 
-        %w(d f).each do |find_type|
+        %w[d f].each do |find_type|
           shell "find . -depth -type #{find_type} -name '*app_prototype*' -exec bash -c 'mv $0 ${0/app_prototype/#{snake_name}}' {} \\;"
         end
       end
@@ -155,12 +155,12 @@ module Raygun
     end
 
     def print_plan
-      puts '     ____ '.colorize(:light_yellow)
+      puts "     ____ ".colorize(:light_yellow)
       puts '    / __ \____ ___  ______ ___  ______ '.colorize(:light_yellow)
       puts '   / /_/ / __ `/ / / / __ `/ / / / __ \ '.colorize(:light_yellow)
-      puts '  / _, _/ /_/ / /_/ / /_/ / /_/ / / / / '.colorize(:light_yellow)
+      puts "  / _, _/ /_/ / /_/ / /_/ / /_/ / / / / ".colorize(:light_yellow)
       puts ' /_/ |_|\__,_/\__, /\__, /\__,_/_/ /_/ '.colorize(:light_yellow)
-      puts '             /____//____/ '.colorize(:light_yellow)
+      puts "             /____//____/ ".colorize(:light_yellow)
       puts
       puts "Raygun will create new app in directory:".colorize(:yellow) + " #{target_dir}".colorize(:yellow) + "...".colorize(:yellow)
       puts
@@ -210,29 +210,29 @@ module Raygun
 
     def camelize(string)
       result = string.sub(/^[a-z\d]*/) { $&.capitalize }
-      result.gsub(/(?:_|(\/))([a-z\d]*)/) { "#{$1}#{$2.capitalize}" }
+      result.gsub(%r{(?:_|(/))([a-z\d]*)}) { "#{Regexp.last_match(1)}#{Regexp.last_match(2).capitalize}" }
     end
 
     def titleize(underscored_string)
-      result = underscored_string.gsub(/_/, ' ')
-      result.gsub(/\b('?[a-z])/) { $1.capitalize }
+      result = underscored_string.tr("_", " ")
+      result.gsub(/\b('?[a-z])/) { Regexp.last_match(1).capitalize }
     end
 
     # Distinguish BSD vs GNU sed with the --version flag (only present in GNU sed).
     def sed_i
       @sed_format ||= begin
-        %x{sed --version &> /dev/null}
-        $?.success? ? "sed -i" : "sed -i ''"
+        `sed --version &> /dev/null`
+        $CHILD_STATUS.success? ? "sed -i" : "sed -i ''"
       end
     end
 
     # Run a shell command and raise an exception if it fails.
     def shell(command)
-      %x{#{command}}
-      raise "#{command} failed with status #{$?.exitstatus}." unless $?.success?
+      `#{command}`
+      raise "#{command} failed with status #{$CHILD_STATUS.exitstatus}." unless $CHILD_STATUS.success?
     end
 
-    def self.parse(args)
+    def self.parse(_args)
       raygun = nil
 
       options = OpenStruct.new
@@ -242,14 +242,14 @@ module Raygun
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: raygun [options] NEW_APP_DIRECTORY"
 
-        opts.on('-h', '--help', "Show raygun usage") do
+        opts.on("-h", "--help", "Show raygun usage") do
           usage_and_exit(opts)
         end
-        opts.on('-p', '--prototype [github_repo]', "Prototype github repo (e.g. carbonfive/raygun-rails).") do |prototype|
+        opts.on("-p", "--prototype [github_repo]", "Prototype github repo (e.g. carbonfive/raygun-rails).") do |prototype|
           options.prototype_repo = prototype
         end
 
-        opts.on('-v', '--version', 'Print the version number') do
+        opts.on("-v", "--version", "Print the version number") do
           puts Raygun::VERSION
           exit 1
         end
@@ -262,7 +262,6 @@ module Raygun
         raise OptionParser::InvalidOption if options.target_dir.nil?
 
         raygun = Raygun::Runner.new(options.target_dir, options.prototype_repo)
-
       rescue OptionParser::InvalidOption
         usage_and_exit(parser)
       end

@@ -3,7 +3,7 @@ module Raygun
     attr_reader :name, :branch, :tarball, :sha
 
     def initialize(repo)
-      @name, @branch = repo.split('#').map(&:strip)
+      @name, @branch = repo.split("#").map(&:strip)
       fetch
     end
 
@@ -11,6 +11,7 @@ module Raygun
 
     def fetch
       return if @branch && @sha
+
       @branch ? fetch_branches : fetch_tags
     end
 
@@ -19,12 +20,12 @@ module Raygun
       print "Whoops - need to try again!".colorize(:red)
       puts  ""
       print "We could not find (".colorize(:light_red)
-      print "#{name}".colorize(:white)
+      print name.to_s.colorize(:white)
       print "##{branch}".colorize(:white) if @branch
       print ") on github.".colorize(:light_red)
       puts  ""
       print "The response from github was a (".colorize(:light_red)
-      print "#{response.code}".colorize(:white)
+      print response.code.to_s.colorize(:white)
       puts  ") which I'm sure you can fix right up!".colorize(:light_red)
       puts  ""
       exit 1
@@ -35,7 +36,7 @@ module Raygun
       print "Whoops - need to try again!".colorize(:red)
       puts  ""
       print "We could not find any tags in the repo (".colorize(:light_red)
-      print "#{name}".colorize(:white)
+      print name.to_s.colorize(:white)
       print ") on github.".colorize(:light_red)
       puts  ""
       print "Raygun uses the 'largest' tag in a repository, where tags are sorted alphanumerically.".colorize(:light_red)
@@ -50,8 +51,8 @@ module Raygun
       response = http_get("https://api.github.com/repos/#{name}/branches/#{branch}")
       handle_github_error(response) unless response.code == "200"
       result = JSON.parse(response.body)
-      @sha = result['commit']['sha']
-      @tarball = result['_links']['html'].gsub(%r(/tree/#{branch}), "/archive/#{branch}.tar.gz")
+      @sha = result["commit"]["sha"]
+      @tarball = result["_links"]["html"].gsub(%r{/tree/#{branch}}, "/archive/#{branch}.tar.gz")
     end
 
     def fetch_tags
@@ -60,8 +61,8 @@ module Raygun
 
       result = JSON.parse(response.body).first
       handle_missing_tag_error unless result
-      @sha = result['commit']['sha']
-      @tarball = result['tarball_url']
+      @sha = result["commit"]["sha"]
+      @tarball = result["tarball_url"]
     end
 
     def http_get(url)
@@ -70,7 +71,7 @@ module Raygun
       http.use_ssl = true
       request      = Net::HTTP::Get.new(URI.encode(url))
 
-      response     = http.request(request)
+      response = http.request(request)
     end
   end
 end
