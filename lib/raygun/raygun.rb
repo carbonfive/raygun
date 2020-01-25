@@ -222,14 +222,14 @@ module Raygun
     def sed_i
       @sed_format ||= begin
         `sed --version &> /dev/null`
-        $CHILD_STATUS.success? ? "sed -i" : "sed -i ''"
+        $?.success? ? "sed -i" : "sed -i ''"
       end
     end
 
     # Run a shell command and raise an exception if it fails.
     def shell(command)
       `#{command}`
-      raise "#{command} failed with status #{$CHILD_STATUS.exitstatus}." unless $CHILD_STATUS.success?
+      raise "#{command} failed with status #{$?.exitstatus}." unless $?.success?
     end
 
     def self.parse(_args)
