@@ -46,14 +46,14 @@ class String
   #
   # Set color values in new string intance
   #
-  def set_color_parameters(params)
-    if params.instance_of?(Hash)
-      @color = params[:color]
-      @background = params[:background]
-      @mode = params[:mode]
-      @uncolorized = params[:uncolorized]
-      self
-    end
+  def color_parameters(params)
+    return unless params.instance_of?(Hash)
+
+    @color = params[:color]
+    @background = params[:background]
+    @mode = params[:mode]
+    @uncolorized = params[:uncolorized]
+    self
   end
 
   public
@@ -74,6 +74,7 @@ class String
   #   puts "This is blue text on red".blue.on_red.blink
   #   puts "This is uncolorized".blue.on_red.uncolorize
   #
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def colorize(params)
     return self unless STDOUT.isatty
 
@@ -104,8 +105,11 @@ class String
 
     color_parameters[:background] += 50 if color_parameters[:background] > 10
 
-    "\033[#{color_parameters[:mode]};#{color_parameters[:color] + 30};#{color_parameters[:background] + 40}m#{color_parameters[:uncolorized]}\033[0m".set_color_parameters(color_parameters)
+    "\033[#{color_parameters[:mode]};#{color_parameters[:color] + 30};"\
+    "#{color_parameters[:background] + 40}m#{color_parameters[:uncolorized]}\033[0m"\
+      .color_parameters(color_parameters)
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   #
   # Return uncolorized string
