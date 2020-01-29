@@ -3,6 +3,7 @@ require "ostruct"
 require "fileutils"
 require "securerandom"
 require "net/http"
+require "open-uri"
 require "json"
 require "colorize"
 
@@ -12,6 +13,7 @@ require_relative "template_repo"
 module Raygun
   class Runner
     CARBONFIVE_REPO = "carbonfive/raygun-rails"
+    C5_CONVENTIONS_REPO = "carbonfive/c5-conventions"
 
     attr_accessor :target_dir, :app_dir, :app_name, :dash_name, :snake_name,
                   :camel_name, :title_name, :prototype_repo,
@@ -105,6 +107,8 @@ module Raygun
 
       FileUtils.mv         dirs_to_move, app_dir
       FileUtils.remove_dir extraneous_dir
+
+      fetch_rubocop_file if @prototype_repo == CARBONFIVE_REPO
     end
 
     def rename_new_app
@@ -217,6 +221,30 @@ module Raygun
 
     protected
 
+    def fetch_rubocop_file
+      sha = shell("git ls-remote https://github.com/#{C5_CONVENTIONS_REPO} master") || ""
+      sha = sha.slice(0..6)
+
+      rubocop_file = "https://raw.githubusercontent.com/#{C5_CONVENTIONS_REPO}/master/rubocop/rubocop.yml"
+      begin
+        rubocop_contents = URI.open(rubocop_file)
+        IO.write("#{@app_dir}/.rubocop.yml", <<~RUBOCOP_YML)
+          # Sourced from #{C5_CONVENTIONS_REPO} @ #{sha}
+          #
+          # If you make changes to this file, consider opening
+          # a PR to backport them to the c5-conventions repo:
+          # https://github.com/#{C5_CONVENTIONS_REPO}/blob/master/rubocop/rubocop.yml
+
+          #{rubocop_contents.string}
+        RUBOCOP_YML
+      rescue Errno::ENOENT, OpenURI::HTTPError => e
+        puts ""
+        puts "Failed to find the CarbonFive conventions rubocop file at #{rubocop_file}".colorize(:light_red)
+        puts "Error: #{e}".colorize(:light_red)
+        puts "You'll have to manage you're own `.rubocop.yml` setup".colorize(:light_red)
+      end
+    end
+
     def camelize(string)
       result = string.sub(/^[a-z\d]*/) { $&.capitalize }
       result.gsub(%r{(?:_|(/))([a-z\d]*)}) { "#{Regexp.last_match(1)}#{Regexp.last_match(2).capitalize}" }
@@ -237,8 +265,10 @@ module Raygun
 
     # Run a shell command and raise an exception if it fails.
     def shell(command)
-      `#{command}`
+      output = `#{command}`
       raise "#{command} failed with status #{$?.exitstatus}." unless $?.success?
+
+      output
     end
 
     class << self
