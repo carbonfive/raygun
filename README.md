@@ -148,9 +148,17 @@ prototype (which is a valid rails app) and tag them when they should be used for
 
 ### Development
 
-Generate an example app using your local development version of Raygun:
+To set up your local environment, run:
 
-    $ ./bin/raygun tmp/example_app
+    $ bin/setup
+
+To run tests and rubocop checks:
+
+    $ bundle exec rake
+
+To generate an example app using your local development version of Raygun:
+
+    $ bin/raygun tmp/example_app
 
 ## Changes
 
