@@ -3,6 +3,26 @@
 **Note:** Don't let the apparent lack of activity here scare you away. Almost all changes are captured in the
 prototype repo (see [raygun-rails](https://github.com/carbonfive/raygun-rails)), and it's kept pretty well up to date.
 
+## 1.1.0 [2020-07-01]
+
+Breaking:
+
+* Require Ruby 2.4+ (#151)
+
+New features:
+
+* Copy `.rubocop.yml` template instead of using a fragile link to the c5-conventions repo (#148)
+* Initialize zapped projects with a default branch of "main" (#157)
+
+Docs:
+
+* Add Bootstrap instructions to the README (it has been removed from the app prototype) (#141)
+
+Housekeeping:
+
+* Add bundler and rake development dependencies (#143)
+* Upgrade to Ruby 2.6.5 (#142)
+
 ## 1.0.4 [2017-11-28]
 
 * Tweak instructions: use `heroku local` instead of `foreman s` (#138, thanks @mattbrictson)
