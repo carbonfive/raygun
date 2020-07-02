@@ -3,7 +3,7 @@
 **Note:** Don't let the apparent lack of activity here scare you away. Almost all changes are captured in the
 prototype repo (see [raygun-rails](https://github.com/carbonfive/raygun-rails)), and it's kept pretty well up to date.
 
-## 1.1.0 [2020-07-01]
+## 1.1.0 [2020-07-02]
 
 Breaking:
 
