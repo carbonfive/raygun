@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/raygun.svg)](http://badge.fury.io/rb/raygun)
-<img src="https://raw.github.com/carbonfive/raygun/master/marvin.jpg" align="right"/>
+<img src="https://raw.github.com/carbonfive/raygun/main/marvin.jpg" align="right"/>
 
 # Raygun
 
@@ -162,4 +162,4 @@ To generate an example app using your local development version of Raygun:
 
 ## Changes
 
-[View the Change Log](https://github.com/carbonfive/raygun/tree/master/CHANGES.md)
+[View the Change Log](https://github.com/carbonfive/raygun/tree/main/CHANGES.md)
