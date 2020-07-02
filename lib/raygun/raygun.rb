@@ -154,6 +154,7 @@ module Raygun
     def initialize_git
       Dir.chdir(app_dir) do
         shell "git init"
+        shell "git checkout -q -b main"
         shell "git add -A ."
         shell "git commit -m 'Raygun-zapped skeleton.'"
       end
