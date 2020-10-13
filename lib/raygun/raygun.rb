@@ -203,10 +203,10 @@ module Raygun
       puts "$".colorize(:blue) + " bin/rake".colorize(:light_blue)
       puts ""
       puts "# Run the app and check things out".colorize(:light_green)
-      puts "$".colorize(:blue) + " heroku local".colorize(:light_blue)
+      puts "$".colorize(:blue) + " yarn start".colorize(:light_blue)
       puts "$".colorize(:blue) + " open http://localhost:3000".colorize(:light_blue)
       puts ""
-      puts "# For some suggested next steps, check out the raygun README".colorize(:light_green)
+      puts "# For next steps like adding Bootstrap or React, check out the raygun README".colorize(:light_green)
       puts "$".colorize(:blue) + " open https://github.com/carbonfive/raygun/#next-steps".colorize(:light_blue)
       puts ""
       puts "Enjoy your Carbon Five flavored Rails application!".colorize(:yellow)
