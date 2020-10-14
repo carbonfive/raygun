@@ -78,6 +78,35 @@ $ open http://localhost:3000
 
 ## Next Steps
 
+### React
+
+To add React, just run this generator:
+
+```bash
+$ bundle exec rails webpacker:install:react
+```
+
+You can use JSX in your `app/javascript` sources and the `react_component` helper in your Rails views. Your React code
+will be packaged and deployed automatically with the rest of your app, and you can test it end-to-end with Capybara,
+just like other Rails apps. See the [webpacker-react](https://github.com/renchap/webpacker-react) README for more
+information.
+
+> :bulb: Check out [spraygun-react](https://github.com/carbonfive/spraygun-react) for eslint and stylelint configurations that can work for React projects.
+
+### React with Typescript
+
+To add React with Typescript, run the React generator listed above, and then add Typescript:
+
+```bash
+$ bundle exec rails webpacker:install:typescript
+```
+
+Don't forget to rename any files containing JSX to `.tsx`.
+
+For more information, see the [webpacker Typescript docs](https://github.com/rails/webpacker/blob/master/docs/typescript.md).
+
+### Bootstrap
+
 As you'll notice, the project comes with enough CSS (SCSS, actually) to establish some patterns.  If you
 need more of a framework, here are instructions on how to add Bootstrap to your new project.
 
