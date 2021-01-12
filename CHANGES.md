@@ -7,7 +7,7 @@ prototype repo (see [raygun-rails](https://github.com/carbonfive/raygun-rails)),
 
 Housekeeping:
 
-* Fix compatibility so that any supported Rudy (currently 2.5+) is allowed (#165).
+* Fix compatibility so that any supported Ruby (currently 2.5+) is allowed (#165).
 
 ## 1.1.0 [2020-07-02]
 
