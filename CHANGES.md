@@ -3,6 +3,12 @@
 **Note:** Don't let the apparent lack of activity here scare you away. Almost all changes are captured in the
 prototype repo (see [raygun-rails](https://github.com/carbonfive/raygun-rails)), and it's kept pretty well up to date.
 
+## 1.2.0 [2021-05-20]
+
+New features:
+
+* Copy the new rubocop conventions from the `main` branch of the c5-conventions repo (#163).
+
 ## 1.1.1 [2020-07-02]
 
 Housekeeping:
