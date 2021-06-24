@@ -21,7 +21,6 @@ Major tools/libraries:
 * RSpec and Capybara
 * Factory Bot
 * SimpleCov
-* Guard (rspec, livereload)
 * And many tweaks, patterns and common recipes (see [raygun-rails](https://github.com/carbonfive/raygun-rails) for all
 the details).
 
@@ -49,8 +48,7 @@ To generate an application, you only need the Raygun gem and network connectivit
 
 To run your new application's specs or fire up its server, you'll need to meet these requirements.
 
-* PostgreSQL 9.x with superuser 'postgres' with no password (`createuser -s postgres`)
-* PhantomJS for JavaScript testing (`brew install phantomjs`)
+* PostgreSQL with superuser 'postgres' with no password (`createuser -s postgres`)
 
 The generated app will be configured to use the ruby version that was used to invoke Raygun. If you're using
 another ruby, just change the `Gemfile` and `.ruby-version` as necessary.
@@ -72,7 +70,7 @@ $ bin/setup
 $ bin/rake
 
 # Fire up the app and open it in a browser
-$ heroku local
+$ yarn start
 $ open http://localhost:3000
 ```
 
