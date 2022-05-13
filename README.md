@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/raygun.svg)](http://badge.fury.io/rb/raygun)
-<img src="https://raw.github.com/carbonfive/raygun/main/marvin.jpg" align="right"/>
+<img src="marvin.png" align="right"/>
 
 # Raygun
 
