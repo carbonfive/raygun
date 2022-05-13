@@ -144,7 +144,7 @@ If you invoke raygun with the `-p` option, you can specify your own github repos
 
 Or
 
-    $ raygun -p githubid/repo your-project#new-branch-name
+    $ raygun -p githubid/repo#some-template-branch your-project
 
 The repository must:
 
