@@ -1,0 +1,32 @@
+name: Ruby CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['2.5.8', '2.6.6', '2.7.2', '3.0.0']
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # automatically cache and install gems
+
+    - name: Install Ruby Dependencies
+      run: |
+        gem install bundler -v 2.1.4 --conservative --no-document
+        bundle config --local path vendor/bundle
+        bundle check || (bundle install --jobs=4 --retry=3 && bundle clean)
+
+    - name: Run RuboCop
+      if: github.event_name == 'pull_request' || matrix.ruby-version == '2.7.2'
+      run: bundle exec rubocop
+
+    - name: Run RSpec
+      run: bundle exec rake spec
